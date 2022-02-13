@@ -20,6 +20,7 @@ The idea of this application is to find a job. You can consider it as a mini-ana
 
 ##  🛠 Libraries and tools 🛠
 
+* HH.ru Api
 * Kotlin
 * Coroutines
 * ViewModel
