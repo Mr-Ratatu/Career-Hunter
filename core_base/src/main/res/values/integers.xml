@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="gone_for_phone">2</integer>
+    <integer name="gone_for_tablet">0</integer>
+    <integer name="invisible_for_phone">1</integer>
+    <integer name="invisible_for_tablet">0</integer>
+    <integer name="gone_for_phone_invisible_for_tablet">2</integer>
+
+    <integer name="weight_one_only_for_phone">1</integer>
+    <integer name="weight_one_only_for_tablet">0</integer>
+    <integer name="two_for_tablet">0</integer>
+
+    <integer name="description_skeleton_length">45</integer>
+    <integer name="comment_max_length">3000</integer>
+
+    <integer name="standard_screen_transition_duration">800</integer>
+</resources>
