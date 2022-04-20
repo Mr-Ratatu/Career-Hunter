@@ -9,8 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import com.work.found.core.base.extensions.popBackStack
 import com.work.found.core.base.lifecycle.ViewLifecycle
+import com.work.found.core.base.presenter.BasePresenter
+import com.work.found.core.base.state.DataProvider
 
-abstract class BaseFragment<T : ViewOutput> :
+abstract class BaseFragment<T : ViewOutput, D : DataProvider> :
     Fragment(),
     ViewLifecycle,
     OnBackPressedListener {
@@ -18,26 +20,26 @@ abstract class BaseFragment<T : ViewOutput> :
     abstract val layoutId: Int
 
     private lateinit var _viewOutput: T
-    val viewOutput: T = _viewOutput
+    val viewOutput: T get() = _viewOutput
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        initDagger()
-        return inflater.inflate(layoutId, container, false)
+    private lateinit var _dataProvider: D
+    val dataProvider: D get() = _dataProvider
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        onAttachView(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onAttachView(this)
 
         initView()
         subscribeOnData()
         setInsetListener(view)
 
         _viewOutput = initViewOutput()
+        @Suppress("UNCHECKED_CAST")
+        _dataProvider = (viewOutput as BasePresenter<*>).dataProvider as D
     }
 
     override fun onResume() {
@@ -83,8 +85,6 @@ abstract class BaseFragment<T : ViewOutput> :
     }
 
     protected abstract fun initViewOutput(): T
-
-    protected abstract fun initDagger()
 
     protected abstract fun initView()
 

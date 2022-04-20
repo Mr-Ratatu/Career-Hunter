@@ -35,6 +35,9 @@ android {
 dependencies {
 
     implementation(project(Modules.core_base))
+    implementation(project(Modules.core_api))
+    implementation(project(Modules.core_impl))
+    implementation(project(Modules.feature_work))
 
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
@@ -43,7 +46,23 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
-    // DI
+    // Network
+    implementation(Dependencies.retrofit)
+    implementation(Dependencies.retrofitGson)
+    implementation(Dependencies.okHttp)
+    implementation(Dependencies.okHttpLoggingInterceptor)
+
+    // Dagger
     implementation(Dependencies.dagger)
     kapt(Dependencies.daggerKapt)
+
+    // Database
+    implementation(Dependencies.roomKtx)
+    kapt(Dependencies.roomKapt)
+
+    // Testing
+    testImplementation(Dependencies.junit5)
+    testRuntimeOnly(Dependencies.junit5Engine)
+    testImplementation(Dependencies.junitExtensionsKtx)
+    testImplementation(Dependencies.coroutinesTest)
 }

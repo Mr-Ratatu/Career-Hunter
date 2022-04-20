@@ -6,6 +6,7 @@
         <entry key="core_base/src/main/res/layout/main_container.xml" value="0.3098958333333333" />
         <entry key="feature_job/src/main/res/layout/fragment_job_list.xml" value="0.23703703703703705" />
         <entry key="feature_splash/src/main/res/layout/fragment_splash.xml" value="0.23703703703703705" />
+        <entry key="feature_work/src/main/res/layout/fragment_job_list.xml" value="0.2962962962962963" />
       </map>
     </option>
   </component>

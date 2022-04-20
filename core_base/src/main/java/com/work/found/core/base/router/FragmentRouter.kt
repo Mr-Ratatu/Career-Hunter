@@ -11,7 +11,7 @@ interface FragmentRouter {
         fragment: Fragment,
         fragmentManager: FragmentManager,
         needToBackStack: Boolean = false,
-        animation: Animation
+        animation: Animation = Animation.defaultAnimation()
     )
 }
 
