@@ -54,7 +54,6 @@ The service in this case acts as a repository that determines where to get data 
 * HH.ru Api
 * Kotlin
 * Coroutines
-* ViewModel
 * StateFlow/SharedFlow
 * Retrofit, OkHttp
 * Gson
