@@ -5,6 +5,8 @@ The idea of this application is to find a job. You can consider it as a mini-ana
 
 ##
 
+## Architecture
+
 ### 📱 Screens 📱
 
 * Splash
