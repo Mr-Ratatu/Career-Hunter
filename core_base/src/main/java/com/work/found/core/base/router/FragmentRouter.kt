@@ -2,7 +2,6 @@ package com.work.found.core.base.router
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.work.found.core.base.R
 
 interface FragmentRouter {
@@ -11,7 +10,7 @@ interface FragmentRouter {
         fragment: Fragment,
         fragmentManager: FragmentManager,
         needToBackStack: Boolean = false,
-        animation: Animation = Animation.defaultAnimation()
+        animation: Animation = Animation.noAnimation()
     )
 }
 

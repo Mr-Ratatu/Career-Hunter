@@ -51,4 +51,5 @@ object Dependencies {
     const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragmentVersion}"
     const val lottie = "com.airbnb.android:lottie:${Versions.lottieVersion}"
     const val timber = "com.jakewharton.timber:timber:${Versions.timberVersion}"
+    const val recyclerview = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
 }

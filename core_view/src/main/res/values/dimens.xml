@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Indent -->
+    <dimen name="indent_4dp">4dp</dimen>
+    <dimen name="indent_8dp">8dp</dimen>
+    <dimen name="indent_16dp">16dp</dimen>
+    <dimen name="indent_32dp">32dp</dimen>
+    <dimen name="indent_48dp">48dp</dimen>
+    <dimen name="indent_120dp">120dp</dimen>
+
+    <!-- Width -->
+    <dimen name="width_48dp">48dp</dimen>
+    <dimen name="width_64dp">64dp</dimen>
+    <dimen name="width_120dp">120dp</dimen>
+    <dimen name="width_150dp">150dp</dimen>
+
+    <!-- Elevation -->
+    <dimen name="elevation_2dp">2dp</dimen>
+    <dimen name="elevation_4dp">4dp</dimen>
+    <dimen name="elevation_8dp">8dp</dimen>
+
+    <!-- Image size -->
+    <dimen name="image_8dp">8dp</dimen>
+    <dimen name="image_12dp">12dp</dimen>
+    <dimen name="image_16dp">16dp</dimen>
+    <dimen name="image_18dp">18dp</dimen>
+    <dimen name="image_20dp">20dp</dimen>
+    <dimen name="image_25dp">25dp</dimen>
+    <dimen name="image_32dp">32dp</dimen>
+    <dimen name="image_50dp">50dp</dimen>
+    <dimen name="image_60dp">60dp</dimen>
+    <dimen name="image_75dp">75dp</dimen>
+    <dimen name="image_150dp">150dp</dimen>
+
+    <!-- Text size -->
+    <dimen name="text_8sp">8sp</dimen>
+    <dimen name="text_12sp">12sp</dimen>
+    <dimen name="text_16sp">16sp</dimen>
+    <dimen name="text_18sp">18sp</dimen>
+    <dimen name="text_24sp">24sp</dimen>
+    <dimen name="text_48sp">48sp</dimen>
+    <dimen name="text_64sp">64sp</dimen>
+
+    <!-- Radius -->
+    <dimen name="radius_8dp">8dp</dimen>
+    <dimen name="radius_16dp">16dp</dimen>
+    <dimen name="radius_64dp">64dp</dimen>
+</resources>

@@ -39,6 +39,12 @@ fun PopupMenu.showWithIcon() {
     show()
 }
 
+fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View = layoutInflater().inflate(
+    layoutRes,
+    this,
+    false
+)
+
 fun ViewGroup.layoutInflater(): LayoutInflater {
     return LayoutInflater.from(context)
 }

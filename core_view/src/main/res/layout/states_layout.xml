@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="@dimen/indent_8dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/state_iv_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_loading" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/state_tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/indent_16dp"
+        android:fontFamily="@font/noto_sans_medium"
+        android:text="@string/loading_state"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/text_18sp" />
+
+</LinearLayout>

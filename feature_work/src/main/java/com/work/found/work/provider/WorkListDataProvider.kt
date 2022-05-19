@@ -1,14 +1,25 @@
 package com.work.found.work.provider
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.work.found.core.api.model.news.ArticlesItem
+import com.work.found.core.api.model.work.WorkResponse
 import com.work.found.core.base.state.DataProvider
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 interface WorkListDataProvider : DataProvider {
-    val workListValues: StateFlow<Unit>
+    val workListValues: LiveData<WorkResponse>
+    val errorValue: LiveData<Throwable>
+    val loadingValue: LiveData<Boolean>
+    val articlesValue: LiveData<List<ArticlesItem>>
 }
 
 class WorkListDataProviderImpl : WorkListDataProvider {
 
-    override val workListValues = MutableStateFlow<Unit>(Unit)
+    override val workListValues = MutableLiveData<WorkResponse>()
+
+    override val errorValue = MutableLiveData<Throwable>()
+
+    override val loadingValue = MutableLiveData<Boolean>()
+
+    override val articlesValue = MutableLiveData<List<ArticlesItem>>()
 }

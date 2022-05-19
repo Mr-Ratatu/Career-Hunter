@@ -25,13 +25,11 @@ abstract class BasePresenter<T : ViewStateInput> : Presenter {
 
     override val presenterScope = CoroutineScope(Job() + Dispatchers.Main.immediate)
 
-    override fun <T : LifecycleOwner> onAttachView(view: T) { initDagger() }
+    override fun <T : LifecycleOwner> onAttachView(view: T) = Unit
 
     override fun <T : LifecycleOwner> onShowView(view: T) = Unit
 
     override fun <T : LifecycleOwner> onHideView(view: T) = Unit
 
     override fun <T : LifecycleOwner> onDetachView(view: T) { presenterScope.cancel() }
-
-    protected abstract fun initDagger()
 }
