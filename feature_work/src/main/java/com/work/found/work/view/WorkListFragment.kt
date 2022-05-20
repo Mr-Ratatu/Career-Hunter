@@ -2,6 +2,8 @@ package com.work.found.work.view
 
 import android.view.View
 import android.view.ViewStub
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
@@ -27,6 +29,8 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
     private val stateView = contentView<StatesView>(R.id.work_list_sv_states)
     private val skeleton = contentView<ViewStub>(R.id.work_list_vs_skeleton)
     private val workList = contentView<RecyclerView>(R.id.work_list_rv)
+    private val searchField = contentView<LinearLayout>(R.id.work_list_ll_search_container)
+    private val filterBtn = contentView<ImageView>(R.id.work_list_iv_filter_btn)
 
     private val newsAdapter = ArticlesAdapter(
         onClickItem = { id -> viewOutput.showDetailInfoAboutArticles(id) }
@@ -45,8 +49,17 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
         stateView {
             setCoroutineScope(lifecycleScope)
         }
+
         workList {
             adapter = concatAdapter
+        }
+
+        searchField {
+            setOnClickListener { viewOutput.showSearchScreen() }
+        }
+
+        filterBtn {
+            setOnClickListener { viewOutput.showFilterScreen() }
         }
     }
 
@@ -63,7 +76,7 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
 
             loadingValue.observe(this@WorkListFragment) { isLoading ->
                 stateView { updateState(StatesView.States.LOADING) }
-                skeleton { isVisible = isLoading }
+//                skeleton { isVisible = isLoading }
             }
 
             articlesValue.observe(this@WorkListFragment) { news ->

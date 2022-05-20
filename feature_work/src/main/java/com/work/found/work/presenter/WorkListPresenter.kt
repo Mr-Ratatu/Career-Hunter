@@ -58,6 +58,14 @@ class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewO
         // TODO
     }
 
+    override fun showSearchScreen() {
+        // TODO
+    }
+
+    override fun showFilterScreen() {
+        // TODO
+    }
+
     override fun provideViewState(): ViewState<*> {
         return WorkListViewStateImpl()
     }

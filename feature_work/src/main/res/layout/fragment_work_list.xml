@@ -12,7 +12,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone" />
+        tools:visibility="visible" />
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_header"
+        tools:layout_editor_absoluteY="43dp" />
 
     <ViewStub
         android:id="@+id/work_list_vs_skeleton"
@@ -28,13 +33,14 @@
         android:id="@+id/work_list_rv"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="@dimen/indent_8dp"
+        android:overScrollMode="never"
+        android:paddingHorizontal="@dimen/indent_8dp"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/work_list_sv_states"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         tools:listitem="@layout/item_work" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
