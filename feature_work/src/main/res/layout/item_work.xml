@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:background="@color/white"
+    android:foreground="?selectableItemBackground"
     app:cardCornerRadius="@dimen/radius_8dp"
     app:cardElevation="@dimen/elevation_4dp">
 
@@ -25,15 +26,15 @@
             android:maxLines="1"
             android:textColor="@color/black"
             android:textSize="@dimen/text_18sp"
-            app:layout_constraintBottom_toBottomOf="@+id/view"
-            app:layout_constraintEnd_toStartOf="@+id/view"
+            app:layout_constraintBottom_toBottomOf="@+id/work_iv_favorite_btn"
+            app:layout_constraintEnd_toStartOf="@+id/work_iv_favorite_btn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:targetApi="o"
             tools:text="Android-developer" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/view"
+            android:id="@+id/work_iv_favorite_btn"
             android:layout_width="@dimen/image_32dp"
             android:layout_height="@dimen/image_32dp"
             android:src="@drawable/ic_unfavorite"
@@ -41,7 +42,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/view3"
+            android:id="@+id/work_iv_salary_icon"
             android:layout_width="@dimen/image_25dp"
             android:layout_height="@dimen/image_25dp"
             android:layout_marginTop="@dimen/indent_8dp"
@@ -58,19 +59,19 @@
             android:gravity="center_vertical"
             android:textColor="@color/black"
             android:textSize="@dimen/text_16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/view3"
-            app:layout_constraintStart_toEndOf="@+id/view3"
-            app:layout_constraintTop_toTopOf="@+id/view3"
+            app:layout_constraintBottom_toBottomOf="@+id/work_iv_salary_icon"
+            app:layout_constraintStart_toEndOf="@+id/work_iv_salary_icon"
+            app:layout_constraintTop_toTopOf="@+id/work_iv_salary_icon"
             tools:text="5200-9200 $" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/view4"
+            android:id="@+id/work_iv_location_icon"
             android:layout_width="@dimen/image_25dp"
             android:layout_height="@dimen/image_25dp"
             android:layout_marginTop="@dimen/indent_8dp"
             android:src="@drawable/ic_location"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view3" />
+            app:layout_constraintTop_toBottomOf="@+id/work_iv_salary_icon" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/work_tv_location"
@@ -81,19 +82,19 @@
             android:gravity="center_vertical"
             android:textColor="@color/black"
             android:textSize="@dimen/text_16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/view4"
-            app:layout_constraintStart_toEndOf="@+id/view4"
-            app:layout_constraintTop_toTopOf="@+id/view4"
+            app:layout_constraintBottom_toBottomOf="@+id/work_iv_location_icon"
+            app:layout_constraintStart_toEndOf="@+id/work_iv_location_icon"
+            app:layout_constraintTop_toTopOf="@+id/work_iv_location_icon"
             tools:text="San Jose" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/view5"
+            android:id="@+id/work_iv_company_icon"
             android:layout_width="@dimen/image_25dp"
             android:layout_height="@dimen/image_25dp"
             android:layout_marginTop="@dimen/indent_8dp"
             android:src="@drawable/ic_company"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view4" />
+            app:layout_constraintTop_toBottomOf="@+id/work_iv_location_icon" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/work_tv_company_name"
@@ -104,9 +105,9 @@
             android:gravity="center_vertical"
             android:textColor="@color/black"
             android:textSize="@dimen/text_16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/view5"
-            app:layout_constraintStart_toEndOf="@+id/view5"
-            app:layout_constraintTop_toTopOf="@+id/view5"
+            app:layout_constraintBottom_toBottomOf="@+id/work_iv_company_icon"
+            app:layout_constraintStart_toEndOf="@+id/work_iv_company_icon"
+            app:layout_constraintTop_toTopOf="@+id/work_iv_company_icon"
             tools:text="Google" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -119,9 +120,9 @@
             android:gravity="center_vertical"
             android:maxLines="4"
             android:textSize="@dimen/text_16sp"
-            app:layout_constraintEnd_toEndOf="@+id/view"
-            app:layout_constraintStart_toStartOf="@+id/view5"
-            app:layout_constraintTop_toBottomOf="@+id/view5"
+            app:layout_constraintEnd_toEndOf="@+id/work_iv_favorite_btn"
+            app:layout_constraintStart_toStartOf="@+id/work_iv_company_icon"
+            app:layout_constraintTop_toBottomOf="@+id/work_iv_company_icon"
             tools:text="@tools:sample/lorem/random" />
 
         <com.google.android.material.button.MaterialButton

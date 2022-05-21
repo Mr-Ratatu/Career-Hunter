@@ -18,12 +18,12 @@
             android:layout_height="@dimen/image_32dp"
             android:layout_marginEnd="@dimen/indent_16dp"
             android:background="@color/gray_200"
-            app:layout_constraintEnd_toStartOf="@+id/view"
+            app:layout_constraintEnd_toStartOf="@+id/work_iv_favorite_btn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:id="@+id/view"
+            android:id="@+id/work_iv_favorite_btn"
             android:layout_width="@dimen/image_32dp"
             android:layout_height="@dimen/image_32dp"
             android:background="@color/gray_200"
@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:id="@+id/view3"
+            android:id="@+id/work_iv_salary_icon"
             android:layout_width="0dp"
             android:layout_height="@dimen/indent_16dp"
             android:layout_marginTop="@dimen/indent_8dp"
@@ -41,24 +41,24 @@
             app:layout_constraintTop_toBottomOf="@+id/work_list_tv_name" />
 
         <View
-            android:id="@+id/view4"
+            android:id="@+id/work_iv_location_icon"
             android:layout_width="0dp"
             android:layout_height="@dimen/indent_16dp"
             android:layout_marginTop="@dimen/indent_8dp"
             android:background="@color/gray_200"
             app:layout_constraintEnd_toStartOf="@+id/work_list_gl_vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view3" />
+            app:layout_constraintTop_toBottomOf="@+id/work_iv_salary_icon" />
 
         <View
-            android:id="@+id/view5"
+            android:id="@+id/work_iv_company_icon"
             android:layout_width="0dp"
             android:layout_height="@dimen/indent_16dp"
             android:layout_marginTop="@dimen/indent_8dp"
             android:background="@color/gray_200"
             app:layout_constraintEnd_toStartOf="@+id/work_list_gl_vertical"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view4" />
+            app:layout_constraintTop_toBottomOf="@+id/work_iv_location_icon" />
 
         <View
             android:layout_width="0dp"
@@ -67,7 +67,7 @@
             android:background="@color/gray_200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view5" />
+            app:layout_constraintTop_toBottomOf="@+id/work_iv_company_icon" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/work_list_gl_vertical"
