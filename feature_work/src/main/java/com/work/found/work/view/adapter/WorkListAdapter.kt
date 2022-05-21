@@ -1,5 +1,6 @@
 package com.work.found.work.view.adapter
 
+import android.text.Html
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -66,7 +67,7 @@ class WorkListAdapter(
             location { text = item.area.name }
             description {
                 val description = item.snippet?.responsibility
-                text = description
+                text = Html.fromHtml(description ?: "", Html.FROM_HTML_MODE_LEGACY)
                 isVisible = !description.isNullOrEmpty()
             }
             salary {
