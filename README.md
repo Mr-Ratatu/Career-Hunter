@@ -1,4 +1,4 @@
-# Work-Found-App
+# Career Hunter
 
 ### 💡 App idea 💡
 The idea of this application is to find a job. You can consider it as a mini-analogue of the well-known hh.ru
@@ -38,14 +38,8 @@ The service in this case acts as a repository that determines where to get data 
 
 ## 📱 Screens 📱
 
-* Splash
-* Authorization/Registration
-* Job list
-* Job detail
-* Profile
-* Filters
-* Search
-* Settings
+<img src="https://github.com/Mr-Ratatu/Work-Found-App/blob/AN-02_work_list_screen/images/splash.jpg" alt="splash" width="250"/> <img src="https://github.com/Mr-Ratatu/Work-Found-App/blob/AN-02_work_list_screen/images/WorkList.jpg" alt="splash" width="250"/>
+
 
 ##
 
