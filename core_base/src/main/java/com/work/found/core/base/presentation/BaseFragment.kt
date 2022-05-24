@@ -25,21 +25,30 @@ abstract class BaseFragment<T : ViewOutput, D : DataProvider> :
     private lateinit var _dataProvider: D
     val dataProvider: D get() = _dataProvider
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedState: Bundle?
+    ): View {
+        return inflater.inflate(layoutId, container, false)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        _viewOutput = initViewOutput()
         onAttachView(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        @Suppress("UNCHECKED_CAST")
+        _dataProvider = (viewOutput as BasePresenter<*>).dataProvider as D
+
         initView()
         subscribeOnData()
         setInsetListener(view)
-
-        _viewOutput = initViewOutput()
-        @Suppress("UNCHECKED_CAST")
-        _dataProvider = (viewOutput as BasePresenter<*>).dataProvider as D
     }
 
     override fun onResume() {

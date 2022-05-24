@@ -4,5 +4,5 @@ import androidx.fragment.app.FragmentManager
 
 interface WorkListRouterInput {
 
-    fun openWorkListScreen(fragmentManager: FragmentManager)
+    fun openWorkListScreen(manager: FragmentManager)
 }

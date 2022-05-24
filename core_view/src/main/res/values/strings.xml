@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="loading_state">Loading, please wait…</string>
+    <string name="success_state">Successful update</string>
+    <string name="error_state">Oops… Failed to update</string>
+</resources>

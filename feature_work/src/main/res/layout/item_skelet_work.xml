@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="@drawable/card_background"
+    android:elevation="@dimen/elevation_4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/indent_16dp">
+
+        <View
+            android:id="@+id/work_list_tv_name"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/image_32dp"
+            android:layout_marginEnd="@dimen/indent_16dp"
+            android:background="@color/gray_200"
+            app:layout_constraintEnd_toStartOf="@+id/work_iv_favorite_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/work_iv_favorite_btn"
+            android:layout_width="@dimen/image_32dp"
+            android:layout_height="@dimen/image_32dp"
+            android:background="@color/gray_200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/work_iv_salary_icon"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/indent_16dp"
+            android:layout_marginTop="@dimen/indent_8dp"
+            android:background="@color/gray_200"
+            app:layout_constraintEnd_toStartOf="@+id/work_list_gl_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/work_list_tv_name" />
+
+        <View
+            android:id="@+id/work_iv_location_icon"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/indent_16dp"
+            android:layout_marginTop="@dimen/indent_8dp"
+            android:background="@color/gray_200"
+            app:layout_constraintEnd_toStartOf="@+id/work_list_gl_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/work_iv_salary_icon" />
+
+        <View
+            android:id="@+id/work_iv_company_icon"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/indent_16dp"
+            android:layout_marginTop="@dimen/indent_8dp"
+            android:background="@color/gray_200"
+            app:layout_constraintEnd_toStartOf="@+id/work_list_gl_vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/work_iv_location_icon" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/radius_64dp"
+            android:layout_marginTop="@dimen/indent_16dp"
+            android:background="@color/gray_200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/work_iv_company_icon" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/work_list_gl_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

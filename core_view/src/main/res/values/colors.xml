@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#121212</color>
+    <color name="splash_background">#121212</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="gray">#FF888888</color>
+    <color name="gray_200">#E5E5E5</color>
+    <color name="gray_900">#23262D</color>
+
+    <color name="positive">#26DE9B</color>
+    <color name="negative">#EB6365</color>
+    <color name="yellow">#F5A921</color>
+    <color name="orange">#F4863C</color>
+    <color name="light_blue">#B0D4FE</color>
+    <color name="white_blue">#BEEAE8</color>
+    <color name="purple">#AD54E2</color>
+
+    <!-- Main color -->
+    <color name="blue_f5">#878AF5</color>
+    <color name="blue_f6">#666AF6</color>
+    <color name="text_color">#31446C</color>
+    <color name="backgroundColor">#F5F5F5</color>
+    <color name="ripple_effect_color">#40000000</color>
+
+</resources>

@@ -1,7 +1,7 @@
 package com.work.found.splash.di
 
-import com.work.found.core.api.di.dependencies.SplashDependencies
-import com.work.found.splash.presentation.SplashFragment
+import com.work.found.core.di.dependencies.SplashDependencies
+import com.work.found.splash.presenter.SplashPresenter
 import dagger.Component
 import javax.inject.Scope
 
@@ -11,7 +11,6 @@ annotation class SplashScope
 
 @SplashScope
 @Component(
-    modules = [],
     dependencies = [SplashDependencies::class]
 )
 interface SplashComponent {
@@ -24,14 +23,5 @@ interface SplashComponent {
         fun build(): SplashComponent
     }
 
-    fun inject(target: SplashFragment)
-
-    companion object {
-        fun create(dependency: SplashDependencies): SplashComponent {
-            return DaggerSplashComponent
-                .builder()
-                .dependencies(dependency)
-                .build()
-        }
-    }
+    fun inject(target: SplashPresenter)
 }

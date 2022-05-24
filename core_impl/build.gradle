@@ -44,4 +44,9 @@ dependencies {
     // DI
     implementation(Dependencies.dagger)
     kapt(Dependencies.daggerKapt)
+
+    // Coroutines
+    implementation(Dependencies.coroutinesCore)
+
+    implementation(Dependencies.gson)
 }

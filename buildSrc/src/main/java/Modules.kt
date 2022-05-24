@@ -1,6 +1,7 @@
 @file:Suppress("PackageDirectoryMismatch")
 
 object Modules {
+    const val core_di = ":core_di"
     const val core_api = ":core_api"
     const val core_impl = ":core_impl"
     const val core_view = ":core_view"

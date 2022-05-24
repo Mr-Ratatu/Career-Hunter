@@ -13,6 +13,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        buildConfigField("String", "ARTICLES_ASSET_NAME", "\"articles.json\"")
     }
 
     buildTypes {
@@ -36,6 +38,8 @@ android {
 dependencies {
 
     implementation(project(Modules.core_base))
+    implementation(project(Modules.core_view))
+    implementation(project(Modules.core_api))
 
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
@@ -52,4 +56,7 @@ dependencies {
     implementation(Dependencies.coroutinesAndroid)
     implementation(Dependencies.lifecycleRuntime)
     implementation(Dependencies.coroutinesCore)
+
+    // UI
+    implementation(Dependencies.recyclerview)
 }
