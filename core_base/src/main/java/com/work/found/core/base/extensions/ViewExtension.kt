@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
@@ -80,4 +81,9 @@ fun View.setTooltip(@StringRes tooltipText: Int) {
 
 fun TextView.textPlaceHolder(@StringRes strRes: Int, value: Int): String {
     return String.format(resources.getString(strRes), value)
+}
+
+fun ImageView.setImageFromString(imageName: String, type: String = "drawable") {
+    val imageId = context.resources.getIdentifier(imageName, type, context.packageName)
+    setImageResource(imageId)
 }

@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/width_150dp"
-    android:layout_height="100dp"
+    android:layout_height="@dimen/height_100dp"
     android:layout_margin="8dp"
     android:background="@color/white"
+    android:foreground="?selectableItemBackground"
     app:cardCornerRadius="@dimen/radius_8dp"
-    app:cardElevation="@dimen/elevation_4dp"
-    android:foreground="?selectableItemBackground">
+    app:cardElevation="@dimen/elevation_4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,9 +19,9 @@
             android:id="@+id/news_iv_icon"
             android:layout_width="@dimen/image_25dp"
             android:layout_height="@dimen/image_25dp"
-            android:src="@drawable/ic_company"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_company" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/news_tv_title"

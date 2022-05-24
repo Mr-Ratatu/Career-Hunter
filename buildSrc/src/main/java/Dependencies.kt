@@ -21,7 +21,7 @@ object Dependencies {
     const val navigationUI = "androidx.navigation:navigation-ui-ktx:${Versions.navigationVersion}"
     const val workManager = "androidx.work:work-runtime-ktx:${Versions.workManager}"
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofitVersion}"
-    const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofitVersion}"
+    const val gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofitVersion}"
     const val loggingInterceptor =
         "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptor}"
     const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttpVersion}"

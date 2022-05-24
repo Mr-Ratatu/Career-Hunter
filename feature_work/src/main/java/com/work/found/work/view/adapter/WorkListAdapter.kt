@@ -22,10 +22,10 @@ class WorkListAdapter(
 ) : ListAdapter<WorkDto, WorkListAdapter.WorkListViewHolder>(
     diffUtilCallback(
         areItemsTheSame = { oldItem, newItem ->
-            oldItem == newItem
+            oldItem.id == newItem.id
         },
         areContentsTheSame = { oldItem, newItem ->
-            oldItem.id == newItem.id
+            oldItem == newItem
         }
     )
 ) {

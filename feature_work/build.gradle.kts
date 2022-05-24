@@ -13,6 +13,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        buildConfigField("String", "ARTICLES_ASSET_NAME", "\"articles.json\"")
     }
 
     buildTypes {

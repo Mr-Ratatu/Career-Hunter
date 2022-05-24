@@ -1,6 +1,7 @@
 package com.work.found
 
 import android.app.Application
+import com.work.found.core.base.utils.AppConfig
 import com.work.found.core.di.base.BaseComponent
 import com.work.found.core.di.base.ComponentCreator
 import com.work.found.core.di.base.DaggerInjector
@@ -17,6 +18,8 @@ class App : Application(), ComponentCreator {
             initAppComponent(this@App)
             getAppComponent() as ApplicationComponent
         }
+
+        AppConfig.init(this)
     }
 
     override fun create(): BaseComponent {

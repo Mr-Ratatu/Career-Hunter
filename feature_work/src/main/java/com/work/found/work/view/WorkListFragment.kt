@@ -4,18 +4,17 @@ import android.view.View
 import android.view.ViewStub
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.work.found.core.base.extensions.contentView
 import com.work.found.core.base.presentation.BaseFragment
-import com.work.found.core.base.utils.VisibilityUi
 import com.work.found.work.R
 import com.work.found.work.core_view.StatesView
 import com.work.found.work.presenter.WorkListPresenter
 import com.work.found.work.provider.WorkListDataProvider
-import com.work.found.work.view.adapter.ArticlesAdapter
+import com.work.found.work.view.adapter.ArticleAdapter
+import com.work.found.work.view.adapter.ArticlesListAdapter
 import com.work.found.work.view.adapter.WorkListAdapter
 
 class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>() {
@@ -32,14 +31,15 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
     private val searchField = contentView<LinearLayout>(R.id.work_list_ll_search_container)
     private val filterBtn = contentView<ImageView>(R.id.work_list_iv_filter_btn)
 
-    private val newsAdapter = ArticlesAdapter(
-        onClickItem = { id -> viewOutput.showDetailInfoAboutArticles(id) }
+    // Adapters
+    private val articleListAdapter = ArticlesListAdapter(
+        itemOnClick = { id -> viewOutput.showDetailInfoAboutArticles(id) }
     )
     private val workListAdapter = WorkListAdapter(
         onClickItem = { id -> viewOutput.showDetailInfoAboutVacancy(id) },
         onApplyWork = {}
     )
-    private val concatAdapter = ConcatAdapter(newsAdapter, workListAdapter)
+    private val concatAdapter = ConcatAdapter(articleListAdapter, workListAdapter)
 
     override val layoutId: Int = R.layout.fragment_work_list
 
@@ -76,11 +76,10 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
 
             loadingValue.observe(this@WorkListFragment) { isLoading ->
                 stateView { updateState(StatesView.States.LOADING) }
-//                skeleton { isVisible = isLoading }
             }
 
             articlesValue.observe(this@WorkListFragment) { news ->
-                newsAdapter.submitList(news)
+                articleListAdapter.setArticles(news)
             }
         }
     }

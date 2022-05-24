@@ -1,10 +1,9 @@
 package com.work.found.work.presenter
 
-import com.work.found.core.api.model.news.ArticlesItem
 import com.work.found.core.base.presenter.BasePresenter
 import com.work.found.core.base.state.ViewState
+import com.work.found.core.base.utils.AppConfig
 import com.work.found.core.di.base.DaggerInjector
-import com.work.found.work.core_view.R
 import com.work.found.work.di.DaggerWorkListComponent
 import com.work.found.work.interactor.WorkListInteractorInput
 import com.work.found.work.provider.WorkListViewStateImpl
@@ -12,6 +11,7 @@ import com.work.found.work.provider.WorkListViewStateInput
 import com.work.found.work.view.WorkListViewOutput
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewOutput {
@@ -41,13 +41,16 @@ class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewO
             }
         }
 
-        viewState.updateArticles(listOf(
-            ArticlesItem(
-                0,
-                R.drawable.ic_location,
-                "How to migration?"
-            )
-        ))
+        loadArticles()
+    }
+
+    private fun loadArticles() {
+        presenterScope.launch(Dispatchers.IO) {
+            val articles = interactor.loadArticles(AppConfig.application)
+            withContext(Dispatchers.Main) {
+                viewState.updateArticles(articles)
+            }
+        }
     }
 
     override fun showDetailInfoAboutVacancy(id: String) {

@@ -52,7 +52,7 @@ dependencies {
 
     // Network
     implementation(Dependencies.retrofit)
-    implementation(Dependencies.retrofitGson)
+    implementation(Dependencies.gson)
     implementation(Dependencies.okHttp)
     implementation(Dependencies.okHttpLoggingInterceptor)
 

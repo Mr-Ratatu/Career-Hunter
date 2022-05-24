@@ -14,6 +14,9 @@
     <dimen name="width_120dp">120dp</dimen>
     <dimen name="width_150dp">150dp</dimen>
 
+    <!-- Height -->
+    <dimen name="height_100dp">100dp</dimen>
+
     <!-- Elevation -->
     <dimen name="elevation_2dp">2dp</dimen>
     <dimen name="elevation_4dp">4dp</dimen>

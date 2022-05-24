@@ -47,4 +47,6 @@ dependencies {
 
     // Coroutines
     implementation(Dependencies.coroutinesCore)
+
+    implementation(Dependencies.gson)
 }

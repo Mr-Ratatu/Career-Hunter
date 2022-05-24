@@ -1,5 +1,6 @@
 package com.work.found.core.base.presenter
 
+import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import com.work.found.core.base.presentation.ViewOutput
 import com.work.found.core.base.state.DataProvider
@@ -19,6 +20,7 @@ abstract class BasePresenter<T : ViewStateInput> : Presenter {
 
     private val _viewState: ViewState<*> by lazy { provideViewState() }
     val dataProvider: DataProvider get() = _viewState.dataProvider
+
     @Suppress("UNCHECKED_CAST")
     val viewState: T
         get() = _viewState as T
@@ -31,5 +33,7 @@ abstract class BasePresenter<T : ViewStateInput> : Presenter {
 
     override fun <T : LifecycleOwner> onHideView(view: T) = Unit
 
-    override fun <T : LifecycleOwner> onDetachView(view: T) { presenterScope.cancel() }
+    override fun <T : LifecycleOwner> onDetachView(view: T) {
+        presenterScope.cancel()
+    }
 }
