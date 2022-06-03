@@ -46,4 +46,7 @@ dependencies {
 
     // Other
     implementation(Dependencies.timber)
+
+    // UI
+    implementation(Dependencies.coil)
 }

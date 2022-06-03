@@ -1,7 +1,11 @@
 package com.work.found.core.api.model.work
 
+import com.google.gson.annotations.SerializedName
+
 data class LogoUrls(
-    val `240`: String,
-    val `90`: String,
+    @SerializedName("240")
+    val mediumIcon: String,
+    @SerializedName("90")
+    val smallIcon: String,
     val original: String
 )

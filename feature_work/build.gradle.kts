@@ -59,4 +59,5 @@ dependencies {
 
     // UI
     implementation(Dependencies.recyclerview)
+    implementation(Dependencies.coil)
 }

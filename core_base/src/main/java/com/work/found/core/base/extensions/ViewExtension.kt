@@ -1,6 +1,7 @@
 package com.work.found.core.base.extensions
 
 import android.content.Context.INPUT_METHOD_SERVICE
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,10 @@ import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.TooltipCompat
+import coil.ImageLoader
+import coil.load
+import coil.transform.CircleCropTransformation
+import coil.transform.Transformation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -79,11 +84,15 @@ fun View.setTooltip(@StringRes tooltipText: Int) {
     TooltipCompat.setTooltipText(this, context.getString(tooltipText))
 }
 
-fun TextView.textPlaceHolder(@StringRes strRes: Int, value: Int): String {
-    return String.format(resources.getString(strRes), value)
+fun TextView.textPlaceHolder(@StringRes strRes: Int, vararg value: String): String {
+    return String.format(resources.getString(strRes), *value)
 }
 
 fun ImageView.setImageFromString(imageName: String, type: String = "drawable") {
     val imageId = context.resources.getIdentifier(imageName, type, context.packageName)
     setImageResource(imageId)
+}
+
+fun TextView.setHtmlText(value: String?) {
+    text = Html.fromHtml(value ?: "", Html.FROM_HTML_MODE_LEGACY)
 }

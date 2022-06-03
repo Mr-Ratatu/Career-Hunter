@@ -1,11 +1,14 @@
 package com.work.found.core.di.dependencies
 
+import com.work.found.core.api.router.WorkDetailRouterInput
 import com.work.found.core.api.services.ArticlesServiceInput
-import com.work.found.core.api.services.WorkListServiceInput
+import com.work.found.core.api.services.WorkServiceInput
 
 interface WorkListDependencies {
 
-    fun workListService(): WorkListServiceInput
+    fun workService(): WorkServiceInput
 
     fun articlesService(): ArticlesServiceInput
+
+    fun workDetailRouter(): WorkDetailRouterInput
 }
