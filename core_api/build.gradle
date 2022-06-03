@@ -40,6 +40,7 @@ dependencies {
 
     // Network
     implementation(Dependencies.retrofit)
+    implementation(Dependencies.gson)
 
     // Coroutines
     implementation(Dependencies.coroutinesCore)

@@ -11,7 +11,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import com.work.found.core.base.extensions.contentView
-import com.work.found.core.base.utils.VisibilityUi
+import com.work.found.core.base.utils.States
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -97,7 +97,7 @@ class StatesView @JvmOverloads constructor(
     }
 
     private fun setErrorState() {
-        iconRotationAnimation.cancel()
+        iconRotationAnimation.end()
         stateIcon {
             setImageResource(R.drawable.ic_error)
         }
@@ -114,9 +114,5 @@ class StatesView @JvmOverloads constructor(
                 rotation = animator.animatedValue as Float
             }
         }
-    }
-
-    enum class States {
-        LOADING, SUCCESS, ERROR
     }
 }

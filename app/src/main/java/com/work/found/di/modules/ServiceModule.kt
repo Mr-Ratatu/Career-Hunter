@@ -1,9 +1,9 @@
 package com.work.found.di.modules
 
 import com.work.found.core.api.services.ArticlesServiceInput
-import com.work.found.core.api.services.WorkListServiceInput
+import com.work.found.core.api.services.WorkServiceInput
 import com.work.found.core.implementation.ArticlesServiceImpl
-import com.work.found.core.implementation.WorkListServiceImpl
+import com.work.found.core.implementation.WorkServiceImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
@@ -13,7 +13,7 @@ interface ServiceModule {
 
     @Binds
     @Singleton
-    fun bindWorkListService(service: WorkListServiceImpl): WorkListServiceInput
+    fun bindWorkListService(service: WorkServiceImpl): WorkServiceInput
 
     @Binds
     @Singleton

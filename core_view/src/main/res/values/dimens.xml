@@ -16,6 +16,8 @@
 
     <!-- Height -->
     <dimen name="height_100dp">100dp</dimen>
+    <dimen name="height_16dp">16dp</dimen>
+    <dimen name="height_32dp">32dp</dimen>
 
     <!-- Elevation -->
     <dimen name="elevation_2dp">2dp</dimen>

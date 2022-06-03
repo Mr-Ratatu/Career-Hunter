@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="experience_placeholder">Требуемый опыт: %1$s</string>
+    <string name="schedule_placeholder">%1$s, %2$s</string>
+    <string name="income_not_specified">Уровень дохода не указан</string>
+</resources>

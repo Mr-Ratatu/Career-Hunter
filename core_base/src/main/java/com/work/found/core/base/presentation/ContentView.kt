@@ -32,6 +32,15 @@ class ContentView<T : View> private constructor(
 
     constructor(viewId: Int, dialog: Dialog) : this(viewId, dialog.context, dialog = dialog)
 
+    val view: T
+        get() = when {
+            dialog != null -> dialog.findViewById(viewId)
+            activity != null -> activity.findViewById(viewId)
+            fragment != null -> fragment.requireView().findViewById(viewId)
+            baseView != null -> baseView.findViewById(viewId)
+            else -> throw IllegalStateException("There is no initialized views")
+        }
+
     val nullableView: T?
         get() {
             return when {
