@@ -54,4 +54,4 @@ The service in this case acts as a repository that determines where to get data 
 * Dagger 2
 * Room, DataStore
 * Paging 3
-* Glide
+* Coil
