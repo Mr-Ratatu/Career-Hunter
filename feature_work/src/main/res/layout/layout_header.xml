@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/work_list_ll_header"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingTop="@dimen/indent_8dp"
     android:paddingHorizontal="@dimen/indent_8dp"
+    android:paddingTop="@dimen/indent_8dp"
+    android:stateListAnimator="@animator/toolbar_elevation"
     app:layout_constraintTop_toBottomOf="@+id/work_list_sv_states"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 

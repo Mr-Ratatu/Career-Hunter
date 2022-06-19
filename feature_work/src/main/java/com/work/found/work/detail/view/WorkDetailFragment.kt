@@ -16,6 +16,7 @@ import com.work.found.core.base.extensions.textPlaceHolder
 import com.work.found.core.base.presentation.BaseFragment
 import com.work.found.core.base.utils.Constants
 import com.work.found.core.base.utils.ShadowDelegate
+import com.work.found.core.base.utils.ViewInsetsController
 import com.work.found.work.R
 import com.work.found.work.core_view.StatesView
 import com.work.found.work.detail.presetner.WorkDetailPresenter
@@ -96,6 +97,7 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
     }
 
     override fun setInsetListener(rootView: View) {
+        ViewInsetsController.bindMargin(rootView, forTop = true, forBottom = true)
     }
 
     private fun initContent(response: WorkDetailResponse) {

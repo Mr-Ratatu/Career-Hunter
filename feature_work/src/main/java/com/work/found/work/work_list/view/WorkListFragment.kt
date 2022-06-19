@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.work.found.core.base.extensions.contentView
 import com.work.found.core.base.presentation.BaseFragment
+import com.work.found.core.base.utils.ShadowDelegate
+import com.work.found.core.base.utils.ViewInsetsController
 import com.work.found.work.R
 import com.work.found.work.core_view.StatesView
 import com.work.found.work.work_list.presenter.WorkListPresenter
@@ -28,16 +30,19 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
     private val workList = contentView<RecyclerView>(R.id.work_list_rv)
     private val searchField = contentView<LinearLayout>(R.id.work_list_ll_search_container)
     private val filterBtn = contentView<ImageView>(R.id.work_list_iv_filter_btn)
+    private val header = contentView<View>(R.id.work_list_header)
 
     // Adapters
     private val articleListAdapter = ArticlesListAdapter(
-        itemOnClick = { id -> viewOutput.showDetailInfoAboutArticles(id) }
+        itemOnClick = { id -> viewOutput.showDetailInfoAboutArticles(id, parentFragmentManager) }
     )
     private val workListAdapter = WorkListAdapter(
         onClickItem = { id -> viewOutput.showDetailInfoAboutVacancy(id, parentFragmentManager) },
         onApplyWork = {}
     )
     private val concatAdapter = ConcatAdapter(articleListAdapter, workListAdapter)
+
+    private val shadowDelegate = ShadowDelegate()
 
     override val layoutId: Int = R.layout.fragment_work_list
 
@@ -59,6 +64,11 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
         filterBtn {
             setOnClickListener { viewOutput.showFilterScreen() }
         }
+
+        shadowDelegate.setShadowScrollListener(
+            scrollView = workList.view,
+            shadowView = header.view.rootView
+        )
 
         showSkeleton()
     }
@@ -90,6 +100,8 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
         workList { visibility = View.VISIBLE }
     }
 
-    override fun setInsetListener(rootView: View) = Unit
+    override fun setInsetListener(rootView: View) {
+        ViewInsetsController.bindMargin(rootView, forTop = true, forBottom = true)
+    }
 
 }
