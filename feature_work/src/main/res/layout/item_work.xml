@@ -17,15 +17,11 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/work_tv_name"
+            style="@style/StyleTitle"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="@dimen/indent_16dp"
             android:ellipsize="end"
-            android:fontFamily="@font/medium"
-            android:gravity="center_vertical"
-            android:maxLines="1"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_18sp"
             app:layout_constraintBottom_toBottomOf="@+id/work_iv_favorite_btn"
             app:layout_constraintEnd_toStartOf="@+id/work_iv_favorite_btn"
             app:layout_constraintStart_toStartOf="parent"

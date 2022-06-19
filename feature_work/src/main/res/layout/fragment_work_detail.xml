@@ -19,6 +19,7 @@
         android:id="@+id/work_detail_tb"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
+        android:elevation="@dimen/elevation_4dp"
         android:stateListAnimator="@animator/toolbar_elevation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

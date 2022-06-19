@@ -21,6 +21,7 @@ class ArticlesListAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun setArticles(list: List<ArticlesItem>) {
+        articles.clear()
         articles.addAll(list)
         notifyDataSetChanged()
     }

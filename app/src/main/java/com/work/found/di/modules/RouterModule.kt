@@ -1,9 +1,11 @@
 package com.work.found.di.modules
 
+import com.work.found.core.api.router.ArticlesRouterInput
 import com.work.found.core.api.router.SplashRouterInput
 import com.work.found.core.api.router.WorkDetailRouterInput
 import com.work.found.core.api.router.WorkListRouterInput
 import com.work.found.splash.router.SplashRouter
+import com.work.found.work.articles.router.ArticlesRouterImpl
 import com.work.found.work.detail.router.WorkDetailRouterImpl
 import com.work.found.work.work_list.router.WorkListRouter
 import dagger.Binds
@@ -24,4 +26,8 @@ interface RouterModule {
     @Binds
     @Singleton
     fun bindWorkDetailRouter(router: WorkDetailRouterImpl): WorkDetailRouterInput
+
+    @Binds
+    @Singleton
+    fun bindArticlesRouter(router: ArticlesRouterImpl): ArticlesRouterInput
 }

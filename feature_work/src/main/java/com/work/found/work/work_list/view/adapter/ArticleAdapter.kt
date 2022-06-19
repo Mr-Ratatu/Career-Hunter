@@ -34,6 +34,17 @@ class ArticleAdapter(
         holder.bind(currentList[position])
     }
 
+    override fun onViewAttachedToWindow(holder: ArticlesViewHolder) {
+        val itemPosition = holder.adapterPosition
+        holder.itemView.setOnClickListener {
+            onClickItem(currentList[itemPosition].id)
+        }
+    }
+
+    override fun onViewDetachedFromWindow(holder: ArticlesViewHolder) {
+        holder.itemView.setOnClickListener(null)
+    }
+
     class ArticlesViewHolder(itemView: View) : BaseViewHolder<ArticlesItem>(itemView) {
 
         private val icon = itemView.contentView<ImageView>(R.id.news_iv_icon)

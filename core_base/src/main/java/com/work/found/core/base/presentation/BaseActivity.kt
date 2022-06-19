@@ -2,6 +2,7 @@ package com.work.found.core.base.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import com.work.found.core.base.presenter.BasePresenter
 import com.work.found.core.base.state.DataProvider
 
@@ -22,7 +23,13 @@ abstract class BaseActivity<T : ViewOutput, D : DataProvider> : AppCompatActivit
         _viewOutput = initViewOutput()
         @Suppress("UNCHECKED_CAST")
         _dataProvider = (viewOutput as BasePresenter<*>).dataProvider as D
+
+        setFullScreen()
     }
 
     protected abstract fun initViewOutput(): T
+
+    private fun setFullScreen() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+    }
 }

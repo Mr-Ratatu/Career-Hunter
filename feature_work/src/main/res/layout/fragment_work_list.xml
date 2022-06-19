@@ -15,7 +15,7 @@
         tools:visibility="visible" />
 
     <include
-        android:id="@+id/toolbar"
+        android:id="@+id/work_list_header"
         layout="@layout/layout_header"
         tools:layout_editor_absoluteY="43dp" />
 
@@ -41,7 +41,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/work_list_header"
         tools:listitem="@layout/item_work" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

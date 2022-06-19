@@ -1,6 +1,7 @@
 package com.work.found.work.work_list.presenter
 
 import androidx.fragment.app.FragmentManager
+import com.work.found.core.api.router.ArticlesRouterInput
 import com.work.found.core.api.router.WorkDetailRouterInput
 import com.work.found.core.base.presenter.BasePresenter
 import com.work.found.core.base.state.ViewState
@@ -24,6 +25,9 @@ class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewO
 
     @Inject
     lateinit var detailRouter: WorkDetailRouterInput
+
+    @Inject
+    lateinit var articlesRouter: ArticlesRouterInput
 
     init {
         DaggerWorkListComponent
@@ -64,8 +68,8 @@ class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewO
         detailRouter.openWorkDetailScreen(id, manager)
     }
 
-    override fun showDetailInfoAboutArticles(id: Int) {
-        // TODO
+    override fun showDetailInfoAboutArticles(id: Int, manager: FragmentManager) {
+        articlesRouter.showArticlesScreen(manager, id)
     }
 
     override fun showSearchScreen() {
