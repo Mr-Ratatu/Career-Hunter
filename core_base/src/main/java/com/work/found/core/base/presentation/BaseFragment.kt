@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import com.work.found.core.base.delegates.FlowMethodsDelegate
+import com.work.found.core.base.delegates.FlowMethodsDelegateImpl
+import com.work.found.core.base.delegates.LiveDataMethodsDelegate
+import com.work.found.core.base.delegates.LiveDataMethodsMixinDelegate
 import com.work.found.core.base.extensions.popBackStack
 import com.work.found.core.base.lifecycle.ViewLifecycle
 import com.work.found.core.base.presenter.BasePresenter
@@ -15,7 +19,9 @@ import com.work.found.core.base.state.DataProvider
 abstract class BaseFragment<T : ViewOutput, D : DataProvider> :
     Fragment(),
     ViewLifecycle,
-    OnBackPressedListener {
+    OnBackPressedListener,
+    LiveDataMethodsDelegate by LiveDataMethodsMixinDelegate(),
+    FlowMethodsDelegate by FlowMethodsDelegateImpl() {
 
     abstract val layoutId: Int
 
@@ -46,6 +52,8 @@ abstract class BaseFragment<T : ViewOutput, D : DataProvider> :
         @Suppress("UNCHECKED_CAST")
         _dataProvider = (viewOutput as BasePresenter<*>).dataProvider as D
 
+        registerViewOwner(viewLifecycleOwner)
+        registerLifecycleCoroutineScope(lifecycleScope)
         initView()
         subscribeOnData()
         setInsetListener(view)

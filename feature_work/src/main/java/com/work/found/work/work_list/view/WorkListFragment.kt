@@ -3,6 +3,7 @@ package com.work.found.work.work_list.view
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,7 @@ import com.work.found.core.base.presentation.BaseFragment
 import com.work.found.core.base.utils.ShadowDelegate
 import com.work.found.core.base.utils.ViewInsetsController
 import com.work.found.work.R
+import com.work.found.work.core_view.ErrorView
 import com.work.found.work.core_view.StatesView
 import com.work.found.work.work_list.presenter.WorkListPresenter
 import com.work.found.work.work_list.provider.WorkListDataProvider
@@ -31,6 +33,7 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
     private val searchField = contentView<LinearLayout>(R.id.work_list_ll_search_container)
     private val filterBtn = contentView<ImageView>(R.id.work_list_iv_filter_btn)
     private val header = contentView<View>(R.id.work_list_header)
+    private val errorView = contentView<ErrorView>(R.id.error_view)
 
     // Adapters
     private val articleListAdapter = ArticlesListAdapter(
@@ -38,7 +41,7 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
     )
     private val workListAdapter = WorkListAdapter(
         onClickItem = { id -> viewOutput.showDetailInfoAboutVacancy(id, parentFragmentManager) },
-        onApplyWork = {}
+        onApplyWork = { viewOutput.showAuthScreen(parentFragmentManager) }
     )
     private val concatAdapter = ConcatAdapter(articleListAdapter, workListAdapter)
 
@@ -70,34 +73,36 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
             shadowView = header.view.rootView
         )
 
-        showSkeleton()
+        errorView {
+            onReplayDataClick(viewOutput::onReplayData)
+        }
     }
 
     override fun subscribeOnData() {
         with(dataProvider) {
-            workListValues.observe(this@WorkListFragment) { work ->
+            workListValues.observeWithViewScopeIgnoreNull { work ->
                 workListAdapter.submitList(work.items)
-                hideSkeleton()
             }
 
-            states.observe(this@WorkListFragment) { state ->
+            states.launchWhenStartedWithScope { state ->
                 stateView { updateState(state) }
             }
 
-            articlesValue.observe(this@WorkListFragment) { news ->
-                articleListAdapter.setArticles(news)
+            articlesValue.observeWithViewScopeIgnoreNull { articles ->
+                articleListAdapter.setArticles(articles)
+            }
+
+            showSkeleton.launchWhenStartedWithScope { needShow ->
+                skeleton { isVisible = needShow }
+                workList { isVisible = !needShow }
+            }
+
+            error.launchWhenStartedWithScope { isError ->
+                errorView {
+                    isVisible = isError
+                }
             }
         }
-    }
-
-    private fun showSkeleton() {
-        skeleton { visibility = View.VISIBLE }
-        workList { visibility = View.GONE }
-    }
-
-    private fun hideSkeleton() {
-        skeleton { visibility = View.GONE }
-        workList { visibility = View.VISIBLE }
     }
 
     override fun setInsetListener(rootView: View) {

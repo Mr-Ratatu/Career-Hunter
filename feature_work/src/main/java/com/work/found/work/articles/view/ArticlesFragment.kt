@@ -6,8 +6,10 @@ import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.lifecycleScope
 import com.work.found.core.api.model.articles.ArticlesItem
 import com.work.found.core.base.extensions.contentView
+import com.work.found.core.base.extensions.launchWhenStarted
 import com.work.found.core.base.extensions.popBackStack
 import com.work.found.core.base.extensions.setImageFromString
 import com.work.found.core.base.presentation.BaseFragment
@@ -17,6 +19,8 @@ import com.work.found.core.base.utils.ViewInsetsController
 import com.work.found.work.R
 import com.work.found.work.articles.presenter.ArticlesPresenter
 import com.work.found.work.articles.provider.ArticlesDataProviderInput
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class ArticlesFragment : BaseFragment<ArticlesViewOutput, ArticlesDataProviderInput>() {
 
@@ -67,20 +71,18 @@ class ArticlesFragment : BaseFragment<ArticlesViewOutput, ArticlesDataProviderIn
     }
 
     override fun subscribeOnData() {
-        dataProvider.article.observe(this@ArticlesFragment) { article ->
-            initContent(article)
-        }
-    }
+        dataProvider.apply {
+            poster.launchWhenStarted(lifecycleScope) { poster ->
+                articlePoster { setImageFromString(poster) }
+            }
 
-    private fun initContent(article: ArticlesItem?) {
-        articleTitle {
-            text = article?.title
-        }
-        articleDescription {
-            text = article?.description
-        }
-        articlePoster {
-            setImageFromString(article!!.poster)
+            title.launchWhenStarted(lifecycleScope) { title ->
+                articleTitle { text = title }
+            }
+
+            description.launchWhenStarted(lifecycleScope) { description ->
+                articleDescription { text = description }
+            }
         }
     }
 

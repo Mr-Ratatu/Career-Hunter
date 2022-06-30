@@ -6,10 +6,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 
 fun <T> Flow<T>.launchWhenStarted(coroutineScope: LifecycleCoroutineScope, block: (T) -> Unit) {
-    coroutineScope.launchWhenCreated {
-        this@launchWhenStarted.collect {
-            block.invoke(it)
-        }
+    coroutineScope.launchWhenStarted {
+        collect { block.invoke(it) }
     }
 }
 

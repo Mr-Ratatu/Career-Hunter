@@ -33,11 +33,14 @@ class StatesView @JvmOverloads constructor(
     private lateinit var coroutineScope: CoroutineScope
 
     private val iconRotationAnimation = ValueAnimator.ofFloat(0f, 360f)
+    private val hideViewAnimation = ValueAnimator.ofInt(measuredHeight, 0)
     private var rotationAnimationListener: RotationAnimationListener
+    private var hideAnimationListener: HideAnimationListener
 
     init {
         LayoutInflater.from(context).inflate(R.layout.states_layout, this)
         rotationAnimationListener = RotationAnimationListener()
+        hideAnimationListener = HideAnimationListener()
         iniRotationAnim()
     }
 
@@ -50,14 +53,24 @@ class StatesView @JvmOverloads constructor(
         }
     }
 
+    private fun startHeightAnim() {
+        hideViewAnimation.apply {
+            interpolator = LinearInterpolator()
+            duration = SPIN_DURATION
+            start()
+        }
+    }
+
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         iconRotationAnimation.addUpdateListener(rotationAnimationListener)
+        hideViewAnimation.addUpdateListener(hideAnimationListener)
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         iconRotationAnimation.removeAllUpdateListeners()
+        hideViewAnimation.removeAllUpdateListeners()
     }
 
     fun setCoroutineScope(scope: CoroutineScope) {
@@ -94,6 +107,7 @@ class StatesView @JvmOverloads constructor(
             delay(ONE_SECONDS)
             visibility = View.GONE
         }
+        startHeightAnim()
     }
 
     private fun setErrorState() {
@@ -113,6 +127,14 @@ class StatesView @JvmOverloads constructor(
             stateIcon {
                 rotation = animator.animatedValue as Float
             }
+        }
+    }
+
+    private inner class HideAnimationListener : ValueAnimator.AnimatorUpdateListener {
+
+        override fun onAnimationUpdate(animator: ValueAnimator) {
+            this@StatesView.layoutParams.height = animator.animatedValue as Int
+            requestLayout()
         }
     }
 }

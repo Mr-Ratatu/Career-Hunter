@@ -2,6 +2,7 @@ package com.work.found.work.work_list.presenter
 
 import androidx.fragment.app.FragmentManager
 import com.work.found.core.api.router.ArticlesRouterInput
+import com.work.found.core.api.router.AuthRouterInput
 import com.work.found.core.api.router.WorkDetailRouterInput
 import com.work.found.core.base.presenter.BasePresenter
 import com.work.found.core.base.state.ViewState
@@ -29,6 +30,9 @@ class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewO
     @Inject
     lateinit var articlesRouter: ArticlesRouterInput
 
+    @Inject
+    lateinit var authRouter: AuthRouterInput
+
     init {
         DaggerWorkListComponent
             .builder()
@@ -36,12 +40,15 @@ class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewO
             .build()
             .inject(this)
 
-        presenterScope.launch(Dispatchers.IO) {
-            val response = interactor.fetchWorkList(vacanciesName = "Android")
+        loadWorkList()
+        loadArticles()
+    }
 
-            withContext(Dispatchers.Main) {
+    private fun loadWorkList() {
+        presenterScope.launch(Dispatchers.IO) {
+            interactor.fetchWorkList(vacanciesName = "Android") { result ->
                 viewState.updateState(States.LOADING)
-                response
+                result
                     .onSuccess { work ->
                         viewState.updateWorkList(work)
                         viewState.updateState(States.SUCCESS)
@@ -51,14 +58,11 @@ class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewO
                     }
             }
         }
-
-        loadArticles()
     }
 
     private fun loadArticles() {
         presenterScope.launch(Dispatchers.IO) {
-            val articles = interactor.loadArticles(AppConfig.application)
-            withContext(Dispatchers.Main) {
+            interactor.loadArticles(AppConfig.application) { articles ->
                 viewState.updateArticles(articles)
             }
         }
@@ -78,6 +82,15 @@ class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewO
 
     override fun showFilterScreen() {
         // TODO
+    }
+
+    override fun showAuthScreen(manager: FragmentManager) {
+        authRouter.showAuthScreen(manager)
+    }
+
+    override fun onReplayData() {
+        loadWorkList()
+        loadArticles()
     }
 
     override fun provideViewState(): ViewState<*> {

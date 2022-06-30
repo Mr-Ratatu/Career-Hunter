@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/core_di" />
             <option value="$PROJECT_DIR$/core_impl" />
             <option value="$PROJECT_DIR$/core_view" />
+            <option value="$PROJECT_DIR$/feature_auth" />
             <option value="$PROJECT_DIR$/feature_root" />
             <option value="$PROJECT_DIR$/feature_splash" />
             <option value="$PROJECT_DIR$/feature_work" />

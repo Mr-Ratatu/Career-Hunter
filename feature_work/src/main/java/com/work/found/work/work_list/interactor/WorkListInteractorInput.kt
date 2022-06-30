@@ -6,7 +6,7 @@ import com.work.found.core.api.model.work.WorkResponse
 
 interface WorkListInteractorInput {
 
-    suspend fun fetchWorkList(vacanciesName: String): Result<WorkResponse>
+    suspend fun fetchWorkList(vacanciesName: String, callback: (Result<WorkResponse>) -> Unit)
 
-    suspend fun loadArticles(context: Context): List<ArticlesItem>
+    suspend fun loadArticles(context: Context, callback: (List<ArticlesItem>) -> Unit)
 }

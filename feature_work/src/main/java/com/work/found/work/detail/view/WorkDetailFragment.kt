@@ -6,15 +6,14 @@ import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.work.found.core.api.model.detail.WorkDetailResponse
-import com.work.found.core.base.extensions.contentView
-import com.work.found.core.base.extensions.popBackStack
-import com.work.found.core.base.extensions.setHtmlText
-import com.work.found.core.base.extensions.textPlaceHolder
+import com.work.found.core.base.extensions.*
 import com.work.found.core.base.presentation.BaseFragment
 import com.work.found.core.base.utils.Constants
+import com.work.found.core.base.utils.Constants.EMPTY_STRING
 import com.work.found.core.base.utils.ShadowDelegate
 import com.work.found.core.base.utils.ViewInsetsController
 import com.work.found.work.R
@@ -57,10 +56,8 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val id = requireArguments().getString(ARGUMENT_ID) ?: ""
+        val id = requireArguments().getString(ARGUMENT_ID).orElse { EMPTY_STRING }
         viewOutput.onUpdateDetailInfo(id)
-
-        showSkeleton()
     }
 
     override fun initViewOutput(): WorkDetailViewOutput {
@@ -90,8 +87,12 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
                 initContent(response)
             }
 
-            states.observe(this@WorkDetailFragment) { state ->
+            states.launchWhenStartedWithScope { state ->
                 stateView { updateState(state) }
+            }
+
+            showSkeleton.launchWhenStartedWithScope { needShow ->
+                skeleton { isVisible = needShow }
             }
         }
     }
@@ -122,20 +123,19 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
                 response.employment.name
             )
         }
-        companyLogo { load(response.employer.logo_urls.mediumIcon) }
+        companyLogo {
+            val mediumLogo = response.employer.logo_urls?.mediumIcon
+            val original = response.employer.logo_urls?.original
+            load(
+                when (mediumLogo) {
+                    null -> original
+                    else -> mediumLogo
+                }
+            )
+        }
         companyName { text = response.employer.name }
         address { text = response.area.name }
         description { setHtmlText(response.description) }
-
-        hideSkeleton()
-    }
-
-    private fun showSkeleton() {
-        skeleton { visibility = View.VISIBLE }
-    }
-
-    private fun hideSkeleton() {
-        skeleton { visibility = View.GONE }
     }
 
     private fun TextView.setRangeSalary(from: Int?, to: Int?, currency: String?) {
@@ -146,7 +146,7 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
             from == null || to == null || currency == null -> {
                 getString(R.string.income_not_specified)
             }
-            else -> Constants.EMPTY_STRING
+            else -> EMPTY_STRING
         }
 
         text = rangeSalary

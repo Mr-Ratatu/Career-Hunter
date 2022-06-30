@@ -12,8 +12,10 @@
         <entry key="core_view/src/main/res/drawable/btn_ripple_effect.xml" value="0.1" />
         <entry key="core_view/src/main/res/drawable/card_background.xml" value="0.1215" />
         <entry key="core_view/src/main/res/drawable/ic_back.xml" value="0.1285" />
+        <entry key="core_view/src/main/res/drawable/ic_email.xml" value="0.172" />
         <entry key="core_view/src/main/res/drawable/ic_error.xml" value="0.1435" />
         <entry key="core_view/src/main/res/drawable/ic_filter.xml" value="0.192" />
+        <entry key="core_view/src/main/res/drawable/ic_google.xml" value="0.172" />
         <entry key="core_view/src/main/res/drawable/ic_loading.xml" value="0.102" />
         <entry key="core_view/src/main/res/drawable/ic_location.xml" value="0.1" />
         <entry key="core_view/src/main/res/drawable/ic_plane.xml" value="0.1" />
@@ -22,10 +24,15 @@
         <entry key="core_view/src/main/res/drawable/ic_settings.xml" value="0.192" />
         <entry key="core_view/src/main/res/drawable/ic_success.xml" value="0.1435" />
         <entry key="core_view/src/main/res/drawable/ic_unfavorite.xml" value="0.143" />
+        <entry key="core_view/src/main/res/drawable/icon_g_plus_colored.xml" value="0.172" />
+        <entry key="core_view/src/main/res/drawable/line_horizontal.xml" value="0.172" />
         <entry key="core_view/src/main/res/drawable/logo_circle.xml" value="0.192" />
+        <entry key="core_view/src/main/res/drawable/outlined_ripple_grey.xml" value="0.172" />
         <entry key="core_view/src/main/res/drawable/search_line_background.xml" value="0.192" />
         <entry key="core_view/src/main/res/drawable/shadow.xml" value="0.1385" />
+        <entry key="core_view/src/main/res/layout/layout_error.xml" value="0.30885416666666665" />
         <entry key="core_view/src/main/res/layout/states_layout.xml" value="0.19218139648437502" />
+        <entry key="feature_auth/src/main/res/layout/fragment_auth.xml" value="0.26789957682291665" />
         <entry key="feature_job/src/main/res/layout/fragment_job_list.xml" value="0.23703703703703705" />
         <entry key="feature_splash/src/main/res/layout/fragment_splash.xml" value="0.23703703703703705" />
         <entry key="feature_work/src/main/res/layout/fragment_articles.xml" value="0.25" />
@@ -41,6 +48,7 @@
         <entry key="feature_work/src/main/res/layout/item_work.xml" value="0.30910695393880205" />
         <entry key="feature_work/src/main/res/layout/layout_articles.xml" value="0.3098958333333333" />
         <entry key="feature_work/src/main/res/layout/layout_detail_toolbar.xml" value="0.3098958333333333" />
+        <entry key="feature_work/src/main/res/layout/layout_error.xml" value="0.30885416666666665" />
         <entry key="feature_work/src/main/res/layout/layout_header.xml" value="0.27050221761067705" />
         <entry key="feature_work/src/main/res/layout/layout_work_detail_skeleton.xml" value="0.23741963704427083" />
         <entry key="feature_work/src/main/res/layout/layout_work_list_skelet.xml" value="0.23438161214192704" />

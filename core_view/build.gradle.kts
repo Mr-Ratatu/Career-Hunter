@@ -34,7 +34,7 @@ android {
 
 dependencies {
 
-    implementation(project(Modules.core_base))
+    implementation(project(configs.Modules.core_base))
 
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
@@ -44,5 +44,8 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
     // Coroutines
-    implementation(Dependencies.coroutinesAndroid)
+    implementation(configs.Dependencies.coroutinesAndroid)
+
+    // UI
+    implementation(configs.Dependencies.lottie)
 }

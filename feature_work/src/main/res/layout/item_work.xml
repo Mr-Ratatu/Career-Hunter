@@ -122,6 +122,7 @@
             tools:text="@tools:sample/lorem/random" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/work_btn_apply_job"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/indent_16dp"

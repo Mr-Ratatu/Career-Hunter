@@ -1,8 +1,8 @@
 package com.work.found.work.work_list.view.adapter
 
-import android.text.Html
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -42,15 +42,22 @@ class WorkListAdapter(
     override fun onViewAttachedToWindow(holder: WorkListViewHolder) {
         val position = holder.adapterPosition
         if (position != UNDEFINED) {
-            holder.itemView.setOnClickListener {
-                val workId = currentList[position].id
-                onClickItem.invoke(workId)
+            holder.apply {
+                itemView.setOnClickListener {
+                    val workId = currentList[position].id
+                    onClickItem.invoke(workId)
+                }
+
+                applyJob { setOnClickListener { onApplyWork() } }
             }
         }
     }
 
     override fun onViewDetachedFromWindow(holder: WorkListViewHolder) {
-        holder.itemView.setOnClickListener(null)
+        holder.apply {
+            itemView.setOnClickListener(null)
+            applyJob { setOnClickListener(null) }
+        }
     }
 
     class WorkListViewHolder(itemView: View) : BaseViewHolder<WorkDto>(itemView) {
@@ -61,6 +68,7 @@ class WorkListAdapter(
         private val location = itemView.contentView<TextView>(R.id.work_tv_location)
         private val description = itemView.contentView<TextView>(R.id.work_tv_description)
         private val salaryIcon = itemView.contentView<ImageView>(R.id.work_iv_salary_icon)
+        val applyJob = itemView.contentView<Button>(R.id.work_btn_apply_job)
 
         override fun bind(item: WorkDto) {
             name { text = item.name }

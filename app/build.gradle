@@ -1,3 +1,6 @@
+import configs.Dependencies
+import configs.Modules
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -42,6 +45,7 @@ dependencies {
     implementation(project(Modules.feature_work))
     implementation(project(Modules.feature_root))
     implementation(project(Modules.feature_splash))
+    implementation(project(Modules.feature_auth))
 
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.4.2")
