@@ -58,7 +58,7 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
         }
 
         searchField {
-            setOnClickListener { viewOutput.showSearchScreen() }
+            setOnClickListener { viewOutput.showSearchScreen(parentFragmentManager) }
         }
 
         filterBtn {
