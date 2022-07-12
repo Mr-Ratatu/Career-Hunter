@@ -29,7 +29,7 @@ class SearchAdapter(
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        return SearchViewHolder(parent.layoutInflater(R.layout.item_work))
+        return SearchViewHolder(parent.layoutInflater(R.layout.item_search_work))
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {

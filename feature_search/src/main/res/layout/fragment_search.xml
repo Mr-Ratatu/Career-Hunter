@@ -10,7 +10,6 @@
         android:id="@+id/search_tb"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:stateListAnimator="@animator/toolbar_elevation"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_back">
 
@@ -29,19 +28,29 @@
 
     </androidx.appcompat.widget.Toolbar>
 
+    <View
+        android:id="@+id/search_work_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@drawable/shadow"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_tb" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_work_list_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:clipToPadding="false"
         android:overScrollMode="never"
         android:paddingHorizontal="@dimen/indent_8dp"
-        android:clipToPadding="false"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_tb"
-        tools:listitem="@layout/item_work" />
+        app:layout_constraintTop_toBottomOf="@+id/search_work_shadow"
+        tools:listitem="@layout/item_search_work" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,7 @@
 package com.work.found.search.presenter
 
+import androidx.fragment.app.FragmentManager
+import com.work.found.core.api.router.WorkDetailRouterInput
 import com.work.found.core.base.presenter.BasePresenter
 import com.work.found.core.base.state.ViewState
 import com.work.found.core.base.utils.States
@@ -18,6 +20,9 @@ class SearchPresenter : BasePresenter<SearchViewState>(), SearchViewOutput {
 
     @Inject
     lateinit var searchInteractor: SearchInteractorInput
+
+    @Inject
+    lateinit var workDetailRouter: WorkDetailRouterInput
 
     init {
         DaggerSearchComponent
@@ -40,6 +45,10 @@ class SearchPresenter : BasePresenter<SearchViewState>(), SearchViewOutput {
                     }
             }
         }
+    }
+
+    override fun showDetailInfoAboutWork(id: String, manager: FragmentManager) {
+        workDetailRouter.openWorkDetailScreen(id, manager)
     }
 
     override fun provideViewState(): ViewState<*> {

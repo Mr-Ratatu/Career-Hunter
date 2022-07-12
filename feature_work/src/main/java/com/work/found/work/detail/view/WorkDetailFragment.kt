@@ -49,6 +49,7 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
     private val scrollContainer = contentView<ScrollView>(R.id.work_detail_sv)
     private val stateView = contentView<StatesView>(R.id.work_detail_sv_states)
     private val skeleton = contentView<View>(R.id.work_detail_skeleton)
+    private val shadow = contentView<View>(R.id.word_detail_shadow)
 
     private val shadowDelegate = ShadowDelegate()
 
@@ -76,7 +77,7 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
 
         shadowDelegate.setShadowScrollListener(
             scrollView = scrollContainer.view,
-            shadowView = toolbar.view
+            shadowView = shadow.view
         )
 
         stateView {
