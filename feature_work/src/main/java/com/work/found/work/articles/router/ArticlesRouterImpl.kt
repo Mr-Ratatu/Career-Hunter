@@ -16,7 +16,7 @@ class ArticlesRouterImpl @Inject constructor() :
         addFragment(
             fragment = ArticlesFragment.newInstance(argumentId),
             fragmentManager = manager,
-            animation = Animation.scaleFadeAnimation(),
+            animation = Animation.defaultAnimation(),
             needToBackStack = true
         )
     }

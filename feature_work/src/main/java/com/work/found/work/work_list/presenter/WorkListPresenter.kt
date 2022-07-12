@@ -1,7 +1,9 @@
 package com.work.found.work.work_list.presenter
 
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LifecycleOwner
 import com.work.found.core.api.router.ArticlesRouterInput
+import com.work.found.core.api.router.SearchRouterInput
 import com.work.found.core.api.router.WorkDetailRouterInput
 import com.work.found.core.base.presenter.BasePresenter
 import com.work.found.core.base.state.ViewState
@@ -29,12 +31,19 @@ class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewO
     @Inject
     lateinit var articlesRouter: ArticlesRouterInput
 
+    @Inject
+    lateinit var searchRouter: SearchRouterInput
+
     init {
         DaggerWorkListComponent
             .builder()
             .dependencies(DaggerInjector.appDependencies())
             .build()
             .inject(this)
+    }
+
+    override fun <T : LifecycleOwner> onAttachView(view: T) {
+        super.onAttachView(view)
 
         presenterScope.launch(Dispatchers.IO) {
             val response = interactor.fetchWorkList(vacanciesName = "Android")
@@ -72,8 +81,8 @@ class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewO
         articlesRouter.showArticlesScreen(manager, id)
     }
 
-    override fun showSearchScreen() {
-        // TODO
+    override fun showSearchScreen(manager: FragmentManager) {
+        searchRouter.openSearchScreen(manager)
     }
 
     override fun showFilterScreen() {

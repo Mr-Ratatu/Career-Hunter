@@ -31,6 +31,7 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
     private val searchField = contentView<LinearLayout>(R.id.work_list_ll_search_container)
     private val filterBtn = contentView<ImageView>(R.id.work_list_iv_filter_btn)
     private val header = contentView<View>(R.id.work_list_header)
+    private val shadow = contentView<View>(R.id.work_list_shadow)
 
     // Adapters
     private val articleListAdapter = ArticlesListAdapter(
@@ -58,7 +59,7 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
         }
 
         searchField {
-            setOnClickListener { viewOutput.showSearchScreen() }
+            setOnClickListener { viewOutput.showSearchScreen(parentFragmentManager) }
         }
 
         filterBtn {
@@ -67,7 +68,7 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
 
         shadowDelegate.setShadowScrollListener(
             scrollView = workList.view,
-            shadowView = header.view.rootView
+            shadowView = shadow.view
         )
 
         showSkeleton()

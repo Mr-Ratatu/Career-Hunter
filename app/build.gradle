@@ -42,6 +42,7 @@ dependencies {
     implementation(project(Modules.feature_work))
     implementation(project(Modules.feature_root))
     implementation(project(Modules.feature_splash))
+    implementation(project(Modules.feature_search))
 
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.appcompat:appcompat:1.4.2")

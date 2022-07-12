@@ -36,6 +36,7 @@
     <dimen name="image_60dp">60dp</dimen>
     <dimen name="image_75dp">75dp</dimen>
     <dimen name="image_150dp">150dp</dimen>
+    <dimen name="image_200dp">200dp</dimen>
 
     <!-- Text size -->
     <dimen name="text_8sp">8sp</dimen>

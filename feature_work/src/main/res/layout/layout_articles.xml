@@ -6,45 +6,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:overScrollMode="never"
-    android:scrollbars="vertical">
+    android:scrollbars="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/indent_16dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/articles_iv_poster"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/image_150dp"
-            android:elevation="@dimen/elevation_4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/articles_tb"
-            tools:src="@tools:sample/backgrounds/scenic" />
-
-        <LinearLayout
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/articles_tv_title"
+            style="@style/StyleTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/indent_16dp">
+            tools:text="How to migration?" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/articles_tv_title"
-                style="@style/StyleTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="How to migration?" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/articles_tv_description"
-                style="@style/StyleDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/indent_16dp"
-                tools:text="@tools:sample/lorem/random" />
-
-        </LinearLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/articles_tv_description"
+            style="@style/StyleDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/indent_16dp"
+            tools:text="@tools:sample/lorem/random" />
 
     </LinearLayout>
 

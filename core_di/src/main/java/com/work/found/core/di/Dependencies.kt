@@ -7,4 +7,5 @@ interface Dependencies :
     RootDependencies,
     WorkListDependencies,
     WorkDerailDependencies,
-    ArticlesDependencies
+    ArticlesDependencies,
+    SearchDependencies

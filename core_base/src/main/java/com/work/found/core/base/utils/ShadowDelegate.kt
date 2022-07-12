@@ -1,6 +1,7 @@
 package com.work.found.core.base.utils
 
 import android.view.View
+import androidx.core.view.isVisible
 
 class ShadowDelegate {
 
@@ -10,7 +11,7 @@ class ShadowDelegate {
 
     fun setShadowScrollListener(scrollView: View, shadowView: View) {
         scrollView.setOnScrollChangeListener { _, _, _, _, _ ->
-            shadowView.isSelected = scrollView.canScrollVertically(UP)
+            shadowView.isVisible = scrollView.canScrollVertically(UP)
         }
     }
 }

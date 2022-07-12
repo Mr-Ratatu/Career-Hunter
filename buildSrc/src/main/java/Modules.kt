@@ -13,4 +13,5 @@ object Modules {
     const val feature_home = ":feature_home"
     const val feature_splash = ":feature_splash"
     const val feature_settings = ":feature_settings"
+    const val feature_search = ":feature_search"
 }
