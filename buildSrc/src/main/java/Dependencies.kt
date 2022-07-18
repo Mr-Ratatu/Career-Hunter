@@ -35,6 +35,8 @@ object Dependencies {
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutinesVersion}"
     const val coroutinesTest =
         "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutinesVersion}"
+    const val mockitoCore = "org.mockito:mockito-core:${Versions.mockito_version}"
+    const val mockitoInline = "org.mockito:mockito-inline:${Versions.mockito_version}"
     const val coil = "io.coil-kt:coil:${Versions.coilVersion}"
     const val room = "androidx.room:room-runtime:${Versions.roomVersion}"
     const val roomKtx = "androidx.room:room-ktx:${Versions.roomVersion}"

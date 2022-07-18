@@ -8,7 +8,6 @@ import com.work.found.core.api.router.WorkDetailRouterInput
 import com.work.found.core.base.presenter.BasePresenter
 import com.work.found.core.base.state.ViewState
 import com.work.found.core.base.utils.AppConfig
-import com.work.found.core.base.utils.States
 import com.work.found.core.di.base.DaggerInjector
 import com.work.found.work.work_list.di.DaggerWorkListComponent
 import com.work.found.work.work_list.interactor.WorkListInteractorInput
@@ -47,18 +46,7 @@ class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewO
 
         presenterScope.launch(Dispatchers.IO) {
             val response = interactor.fetchWorkList(vacanciesName = "Android")
-
-            withContext(Dispatchers.Main) {
-                viewState.updateState(States.LOADING)
-                response
-                    .onSuccess { work ->
-                        viewState.updateWorkList(work)
-                        viewState.updateState(States.SUCCESS)
-                    }
-                    .onFailure { error ->
-                        viewState.updateState(States.ERROR)
-                    }
-            }
+            viewState.updateState(response)
         }
 
         loadArticles()

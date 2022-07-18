@@ -6,9 +6,13 @@ import android.widget.LinearLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.work.found.core.api.model.work.WorkResponse
+import com.work.found.core.api.state.Result
 import com.work.found.core.base.extensions.contentView
+import com.work.found.core.base.extensions.launchWhenStarted
 import com.work.found.core.base.presentation.BaseFragment
 import com.work.found.core.base.utils.ShadowDelegate
+import com.work.found.core.base.utils.States
 import com.work.found.core.base.utils.ViewInsetsController
 import com.work.found.work.R
 import com.work.found.work.core_view.StatesView
@@ -76,18 +80,30 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
 
     override fun subscribeOnData() {
         with(dataProvider) {
-            workListValues.observe(this@WorkListFragment) { work ->
-                workListAdapter.submitList(work.items)
-                hideSkeleton()
-            }
-
-            states.observe(this@WorkListFragment) { state ->
-                stateView { updateState(state) }
+            states.launchWhenStarted(lifecycleScope) { state ->
+                handleStates(state)
             }
 
             articlesValue.observe(this@WorkListFragment) { news ->
                 articleListAdapter.setArticles(news)
             }
+        }
+    }
+
+    private fun handleStates(result: Result<WorkResponse>) {
+        when (result) {
+            is Result.Success -> {
+                stateView { updateState(States.SUCCESS) }
+                workListAdapter.submitList(result.value.items)
+                hideSkeleton()
+            }
+            is Result.Loading -> stateView { updateState(States.LOADING) }
+            is Result.Error -> {
+                stateView { updateState(States.ERROR) }
+                skeleton { visibility = View.GONE }
+            }
+            is Result.NotFoundError -> Unit
+            is Result.ConnectionError -> Unit
         }
     }
 

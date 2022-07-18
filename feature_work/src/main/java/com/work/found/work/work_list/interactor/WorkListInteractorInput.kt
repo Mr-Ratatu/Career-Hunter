@@ -3,6 +3,7 @@ package com.work.found.work.work_list.interactor
 import android.content.Context
 import com.work.found.core.api.model.articles.ArticlesItem
 import com.work.found.core.api.model.work.WorkResponse
+import com.work.found.core.api.state.Result
 
 interface WorkListInteractorInput {
 
