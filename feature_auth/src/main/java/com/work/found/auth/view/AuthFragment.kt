@@ -44,7 +44,7 @@ class AuthFragment : BaseFragment<AuthViewOutput, AuthDataProvider>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        auth = FirebaseApp.getInstance() as FirebaseAuth
+//        auth = FirebaseApp.getInstance() as FirebaseAuth
     }
 
     override fun initViewOutput(): AuthViewOutput {
@@ -95,7 +95,7 @@ class AuthFragment : BaseFragment<AuthViewOutput, AuthDataProvider>() {
     }
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
+        /*val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         auth.signInWithCredential(credential)
             .addOnSuccessListener(requireActivity()) { authResult ->
                 startActivity(
@@ -106,6 +106,6 @@ class AuthFragment : BaseFragment<AuthViewOutput, AuthDataProvider>() {
                 )
             }
             .addOnFailureListener(requireActivity()) { e ->
-            }
+            }*/
     }
 }
