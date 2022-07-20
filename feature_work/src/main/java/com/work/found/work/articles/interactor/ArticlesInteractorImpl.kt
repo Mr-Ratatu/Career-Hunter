@@ -13,8 +13,6 @@ class ArticlesInteractorImpl @Inject constructor(
     override suspend fun loadArticles(context: Context, id: Int): ArticlesItem? {
         return service.loadArticles(
             context, BuildConfig.ARTICLES_ASSET_NAME
-        ).find { item ->
-            item.id == id
-        }
+        ).find { item -> item.id == id }
     }
 }

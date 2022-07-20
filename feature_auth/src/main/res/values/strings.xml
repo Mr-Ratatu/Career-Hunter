@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="google_btn_text">Google</string>
+    <string name="email_btn_text">Email</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="divider_text">Или</string>
+    <string name="info_title_social_sign_in">Sign in</string>
+    <string name="info_title_social_sign_up">Sign up</string>
+</resources>

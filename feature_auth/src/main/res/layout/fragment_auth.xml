@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/articles_tb"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back"
+        tools:layout_height="56dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/auth_iv_logo"
+        android:layout_width="@dimen/image_75dp"
+        android:layout_height="@dimen/image_75dp"
+        android:layout_gravity="center"
+        android:background="@drawable/logo_circle"
+        android:fontFamily="@font/bold"
+        android:gravity="center"
+        android:text="@string/app_logo_name"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_24sp"
+        app:layout_constraintBottom_toTopOf="@+id/auth_tv_welcome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/auth_tv_welcome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/indent_16dp"
+        android:fontFamily="@font/bold"
+        android:gravity="center"
+        android:paddingHorizontal="@dimen/indent_48dp"
+        android:text="Добро пожаловать в CareerHunter"
+        android:textColor="@color/gray_900"
+        android:textSize="@dimen/text_24sp"
+        app:layout_constraintBottom_toTopOf="@+id/auth_tv_social_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/auth_iv_logo" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/auth_tv_social_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/indent_16dp"
+        android:text="@string/info_title_social_sign_in"
+        android:textColor="@color/gray_900"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/auth_btn_google"
+        app:layout_constraintTop_toBottomOf="@+id/auth_tv_welcome" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/auth_btn_google"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_48dp"
+        android:layout_marginHorizontal="@dimen/indent_16dp"
+        android:layout_marginTop="@dimen/indent_32dp"
+        android:background="@drawable/outlined_ripple_grey"
+        android:drawableStart="@drawable/ic_google"
+        android:gravity="center"
+        android:paddingStart="@dimen/indent_16dp"
+        android:paddingEnd="36dp"
+        android:text="@string/google_btn_text"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_18sp"
+        app:fontFamily="@font/medium"
+        app:layout_constraintBottom_toTopOf="@+id/auth_tv_divider"
+        app:layout_constraintTop_toBottomOf="@+id/auth_tv_social_header"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/auth_tv_divider"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/indent_16dp"
+        android:background="@drawable/line_horizontal"
+        android:gravity="center_horizontal"
+        android:paddingBottom="2dp"
+        android:text="@string/divider_text"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/text_12sp"
+        app:layout_constraintBottom_toTopOf="@+id/auth_btn_email"
+        app:layout_constraintEnd_toEndOf="@+id/auth_btn_google"
+        app:layout_constraintStart_toStartOf="@+id/auth_btn_google"
+        app:layout_constraintTop_toBottomOf="@+id/auth_btn_google" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/auth_btn_email"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_48dp"
+        android:layout_marginHorizontal="@dimen/indent_16dp"
+        android:layout_marginTop="@dimen/indent_16dp"
+        android:background="@drawable/outlined_ripple_grey"
+        android:drawableStart="@drawable/ic_email"
+        android:gravity="center"
+        android:paddingStart="@dimen/indent_16dp"
+        android:paddingEnd="36dp"
+        android:text="@string/email_btn_text"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_18sp"
+        app:fontFamily="@font/medium"
+        app:layout_constraintBottom_toTopOf="@+id/auth_tv_hint"
+        app:layout_constraintTop_toBottomOf="@+id/auth_tv_divider"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/auth_tv_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/indent_32dp"
+        android:gravity="center_vertical"
+        android:text="@string/dont_have_an_account"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/auth_tv_sign_up"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/auth_tv_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/indent_8dp"
+        android:background="@drawable/btn_ripple_effect"
+        android:gravity="center_vertical"
+        android:text="Sign up"
+        android:textColor="@color/blue_f5"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/auth_tv_hint"
+        app:layout_constraintTop_toTopOf="@+id/auth_tv_hint" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

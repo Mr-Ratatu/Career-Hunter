@@ -69,7 +69,7 @@ class SearchFragment : BaseFragment<SearchViewOutput, SearchDataProvider>() {
 
     override fun subscribeOnData() {
         dataProvider.apply {
-            states.observe(this@SearchFragment) { response ->
+            states.observeWithViewScopeIgnoreNull { response ->
                 handleStates(response)
             }
         }

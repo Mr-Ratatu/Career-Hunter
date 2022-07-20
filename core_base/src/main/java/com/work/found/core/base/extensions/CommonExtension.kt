@@ -10,3 +10,5 @@ fun <T> Any.takeAs(clazz: Class<T>) = this as T
 
 @Suppress("UNCHECKED_CAST")
 inline fun <reified T: Any> Any.takeAs() = this as T
+
+inline fun <T> T?.orElse(ifNullBlock: () -> T): T = this ?: ifNullBlock()

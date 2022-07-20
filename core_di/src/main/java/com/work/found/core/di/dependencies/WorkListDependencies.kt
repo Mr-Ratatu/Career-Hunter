@@ -2,6 +2,7 @@ package com.work.found.core.di.dependencies
 
 import com.work.found.core.api.router.ArticlesRouterInput
 import com.work.found.core.api.router.SearchRouterInput
+import com.work.found.core.api.router.AuthRouterInput
 import com.work.found.core.api.router.WorkDetailRouterInput
 import com.work.found.core.api.services.ArticlesServiceInput
 import com.work.found.core.api.services.WorkServiceInput
@@ -17,4 +18,6 @@ interface WorkListDependencies {
     fun articlesRouter(): ArticlesRouterInput
 
     fun searchRouter(): SearchRouterInput
+
+    fun authRouter(): AuthRouterInput
 }

@@ -20,7 +20,7 @@
     <color name="blue_f5">#878AF5</color>
     <color name="blue_f6">#666AF6</color>
     <color name="text_color">#31446C</color>
-    <color name="backgroundColor">#F5F5F5</color>
+    <color name="backgroundColor">#FFFFFF</color>
     <color name="ripple_effect_color">#40000000</color>
 
 </resources>

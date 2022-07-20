@@ -37,9 +37,9 @@ android {
 
 dependencies {
 
-    implementation(project(Modules.core_base))
-    implementation(project(Modules.core_view))
-    implementation(project(Modules.core_api))
+    implementation(project(configs.Modules.core_base))
+    implementation(project(configs.Modules.core_view))
+    implementation(project(configs.Modules.core_api))
 
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
@@ -49,15 +49,15 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
     // DI
-    implementation(Dependencies.dagger)
-    kapt(Dependencies.daggerKapt)
+    implementation(configs.Dependencies.dagger)
+    kapt(configs.Dependencies.daggerKapt)
 
     // Coroutines
-    implementation(Dependencies.coroutinesAndroid)
-    implementation(Dependencies.lifecycleRuntime)
-    implementation(Dependencies.coroutinesCore)
+    implementation(configs.Dependencies.coroutinesAndroid)
+    implementation(configs.Dependencies.lifecycleRuntime)
+    implementation(configs.Dependencies.coroutinesCore)
 
     // UI
-    implementation(Dependencies.recyclerview)
-    implementation(Dependencies.coil)
+    implementation(configs.Dependencies.recyclerview)
+    implementation(configs.Dependencies.coil)
 }

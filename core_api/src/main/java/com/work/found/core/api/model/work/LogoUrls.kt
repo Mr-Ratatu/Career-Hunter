@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class LogoUrls(
     @SerializedName("240")
-    val mediumIcon: String = "",
+    val mediumIcon: String? = null,
     @SerializedName("90")
-    val smallIcon: String = "",
-    val original: String = ""
+    val smallIcon: String? = null,
+    val original: String? = null
 )

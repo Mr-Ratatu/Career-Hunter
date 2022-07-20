@@ -8,13 +8,10 @@ import com.work.found.core.base.state.DataProvider
 import com.work.found.core.base.utils.SingleLiveEvent
 
 interface SearchDataProvider : DataProvider {
-    val workList: LiveData<WorkResponse>
     val states: LiveData<Result<WorkResponse>>
 }
 
 class SearchDataProviderImpl : SearchDataProvider {
-
-    override val workList = MutableLiveData<WorkResponse>()
 
     override val states = SingleLiveEvent<Result<WorkResponse>>(Result.Loading)
 }

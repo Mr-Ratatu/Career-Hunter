@@ -24,7 +24,7 @@ fun Context.gridLayoutManager(spanCount: Int) = GridLayoutManager(this, spanCoun
 /**
  * Create an ItemCallback callback instance
  */
-inline fun <T> diffUtilCallback(
+inline fun <T : Any> diffUtilCallback(
     crossinline areItemsTheSame: (oldItem: T, newItem: T) -> Boolean,
     crossinline areContentsTheSame: (oldItem: T, newItem: T) -> Boolean
 ) = object : DiffUtil.ItemCallback<T>() {

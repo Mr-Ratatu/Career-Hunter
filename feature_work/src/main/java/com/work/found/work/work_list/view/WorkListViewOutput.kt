@@ -8,4 +8,6 @@ interface WorkListViewOutput: ViewOutput {
     fun showDetailInfoAboutArticles(id: Int, manager: FragmentManager)
     fun showSearchScreen(manager: FragmentManager)
     fun showFilterScreen()
+    fun showAuthScreen(manager: FragmentManager)
+    fun onReloadData()
 }

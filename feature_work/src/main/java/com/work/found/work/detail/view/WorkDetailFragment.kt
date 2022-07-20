@@ -10,12 +10,10 @@ import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.work.found.core.api.model.detail.WorkDetailResponse
 import com.work.found.core.api.state.Result
-import com.work.found.core.base.extensions.contentView
-import com.work.found.core.base.extensions.popBackStack
-import com.work.found.core.base.extensions.setHtmlText
-import com.work.found.core.base.extensions.textPlaceHolder
+import com.work.found.core.base.extensions.*
 import com.work.found.core.base.presentation.BaseFragment
 import com.work.found.core.base.utils.Constants
+import com.work.found.core.base.utils.Constants.EMPTY_STRING
 import com.work.found.core.base.utils.ShadowDelegate
 import com.work.found.core.base.utils.States
 import com.work.found.core.base.utils.ViewInsetsController
@@ -60,7 +58,7 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val id = requireArguments().getString(ARGUMENT_ID) ?: ""
+        val id = requireArguments().getString(ARGUMENT_ID).orElse { EMPTY_STRING }
         viewOutput.onUpdateDetailInfo(id)
 
         showSkeleton()
@@ -89,7 +87,7 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
 
     override fun subscribeOnData() {
         dataProvider.apply {
-            states.observe(this@WorkDetailFragment) { state ->
+            states.observeWithViewScopeIgnoreNull { state ->
                 handleStates(state)
             }
         }
@@ -134,7 +132,16 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
                 response.employment.name
             )
         }
-        companyLogo { load(response.employer.logo_urls.mediumIcon) }
+        companyLogo {
+            val mediumLogo = response.employer.logo_urls.mediumIcon
+            val original = response.employer.logo_urls.original
+            load(
+                when {
+                    mediumLogo.isNullOrEmpty() -> original
+                    else -> mediumLogo
+                }
+            )
+        }
         companyName { text = response.employer.name }
         address { text = response.area.name }
         description { setHtmlText(response.description) }
@@ -158,7 +165,7 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
             from == null || to == null || currency == null -> {
                 getString(R.string.income_not_specified)
             }
-            else -> Constants.EMPTY_STRING
+            else -> EMPTY_STRING
         }
 
         text = rangeSalary
