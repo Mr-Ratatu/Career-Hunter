@@ -8,5 +8,5 @@ interface Dependencies :
     WorkListDependencies,
     WorkDerailDependencies,
     ArticlesDependencies,
-    AuthDependencies
+    AuthDependencies,
     SearchDependencies

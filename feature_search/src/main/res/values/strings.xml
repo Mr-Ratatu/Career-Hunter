@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="search_vacation_hint">Поиск вакансий</string>
+    <string name="income_not_specified">Уровень дохода не указан</string>
 </resources>

@@ -61,9 +61,7 @@ class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewO
 
     private fun loadArticles() {
         presenterScope.launch(Dispatchers.IO) {
-            interactor.loadArticles(AppConfig.application) { articles ->
-                viewState.updateArticles(articles)
-            }
+            viewState.updateArticles(interactor.loadArticles(AppConfig.application))
         }
     }
 
@@ -87,7 +85,7 @@ class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewO
         authRouter.showAuthScreen(manager)
     }
 
-    override fun onReplayData() {
+    override fun onReloadData() {
         loadWorkList()
         loadArticles()
     }

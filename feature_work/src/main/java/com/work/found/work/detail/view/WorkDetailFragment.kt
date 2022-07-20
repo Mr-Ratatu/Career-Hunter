@@ -10,12 +10,10 @@ import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.work.found.core.api.model.detail.WorkDetailResponse
 import com.work.found.core.api.state.Result
-import com.work.found.core.base.extensions.contentView
-import com.work.found.core.base.extensions.popBackStack
-import com.work.found.core.base.extensions.setHtmlText
-import com.work.found.core.base.extensions.textPlaceHolder
+import com.work.found.core.base.extensions.*
 import com.work.found.core.base.presentation.BaseFragment
 import com.work.found.core.base.utils.Constants
+import com.work.found.core.base.utils.Constants.EMPTY_STRING
 import com.work.found.core.base.utils.ShadowDelegate
 import com.work.found.core.base.utils.States
 import com.work.found.core.base.utils.ViewInsetsController
@@ -89,7 +87,7 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
 
     override fun subscribeOnData() {
         dataProvider.apply {
-            states.observe(this@WorkDetailFragment) { state ->
+            states.observeWithViewScopeIgnoreNull { state ->
                 handleStates(state)
             }
         }
@@ -135,11 +133,11 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
             )
         }
         companyLogo {
-            val mediumLogo = response.employer.logo_urls?.mediumIcon
-            val original = response.employer.logo_urls?.original
+            val mediumLogo = response.employer.logo_urls.mediumIcon
+            val original = response.employer.logo_urls.original
             load(
-                when (mediumLogo) {
-                    null -> original
+                when {
+                    mediumLogo.isNullOrEmpty() -> original
                     else -> mediumLogo
                 }
             )

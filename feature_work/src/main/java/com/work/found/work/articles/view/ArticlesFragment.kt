@@ -72,15 +72,15 @@ class ArticlesFragment : BaseFragment<ArticlesViewOutput, ArticlesDataProviderIn
 
     override fun subscribeOnData() {
         dataProvider.apply {
-            poster.launchWhenStarted(lifecycleScope) { poster ->
+            poster.launchWhenStartedWithScope { poster ->
                 articlePoster { setImageFromString(poster) }
             }
 
-            title.launchWhenStarted(lifecycleScope) { title ->
+            title.launchWhenStartedWithScope { title ->
                 articleTitle { text = title }
             }
 
-            description.launchWhenStarted(lifecycleScope) { description ->
+            description.launchWhenStartedWithScope { description ->
                 articleDescription { text = description }
             }
         }

@@ -17,6 +17,8 @@ object Dependencies {
     const val junit5Engine = "org.junit.jupiter:junit-jupiter-engine:${Versions.junit5Version}"
     const val junitExtensions = "androidx.test.ext:junit:${Versions.junitExtensionsVersion}"
     const val junitExtensionsKtx = "androidx.test.ext:junit-ktx:${Versions.junitExtensionsVersion}"
+    const val mockitoCore = "org.mockito:mockito-core:${Versions.mockito_version}"
+    const val mockitoInline = "org.mockito:mockito-inline:${Versions.mockito_version}"
 
     // https://developer.android.com/training/testing/espresso
     const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espressoCoreVersion}"

@@ -15,6 +15,7 @@ import com.work.found.core.base.utils.ShadowDelegate
 import com.work.found.core.base.utils.States
 import com.work.found.core.base.utils.ViewInsetsController
 import com.work.found.work.R
+import com.work.found.work.core_view.ErrorView
 import com.work.found.work.core_view.StatesView
 import com.work.found.work.work_list.presenter.WorkListPresenter
 import com.work.found.work.work_list.provider.WorkListDataProvider
@@ -34,7 +35,6 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
     private val workList = contentView<RecyclerView>(R.id.work_list_rv)
     private val searchField = contentView<LinearLayout>(R.id.work_list_ll_search_container)
     private val filterBtn = contentView<ImageView>(R.id.work_list_iv_filter_btn)
-    private val header = contentView<View>(R.id.work_list_header)
     private val errorView = contentView<ErrorView>(R.id.error_view)
     private val shadow = contentView<View>(R.id.work_list_shadow)
 
@@ -76,12 +76,14 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
             shadowView = shadow.view
         )
 
-        showSkeleton()
+        errorView {
+            setOnReloadClickListener { viewOutput.onReloadData() }
+        }
     }
 
     override fun subscribeOnData() {
         with(dataProvider) {
-            states.launchWhenStarted(lifecycleScope) { state ->
+            states.launchWhenStartedWithScope { state ->
                 handleStates(state)
             }
 
@@ -96,15 +98,20 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
             is Result.Success -> {
                 stateView { updateState(States.SUCCESS) }
                 workListAdapter.submitList(result.value.items)
+                errorView { visibility = View.GONE }
                 hideSkeleton()
             }
-            is Result.Loading -> stateView { updateState(States.LOADING) }
-            is Result.Error -> {
+            is Result.Loading -> {
+                showSkeleton()
+                stateView { updateState(States.LOADING) }
+            }
+            is Result.Error,
+            is Result.NotFoundError,
+            is Result.ConnectionError -> {
                 stateView { updateState(States.ERROR) }
                 skeleton { visibility = View.GONE }
+                errorView { visibility = View.VISIBLE }
             }
-            is Result.NotFoundError -> Unit
-            is Result.ConnectionError -> Unit
         }
     }
 

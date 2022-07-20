@@ -94,14 +94,17 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/work_tv_company_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/indent_8dp"
+            android:ellipsize="end"
             android:fontFamily="@font/noto_sans_medium"
             android:gravity="center_vertical"
+            android:maxLines="1"
             android:textColor="@color/black"
             android:textSize="@dimen/text_16sp"
             app:layout_constraintBottom_toBottomOf="@+id/work_iv_company_icon"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/work_iv_company_icon"
             app:layout_constraintTop_toTopOf="@+id/work_iv_company_icon"
             tools:text="Google" />

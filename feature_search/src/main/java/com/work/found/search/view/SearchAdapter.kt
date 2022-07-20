@@ -13,6 +13,7 @@ import com.work.found.core.base.extensions.layoutInflater
 import com.work.found.core.base.extensions.setHtmlText
 import com.work.found.core.base.presentation.BaseViewHolder
 import com.work.found.core.base.utils.Constants
+import com.work.found.core.base.utils.RangeController
 import com.work.found.search.R
 
 class SearchAdapter(
@@ -57,7 +58,6 @@ class SearchAdapter(
         private val companyName = itemView.contentView<TextView>(R.id.work_tv_company_name)
         private val location = itemView.contentView<TextView>(R.id.work_tv_location)
         private val description = itemView.contentView<TextView>(R.id.work_tv_description)
-        private val salaryIcon = itemView.contentView<ImageView>(R.id.work_iv_salary_icon)
 
         override fun bind(item: WorkDto) {
             name { text = item.name }
@@ -69,25 +69,13 @@ class SearchAdapter(
                 isVisible = !description.isNullOrEmpty()
             }
             salary {
-                text = getRangeSalary(
+                text = RangeController.getRangeSalary(
                     from = item.salary?.from,
                     to = item.salary?.to,
-                    currency = item.salary?.currency
+                    currency = item.salary?.currency,
+                    defaultMessage = R.string.income_not_specified
                 )
             }
-        }
-
-        private fun getRangeSalary(from: Int?, to: Int?, currency: String?): String {
-            val rangeSalary = when {
-                from != null && to != null && currency != null -> { "$from-$to $currency" }
-                from == null || to == null || currency == null -> {
-                    salaryIcon { visibility = View.GONE }
-                    Constants.EMPTY_STRING
-                }
-                else -> Constants.EMPTY_STRING
-            }
-
-            return rangeSalary
         }
     }
 }

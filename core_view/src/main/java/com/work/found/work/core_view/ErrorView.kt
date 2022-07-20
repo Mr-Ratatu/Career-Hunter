@@ -15,7 +15,7 @@ class ErrorView constructor(context: Context, attr: AttributeSet?) : FrameLayout
         LayoutInflater.from(context).inflate(R.layout.layout_error, this)
     }
 
-    fun onReplayDataClick(action: () -> Unit) {
+    fun setOnReloadClickListener(action: () -> Unit) {
         replayBtn {
             setOnClickListener { action() }
         }

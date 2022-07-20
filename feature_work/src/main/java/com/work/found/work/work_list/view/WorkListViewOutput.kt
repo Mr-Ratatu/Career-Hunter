@@ -9,5 +9,5 @@ interface WorkListViewOutput: ViewOutput {
     fun showSearchScreen(manager: FragmentManager)
     fun showFilterScreen()
     fun showAuthScreen(manager: FragmentManager)
-    fun onReplayData()
+    fun onReloadData()
 }
