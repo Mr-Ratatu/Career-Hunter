@@ -7,6 +7,7 @@ import com.work.found.core.api.services.ArticlesServiceInput
 import com.work.found.core.api.services.WorkServiceInput
 import com.work.found.work.BuildConfig
 import javax.inject.Inject
+import com.work.found.core.api.state.Result
 
 class WorkListInteractorImpl @Inject constructor(
     private val workService: WorkServiceInput,
@@ -14,11 +15,7 @@ class WorkListInteractorImpl @Inject constructor(
 ) : WorkListInteractorInput {
 
     override suspend fun fetchWorkList(vacanciesName: String): Result<WorkResponse> {
-        return try {
-            Result.success(workService.fetchWorkList(vacanciesName))
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+        return workService.fetchWorkList(vacanciesName)
     }
 
     override suspend fun loadArticles(context: Context): List<ArticlesItem> {

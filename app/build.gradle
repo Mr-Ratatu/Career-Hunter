@@ -70,4 +70,7 @@ dependencies {
     testRuntimeOnly(Dependencies.junit5Engine)
     testImplementation(Dependencies.junitExtensionsKtx)
     testImplementation(Dependencies.coroutinesTest)
+    testImplementation(Dependencies.mockitoCore)
+    testImplementation(Dependencies.mockitoInline)
+    androidTestImplementation 'org.mockito:mockito-android:3.8.0'
 }
