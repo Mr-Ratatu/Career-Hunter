@@ -17,8 +17,17 @@
 
     <include
         android:id="@+id/work_list_header"
-        layout="@layout/layout_header"
-        tools:layout_editor_absoluteY="43dp" />
+        layout="@layout/layout_header" />
+
+    <View
+        android:id="@+id/work_list_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@drawable/shadow"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/work_list_header" />
 
     <include
         android:id="@+id/work_list_vs_skeleton"
@@ -43,7 +52,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/work_list_header"
+        app:layout_constraintTop_toBottomOf="@+id/work_list_shadow"
         tools:listitem="@layout/item_work" />
 
     <com.work.found.work.core_view.ErrorView

@@ -3,16 +3,18 @@ package com.work.found.work.work_list.view
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.work.found.core.api.model.work.WorkResponse
+import com.work.found.core.api.state.Result
 import com.work.found.core.base.extensions.contentView
+import com.work.found.core.base.extensions.launchWhenStarted
 import com.work.found.core.base.presentation.BaseFragment
 import com.work.found.core.base.utils.ShadowDelegate
+import com.work.found.core.base.utils.States
 import com.work.found.core.base.utils.ViewInsetsController
 import com.work.found.work.R
-import com.work.found.work.core_view.ErrorView
 import com.work.found.work.core_view.StatesView
 import com.work.found.work.work_list.presenter.WorkListPresenter
 import com.work.found.work.work_list.provider.WorkListDataProvider
@@ -34,6 +36,7 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
     private val filterBtn = contentView<ImageView>(R.id.work_list_iv_filter_btn)
     private val header = contentView<View>(R.id.work_list_header)
     private val errorView = contentView<ErrorView>(R.id.error_view)
+    private val shadow = contentView<View>(R.id.work_list_shadow)
 
     // Adapters
     private val articleListAdapter = ArticlesListAdapter(
@@ -61,7 +64,7 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
         }
 
         searchField {
-            setOnClickListener { viewOutput.showSearchScreen() }
+            setOnClickListener { viewOutput.showSearchScreen(parentFragmentManager) }
         }
 
         filterBtn {
@@ -70,39 +73,49 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
 
         shadowDelegate.setShadowScrollListener(
             scrollView = workList.view,
-            shadowView = header.view.rootView
+            shadowView = shadow.view
         )
 
-        errorView {
-            onReplayDataClick(viewOutput::onReplayData)
-        }
+        showSkeleton()
     }
 
     override fun subscribeOnData() {
         with(dataProvider) {
-            workListValues.observeWithViewScopeIgnoreNull { work ->
-                workListAdapter.submitList(work.items)
-            }
-
-            states.launchWhenStartedWithScope { state ->
-                stateView { updateState(state) }
+            states.launchWhenStarted(lifecycleScope) { state ->
+                handleStates(state)
             }
 
             articlesValue.observeWithViewScopeIgnoreNull { articles ->
                 articleListAdapter.setArticles(articles)
             }
-
-            showSkeleton.launchWhenStartedWithScope { needShow ->
-                skeleton { isVisible = needShow }
-                workList { isVisible = !needShow }
-            }
-
-            error.launchWhenStartedWithScope { isError ->
-                errorView {
-                    isVisible = isError
-                }
-            }
         }
+    }
+
+    private fun handleStates(result: Result<WorkResponse>) {
+        when (result) {
+            is Result.Success -> {
+                stateView { updateState(States.SUCCESS) }
+                workListAdapter.submitList(result.value.items)
+                hideSkeleton()
+            }
+            is Result.Loading -> stateView { updateState(States.LOADING) }
+            is Result.Error -> {
+                stateView { updateState(States.ERROR) }
+                skeleton { visibility = View.GONE }
+            }
+            is Result.NotFoundError -> Unit
+            is Result.ConnectionError -> Unit
+        }
+    }
+
+    private fun showSkeleton() {
+        skeleton { visibility = View.VISIBLE }
+        workList { visibility = View.GONE }
+    }
+
+    private fun hideSkeleton() {
+        skeleton { visibility = View.GONE }
+        workList { visibility = View.VISIBLE }
     }
 
     override fun setInsetListener(rootView: View) {

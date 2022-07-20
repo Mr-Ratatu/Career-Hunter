@@ -19,6 +19,7 @@
             <option value="$PROJECT_DIR$/core_view" />
             <option value="$PROJECT_DIR$/feature_auth" />
             <option value="$PROJECT_DIR$/feature_root" />
+            <option value="$PROJECT_DIR$/feature_search" />
             <option value="$PROJECT_DIR$/feature_splash" />
             <option value="$PROJECT_DIR$/feature_work" />
           </set>

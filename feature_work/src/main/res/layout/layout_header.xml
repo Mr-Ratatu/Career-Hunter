@@ -7,9 +7,8 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
+    android:paddingVertical="@dimen/indent_4dp"
     android:paddingHorizontal="@dimen/indent_8dp"
-    android:paddingTop="@dimen/indent_8dp"
-    android:stateListAnimator="@animator/toolbar_elevation"
     app:layout_constraintTop_toBottomOf="@+id/work_list_sv_states"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
@@ -24,7 +23,7 @@
         android:foreground="@drawable/btn_ripple_effect"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="@dimen/indent_8dp">
+        android:paddingHorizontal="@dimen/indent_8dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="@dimen/image_25dp"

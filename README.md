@@ -38,7 +38,7 @@ The service in this case acts as a repository that determines where to get data 
 
 ## 📱 Screens 📱
 
-<img src="https://github.com/Mr-Ratatu/Work-Found-App/blob/AN-02_work_list_screen/images/splash.jpg" alt="splash" width="250"/> <img src="https://github.com/Mr-Ratatu/Work-Found-App/blob/AN-02_work_list_screen/images/WorkList.jpg" alt="splash" width="250"/>
+<img src="https://github.com/Mr-Ratatu/Work-Found-App/blob/AN-02_work_list_screen/images/splash.jpg" alt="splash" width="250" /> <img src="https://github.com/Mr-Ratatu/Work-Found-App/blob/develop/images/WorkList.jpg" alt="splash" width="250"/> <img src="https://github.com/Mr-Ratatu/Work-Found-App/blob/develop/images/Detail.jpg" alt="splash" width="250"/> <img src="https://github.com/Mr-Ratatu/Work-Found-App/blob/develop/images/Search.jpg" alt="splash" width="250"/> <img src="https://github.com/Mr-Ratatu/Work-Found-App/blob/develop/images/Articles.jpg" alt="splash" width="250"/> <img src="https://github.com/Mr-Ratatu/Work-Found-App/blob/develop/images/Auth.jpg" alt="splash" width="250"/>
 
 
 ##

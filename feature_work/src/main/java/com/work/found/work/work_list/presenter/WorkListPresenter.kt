@@ -1,13 +1,14 @@
 package com.work.found.work.work_list.presenter
 
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LifecycleOwner
 import com.work.found.core.api.router.ArticlesRouterInput
+import com.work.found.core.api.router.SearchRouterInput
 import com.work.found.core.api.router.AuthRouterInput
 import com.work.found.core.api.router.WorkDetailRouterInput
 import com.work.found.core.base.presenter.BasePresenter
 import com.work.found.core.base.state.ViewState
 import com.work.found.core.base.utils.AppConfig
-import com.work.found.core.base.utils.States
 import com.work.found.core.di.base.DaggerInjector
 import com.work.found.work.work_list.di.DaggerWorkListComponent
 import com.work.found.work.work_list.interactor.WorkListInteractorInput
@@ -33,12 +34,19 @@ class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewO
     @Inject
     lateinit var authRouter: AuthRouterInput
 
+    @Inject
+    lateinit var searchRouter: SearchRouterInput
+
     init {
         DaggerWorkListComponent
             .builder()
             .dependencies(DaggerInjector.appDependencies())
             .build()
             .inject(this)
+    }
+
+    override fun <T : LifecycleOwner> onAttachView(view: T) {
+        super.onAttachView(view)
 
         loadWorkList()
         loadArticles()
@@ -46,17 +54,8 @@ class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewO
 
     private fun loadWorkList() {
         presenterScope.launch(Dispatchers.IO) {
-            interactor.fetchWorkList(vacanciesName = "Android") { result ->
-                viewState.updateState(States.LOADING)
-                result
-                    .onSuccess { work ->
-                        viewState.updateWorkList(work)
-                        viewState.updateState(States.SUCCESS)
-                    }
-                    .onFailure { error ->
-                        viewState.updateState(States.ERROR)
-                    }
-            }
+            val response = interactor.fetchWorkList(vacanciesName = "Android")
+            viewState.updateState(response)
         }
     }
 
@@ -76,8 +75,8 @@ class WorkListPresenter : BasePresenter<WorkListViewStateInput>(), WorkListViewO
         articlesRouter.showArticlesScreen(manager, id)
     }
 
-    override fun showSearchScreen() {
-        // TODO
+    override fun showSearchScreen(manager: FragmentManager) {
+        searchRouter.openSearchScreen(manager)
     }
 
     override fun showFilterScreen() {

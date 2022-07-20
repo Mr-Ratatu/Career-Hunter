@@ -6,7 +6,7 @@ import com.work.found.core.base.presentation.ViewOutput
 interface WorkListViewOutput: ViewOutput {
     fun showDetailInfoAboutVacancy(id: String, manager: FragmentManager)
     fun showDetailInfoAboutArticles(id: Int, manager: FragmentManager)
-    fun showSearchScreen()
+    fun showSearchScreen(manager: FragmentManager)
     fun showFilterScreen()
     fun showAuthScreen(manager: FragmentManager)
     fun onReplayData()

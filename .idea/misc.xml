@@ -34,6 +34,8 @@
         <entry key="core_view/src/main/res/layout/states_layout.xml" value="0.19218139648437502" />
         <entry key="feature_auth/src/main/res/layout/fragment_auth.xml" value="0.26789957682291665" />
         <entry key="feature_job/src/main/res/layout/fragment_job_list.xml" value="0.23703703703703705" />
+        <entry key="feature_search/src/main/res/layout/fragment_search.xml" value="0.30885416666666665" />
+        <entry key="feature_search/src/main/res/layout/item_work.xml" value="0.3098958333333333" />
         <entry key="feature_splash/src/main/res/layout/fragment_splash.xml" value="0.23703703703703705" />
         <entry key="feature_work/src/main/res/layout/fragment_articles.xml" value="0.25" />
         <entry key="feature_work/src/main/res/layout/fragment_job_list.xml" value="0.2962962962962963" />
