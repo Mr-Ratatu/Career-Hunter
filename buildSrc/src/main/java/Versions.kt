@@ -29,4 +29,5 @@ object Versions {
     const val lottieVersion = "3.4.0"
     const val timberVersion = "5.0.1"
     const val recyclerview = "1.2.1"
+    const val mockito_version = "3.8.0"
 }

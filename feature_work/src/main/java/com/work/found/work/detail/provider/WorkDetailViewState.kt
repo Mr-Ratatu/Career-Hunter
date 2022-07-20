@@ -1,12 +1,13 @@
 package com.work.found.work.detail.provider
 
 import com.work.found.core.api.model.detail.WorkDetailResponse
+import com.work.found.core.api.state.Result
 import com.work.found.core.base.state.ViewState
 import com.work.found.core.base.utils.States
 
 interface WorkDetailViewStateInput : ViewState<WorkDetailDataProviderInput> {
     fun updateDetailInfo(response: WorkDetailResponse)
-    fun updateState(state: States)
+    fun updateState(state: Result<WorkDetailResponse>)
 }
 
 class WorkDetailViewStateImpl : WorkDetailViewStateInput {
@@ -17,7 +18,7 @@ class WorkDetailViewStateImpl : WorkDetailViewStateInput {
         dataProvider.detailInfo.value = response
     }
 
-    override fun updateState(state: States) {
+    override fun updateState(state: Result<WorkDetailResponse>) {
         dataProvider.states.value = state
     }
 }

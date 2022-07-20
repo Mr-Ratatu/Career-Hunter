@@ -6,6 +6,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
+import com.work.found.core.api.model.work.WorkResponse
+import com.work.found.core.api.state.Result
 import com.work.found.core.base.extensions.*
 import com.work.found.core.base.presentation.BaseFragment
 import com.work.found.core.base.utils.Constants
@@ -67,9 +69,21 @@ class SearchFragment : BaseFragment<SearchViewOutput, SearchDataProvider>() {
 
     override fun subscribeOnData() {
         dataProvider.apply {
-            workList.observe(this@SearchFragment) { response ->
-                searchAdapter.submitList(response.items)
+            states.observe(this@SearchFragment) { response ->
+                handleStates(response)
             }
+        }
+    }
+
+    private fun handleStates(result: Result<WorkResponse>) {
+        when (result) {
+            is Result.Success -> {
+                searchAdapter.submitList(result.value.items)
+            }
+            is Result.Loading -> Unit
+            is Result.Error -> Unit
+            is Result.NotFoundError -> Unit
+            is Result.ConnectionError -> Unit
         }
     }
 

@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.work.found.core.api.model.detail.WorkDetailResponse
+import com.work.found.core.api.state.Result
 import com.work.found.core.base.extensions.contentView
 import com.work.found.core.base.extensions.popBackStack
 import com.work.found.core.base.extensions.setHtmlText
@@ -16,6 +17,7 @@ import com.work.found.core.base.extensions.textPlaceHolder
 import com.work.found.core.base.presentation.BaseFragment
 import com.work.found.core.base.utils.Constants
 import com.work.found.core.base.utils.ShadowDelegate
+import com.work.found.core.base.utils.States
 import com.work.found.core.base.utils.ViewInsetsController
 import com.work.found.work.R
 import com.work.found.work.core_view.StatesView
@@ -87,18 +89,27 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
 
     override fun subscribeOnData() {
         dataProvider.apply {
-            detailInfo.observe(this@WorkDetailFragment) { response ->
-                initContent(response)
-            }
-
             states.observe(this@WorkDetailFragment) { state ->
-                stateView { updateState(state) }
+                handleStates(state)
             }
         }
     }
 
     override fun setInsetListener(rootView: View) {
         ViewInsetsController.bindMargin(rootView, forTop = true, forBottom = true)
+    }
+
+    private fun handleStates(result: Result<WorkDetailResponse>) {
+        when (result) {
+            is Result.Success -> {
+                initContent(result.value)
+                stateView { updateState(States.SUCCESS) }
+            }
+            is Result.Loading -> stateView { updateState(States.LOADING) }
+            is Result.Error -> stateView { updateState(States.ERROR) }
+            is Result.NotFoundError -> Unit
+            is Result.ConnectionError -> Unit
+        }
     }
 
     private fun initContent(response: WorkDetailResponse) {

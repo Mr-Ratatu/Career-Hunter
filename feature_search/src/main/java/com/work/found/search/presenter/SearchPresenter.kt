@@ -35,15 +35,7 @@ class SearchPresenter : BasePresenter<SearchViewState>(), SearchViewOutput {
     override fun onFetchWorkList(name: String) {
         presenterScope.launch(Dispatchers.IO) {
             val response = searchInteractor.fetchWorkList(vacanciesName = name)
-
-            withContext(Dispatchers.Main) {
-                response
-                    .onSuccess { work ->
-                        viewState.updateWorkList(work)
-                    }
-                    .onFailure { error ->
-                    }
-            }
+            viewState.updateState(response)
         }
     }
 
