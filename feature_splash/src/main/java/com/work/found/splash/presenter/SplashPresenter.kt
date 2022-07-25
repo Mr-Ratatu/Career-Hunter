@@ -1,7 +1,7 @@
 package com.work.found.splash.presenter
 
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.LifecycleOwner
+import com.work.found.core.api.router.HomeRouterInput
 import com.work.found.core.api.router.WorkListRouterInput
 import com.work.found.core.base.presenter.BasePresenter
 import com.work.found.core.base.state.ViewState
@@ -17,12 +17,11 @@ class SplashPresenter : BasePresenter<SplashViewState>(), SplashViewOutput {
     @Inject
     lateinit var router: WorkListRouterInput
 
+    @Inject
+    lateinit var homeRouter: HomeRouterInput
+
     override fun provideViewState(): ViewState<*> {
         return SplashViewStateImpl()
-    }
-
-    override fun <T : LifecycleOwner> onShowView(view: T) {
-        super.onShowView(view)
     }
 
     init {
@@ -35,5 +34,9 @@ class SplashPresenter : BasePresenter<SplashViewState>(), SplashViewOutput {
 
     override fun openWorkListScreen(manager: FragmentManager) {
         router.openWorkListScreen(manager)
+    }
+
+    override fun openHomeScreen(manager: FragmentManager) {
+        homeRouter.openHomeScreen(manager)
     }
 }

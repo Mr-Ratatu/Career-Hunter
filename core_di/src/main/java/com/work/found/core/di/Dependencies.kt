@@ -9,4 +9,5 @@ interface Dependencies :
     WorkDerailDependencies,
     ArticlesDependencies,
     AuthDependencies,
-    SearchDependencies
+    SearchDependencies,
+    HomeDependencies

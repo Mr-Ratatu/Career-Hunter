@@ -6,10 +6,8 @@ import com.work.found.core.api.router.AuthRouterInput
 import com.work.found.core.base.router.Animation
 import com.work.found.core.base.router.FragmentRouter
 import com.work.found.core.base.router.FragmentRouterImpl
-import javax.inject.Inject
 
-class AuthRouterImpl @Inject constructor() :
-    AuthRouterInput, FragmentRouter by FragmentRouterImpl() {
+class AuthRouterImpl : AuthRouterInput, FragmentRouter by FragmentRouterImpl() {
 
     override fun showAuthScreen(manager: FragmentManager) {
         addFragment(

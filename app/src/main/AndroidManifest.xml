@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkFoundApp">
         <activity
-            android:name=".root.view.RootActivity"
+            android:name="com.work.found.root.root_activity.view.RootActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

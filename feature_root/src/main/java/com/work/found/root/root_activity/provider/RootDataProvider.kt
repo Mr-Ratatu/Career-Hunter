@@ -1,4 +1,4 @@
-package com.work.found.root.provider
+package com.work.found.root.root_activity.provider
 
 import com.work.found.core.base.state.DataProvider
 

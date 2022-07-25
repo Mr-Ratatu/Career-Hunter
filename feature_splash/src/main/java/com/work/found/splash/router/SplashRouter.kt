@@ -8,7 +8,7 @@ import com.work.found.core.base.router.FragmentRouterImpl
 import com.work.found.splash.view.SplashFragment
 import javax.inject.Inject
 
-class SplashRouter @Inject constructor() : SplashRouterInput, FragmentRouter by FragmentRouterImpl() {
+class SplashRouter : SplashRouterInput, FragmentRouter by FragmentRouterImpl() {
 
     override fun showSplashScreen(manager: FragmentManager) {
         addFragment(

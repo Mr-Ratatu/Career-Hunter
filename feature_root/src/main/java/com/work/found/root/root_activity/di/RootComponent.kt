@@ -1,7 +1,7 @@
-package com.work.found.root.di
+package com.work.found.root.root_activity.di
 
 import com.work.found.core.di.dependencies.RootDependencies
-import com.work.found.root.presenter.RootPresenter
+import com.work.found.root.root_activity.presenter.RootPresenter
 import dagger.Component
 import javax.inject.Scope
 

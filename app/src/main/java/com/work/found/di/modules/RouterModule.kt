@@ -2,39 +2,44 @@ package com.work.found.di.modules
 
 import com.work.found.auth.router.AuthRouterImpl
 import com.work.found.core.api.router.*
+import com.work.found.root.home.router.HomeRouterImpl
 import com.work.found.search.router.SearchRouterImpl
 import com.work.found.splash.router.SplashRouter
 import com.work.found.work.articles.router.ArticlesRouterImpl
 import com.work.found.work.detail.router.WorkDetailRouterImpl
 import com.work.found.work.work_list.router.WorkListRouter
-import dagger.Binds
+import dagger.Provides
 import dagger.Module
 import javax.inject.Singleton
 
 @Module
-interface RouterModule {
+class RouterModule {
 
-    @Binds
+    @Provides
     @Singleton
-    fun bindWorkListRouter(router: WorkListRouter): WorkListRouterInput
+    fun providesWorkListRouter(): WorkListRouterInput = WorkListRouter()
 
-    @Binds
+    @Provides
     @Singleton
-    fun bindSplashRouter(router: SplashRouter): SplashRouterInput
+    fun providesSplashRouter(): SplashRouterInput = SplashRouter()
 
-    @Binds
+    @Provides
     @Singleton
-    fun bindWorkDetailRouter(router: WorkDetailRouterImpl): WorkDetailRouterInput
+    fun providesWorkDetailRouter(): WorkDetailRouterInput = WorkDetailRouterImpl()
 
-    @Binds
+    @Provides
     @Singleton
-    fun bindArticlesRouter(router: ArticlesRouterImpl): ArticlesRouterInput
+    fun providesArticlesRouter(): ArticlesRouterInput = ArticlesRouterImpl()
 
-    @Binds
+    @Provides
     @Singleton
-    fun bindSearchRouter(router: SearchRouterImpl): SearchRouterInput
+    fun providesSearchRouter(): SearchRouterInput = SearchRouterImpl()
 
-    @Binds
+    @Provides
     @Singleton
-    fun bindAuthRouter(router: AuthRouterImpl): AuthRouterInput
+    fun providesAuthRouter(): AuthRouterInput = AuthRouterImpl()
+
+    @Provides
+    @Singleton
+    fun providesHomeRouter(): HomeRouterInput = HomeRouterImpl()
 }

@@ -101,7 +101,7 @@ class AuthFragment : BaseFragment<AuthViewOutput, AuthDataProvider>() {
                 startActivity(
                     Intent(
                         requireActivity(),
-                        Class.forName("com.work.found.root.view.RootActivity")
+                        Class.forName("com.work.found.root.root_activity.view.RootActivity")
                     )
                 )
             }

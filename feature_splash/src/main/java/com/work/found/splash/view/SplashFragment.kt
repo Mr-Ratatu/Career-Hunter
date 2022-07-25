@@ -24,7 +24,7 @@ class SplashFragment : BaseFragment<SplashViewOutput, SplashDataProvider>() {
 
         lifecycleScope.launch {
             delay(3000)
-            viewOutput.openWorkListScreen(parentFragmentManager)
+            viewOutput.openHomeScreen(parentFragmentManager)
         }
     }
 

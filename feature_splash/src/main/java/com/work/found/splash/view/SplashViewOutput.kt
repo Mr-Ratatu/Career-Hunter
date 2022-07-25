@@ -5,4 +5,5 @@ import com.work.found.core.base.presentation.ViewOutput
 
 interface SplashViewOutput: ViewOutput {
     fun openWorkListScreen(manager: FragmentManager)
+    fun openHomeScreen(manager: FragmentManager)
 }

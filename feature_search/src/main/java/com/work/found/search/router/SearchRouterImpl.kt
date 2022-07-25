@@ -6,9 +6,8 @@ import com.work.found.core.base.router.Animation
 import com.work.found.core.base.router.FragmentRouter
 import com.work.found.core.base.router.FragmentRouterImpl
 import com.work.found.search.view.SearchFragment
-import javax.inject.Inject
 
-class SearchRouterImpl @Inject constructor() : SearchRouterInput, FragmentRouter by FragmentRouterImpl() {
+class SearchRouterImpl : SearchRouterInput, FragmentRouter by FragmentRouterImpl() {
 
     override fun openSearchScreen(manager: FragmentManager) {
         addFragment(
