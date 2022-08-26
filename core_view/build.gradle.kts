@@ -47,6 +47,9 @@ dependencies {
     // Coroutines
     implementation(configs.Dependencies.coroutinesAndroid)
 
+    // Other
+    implementation(configs.Dependencies.timber)
+
     // UI
     implementation(configs.Dependencies.lottie)
 }

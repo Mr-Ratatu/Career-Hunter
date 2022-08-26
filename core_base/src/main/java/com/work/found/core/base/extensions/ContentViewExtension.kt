@@ -4,7 +4,7 @@ import android.app.Activity
 import android.app.Dialog
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.work.found.core.base.presentation.ContentView
+import com.work.found.work.core_view.ContentView
 
 fun <T : View> Fragment.contentView(viewId: Int) = ContentView<T>(viewId, this)
 

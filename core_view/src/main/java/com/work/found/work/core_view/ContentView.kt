@@ -1,4 +1,4 @@
-package com.work.found.core.base.presentation
+package com.work.found.work.core_view
 
 import android.app.Activity
 import android.app.Dialog
