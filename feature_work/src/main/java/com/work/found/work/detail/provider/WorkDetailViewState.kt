@@ -3,7 +3,6 @@ package com.work.found.work.detail.provider
 import com.work.found.core.api.model.detail.WorkDetailResponse
 import com.work.found.core.api.state.Result
 import com.work.found.core.base.state.ViewState
-import com.work.found.core.base.utils.States
 
 interface WorkDetailViewStateInput : ViewState<WorkDetailDataProviderInput> {
     fun updateDetailInfo(response: WorkDetailResponse)

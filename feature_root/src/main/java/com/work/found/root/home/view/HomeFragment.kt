@@ -2,10 +2,12 @@ package com.work.found.root.home.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.work.found.core.base.extensions.contentView
 import com.work.found.core.base.presentation.BaseFragment
 import com.work.found.core.base.R
+import com.work.found.core.base.utils.ViewInsetsController
 import com.work.found.root.home.presenter.HomePresenter
 import com.work.found.root.home.providers.HomeDataProvider
 
@@ -47,5 +49,7 @@ class HomeFragment : BaseFragment<HomeViewOutput, HomeDataProvider>() {
 
     override fun subscribeOnData() = Unit
 
-    override fun setInsetListener(rootView: View) = Unit
+    override fun setInsetListener(rootView: View) {
+        ViewInsetsController.bindPadding(rootView, forBottom = true, forTop = true)
+    }
 }

@@ -59,20 +59,20 @@ fun ViewGroup.layoutInflater(
 }
 
 @ExperimentalCoroutinesApi
-fun View.clicksAsFlow() = callbackFlow {
+fun View.clicksAsFlow() = Unit/*callbackFlow {
     setOnClickListener {
         offer(Unit)
     }
     awaitClose {
         setOnClickListener(null)
     }
-}
+}*/
 
 @FlowPreview
 @ExperimentalCoroutinesApi
 fun View.throttleAfterFirstClicks(coroutineScope: CoroutineScope, listener: () -> Unit) {
     coroutineScope.launch {
-        clicksAsFlow().throttleAfterFirst(1000L).collect { listener() }
+//        clicksAsFlow().throttleAfterFirst(1000L).collect { listener() }
     }
 }
 

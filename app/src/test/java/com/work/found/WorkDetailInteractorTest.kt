@@ -7,6 +7,7 @@ import com.work.found.work.detail.interactor.WorkDetailInteractorImpl
 import com.work.found.work.detail.interactor.WorkDetailInteractorInput
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import java.net.UnknownHostException
 
@@ -27,14 +28,14 @@ internal class WorkDetailInteractorTest {
 
         // WHEN
         val actual = interactor.fetchWorkDetail(id = inputValue)
-        val expected = Result.Success(MockWorkService.workDetailResponse)
+        val expected = Result.Success(ExpensesFactory.workDetailResponse)
 
         // THEN
         assertEquals(expected, actual)
     }
 
     @Test
-    fun `should return error detail result`() = runBlockingTest {
+    fun `should return error detail result`() = runTest {
         // GIVEN
         service = MockWorkService(returnError = true, unknownHostException = unknownHostException)
         interactor = WorkDetailInteractorImpl(service)
@@ -48,7 +49,7 @@ internal class WorkDetailInteractorTest {
     }
 
     @Test
-    fun `should return loading detail result`() = runBlockingTest {
+    fun `should return loading detail result`() = runTest {
         // GIVEN
         service = MockWorkService(unknownHostException = unknownHostException)
         interactor = WorkDetailInteractorImpl(service)

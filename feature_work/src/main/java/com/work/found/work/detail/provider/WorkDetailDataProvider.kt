@@ -6,7 +6,6 @@ import com.work.found.core.api.model.detail.WorkDetailResponse
 import com.work.found.core.api.state.Result
 import com.work.found.core.base.state.DataProvider
 import com.work.found.core.base.utils.SingleLiveEvent
-import com.work.found.core.base.utils.States
 
 interface WorkDetailDataProviderInput : DataProvider {
     val detailInfo: LiveData<WorkDetailResponse>

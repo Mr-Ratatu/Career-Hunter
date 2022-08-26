@@ -23,7 +23,7 @@ class SplashFragment : BaseFragment<SplashViewOutput, SplashDataProvider>() {
         super.onViewCreated(view, savedInstanceState)
 
         lifecycleScope.launch {
-            delay(3000)
+            delay(1500)
             viewOutput.openHomeScreen(parentFragmentManager)
         }
     }

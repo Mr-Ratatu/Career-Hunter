@@ -1,5 +1,6 @@
 package com.work.found.mock
 
+import com.work.found.ExpensesFactory
 import com.work.found.core.api.model.detail.*
 import com.work.found.core.api.model.work.Area
 import com.work.found.core.api.model.work.Employer
@@ -17,7 +18,7 @@ internal class MockWorkService(
 
     override suspend fun fetchWorkList(vacanciesName: String): Result<WorkResponse> {
         return when {
-            returnSuccess -> Result.Success(workResponse)
+            returnSuccess -> Result.Success(ExpensesFactory.workResponse)
             returnError -> Result.Error(unknownHostException)
             else -> Result.Loading
         }
@@ -25,36 +26,9 @@ internal class MockWorkService(
 
     override suspend fun fetchWorkDetail(id: String): Result<WorkDetailResponse> {
         return when {
-            returnSuccess -> Result.Success(workDetailResponse)
+            returnSuccess -> Result.Success(ExpensesFactory.workDetailResponse)
             returnError -> Result.Error(unknownHostException)
             else -> Result.Loading
         }
-    }
-
-    companion object {
-        val workResponse = WorkResponse(
-            alternate_url = "",
-            found = 10,
-            items = emptyList(),
-            pages = 5,
-            page = 2,
-            per_page = 3
-        )
-
-        val workDetailResponse = WorkDetailResponse(
-            address = "",
-            area = Area(),
-            contacts = "",
-            description = "",
-            employer = Employer(),
-            employment = Employment(),
-            experience = Experience(),
-            id = "67495966",
-            key_skills = emptyList(),
-            name = "Android-разработчик",
-            salary = Salary(),
-            schedule = Schedule(),
-            site = Site(),
-        )
     }
 }

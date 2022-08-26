@@ -8,13 +8,14 @@ import android.view.View
 import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
-import com.work.found.core.base.extensions.contentView
-import com.work.found.core.base.utils.States
+import com.work.found.work.core_view.databinding.StatesLayoutBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
+enum class States {
+    LOADING, SUCCESS, ERROR
+}
 
 class StatesView @JvmOverloads constructor(
     context: Context,
@@ -26,9 +27,8 @@ class StatesView @JvmOverloads constructor(
         private const val SPIN_DURATION = 300L
         private const val ONE_SECONDS = 1000L
     }
-
-    private val stateName = contentView<TextView>(R.id.state_tv_name)
-    private val stateIcon = contentView<ImageView>(R.id.state_iv_icon)
+    
+    private var binding: StatesLayoutBinding
 
     private lateinit var coroutineScope: CoroutineScope
 
@@ -38,7 +38,7 @@ class StatesView @JvmOverloads constructor(
     private var hideAnimationListener: HideAnimationListener
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.states_layout, this)
+        binding = StatesLayoutBinding.inflate(LayoutInflater.from(context))
         rotationAnimationListener = RotationAnimationListener()
         hideAnimationListener = HideAnimationListener()
         iniRotationAnim()
@@ -86,20 +86,16 @@ class StatesView @JvmOverloads constructor(
     }
 
     private fun setLoadingState() {
-        stateIcon {
-            setImageResource(R.drawable.ic_loading)
-        }
-        stateName {
-            text = resources.getString(R.string.loading_state)
-        }
+        binding.stateIvIcon.setImageResource(R.drawable.ic_loading)
+        binding.stateTvName.text = resources.getString(R.string.loading_state)
+
     }
 
     private fun setSuccessState() {
         iconRotationAnimation.end()
-        stateIcon {
-            setImageResource(R.drawable.ic_success)
-        }
-        stateName {
+        binding.stateIvIcon.setImageResource(R.drawable.ic_success)
+
+        binding.stateTvName.apply {
             text = resources.getString(R.string.success_state)
             setTextColor(resources.getColor(R.color.positive, null))
         }
@@ -112,10 +108,9 @@ class StatesView @JvmOverloads constructor(
 
     private fun setErrorState() {
         iconRotationAnimation.end()
-        stateIcon {
-            setImageResource(R.drawable.ic_error)
-        }
-        stateName {
+        binding.stateIvIcon.setImageResource(R.drawable.ic_error)
+
+        binding.stateTvName.apply {
             text = resources.getString(R.string.error_state)
             setTextColor(resources.getColor(R.color.negative, null))
         }
@@ -124,9 +119,7 @@ class StatesView @JvmOverloads constructor(
     private inner class RotationAnimationListener : ValueAnimator.AnimatorUpdateListener {
 
         override fun onAnimationUpdate(animator: ValueAnimator) {
-            stateIcon {
-                rotation = animator.animatedValue as Float
-            }
+            binding.stateIvIcon.rotation = animator.animatedValue as Float
         }
     }
 

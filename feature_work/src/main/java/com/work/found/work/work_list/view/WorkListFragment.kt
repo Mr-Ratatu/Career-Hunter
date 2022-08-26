@@ -9,13 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.work.found.core.api.model.work.WorkResponse
 import com.work.found.core.api.state.Result
 import com.work.found.core.base.extensions.contentView
-import com.work.found.core.base.extensions.launchWhenStarted
 import com.work.found.core.base.presentation.BaseFragment
 import com.work.found.core.base.utils.ShadowDelegate
-import com.work.found.core.base.utils.States
 import com.work.found.core.base.utils.ViewInsetsController
 import com.work.found.work.R
 import com.work.found.work.core_view.ErrorView
+import com.work.found.work.core_view.States
 import com.work.found.work.core_view.StatesView
 import com.work.found.work.work_list.presenter.WorkListPresenter
 import com.work.found.work.work_list.provider.WorkListDataProvider
@@ -87,7 +86,7 @@ class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>(
                 handleStates(state)
             }
 
-            articlesValue.observeWithViewScopeIgnoreNull { articles ->
+            articlesValue.launchWhenStartedWithScope { articles ->
                 articleListAdapter.setArticles(articles)
             }
         }

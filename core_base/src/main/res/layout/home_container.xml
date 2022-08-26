@@ -12,10 +12,18 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray_200" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/home_navigation_bv"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="wrap_content"
+        app:itemIconTint="@color/home_navigation_icon_color"
+        app:itemTextColor="@color/home_navigation_text_color"
+        app:labelVisibilityMode="auto"
         app:menu="@menu/bottom_navigation_menu"
         tools:layout_height="56dp" />
 
