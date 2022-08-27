@@ -9,7 +9,7 @@ import com.work.found.work.BuildConfig
 import javax.inject.Inject
 import com.work.found.core.api.state.Result
 
-class WorkListInteractorImpl @Inject constructor(
+class WorkListInteractorImpl constructor(
     private val workService: WorkServiceInput,
     private val articlesService: ArticlesServiceInput
 ) : WorkListInteractorInput {

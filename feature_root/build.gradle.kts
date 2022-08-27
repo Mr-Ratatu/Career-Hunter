@@ -49,4 +49,9 @@ dependencies {
     // DI
     implementation(configs.Dependencies.dagger)
     kapt(configs.Dependencies.daggerKapt)
+
+    // Coroutines
+    implementation(configs.Dependencies.coroutinesAndroid)
+    implementation(configs.Dependencies.lifecycleRuntime)
+    implementation(configs.Dependencies.coroutinesCore)
 }

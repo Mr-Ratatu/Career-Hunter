@@ -2,11 +2,11 @@ package com.work.found.root.home.view
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.LifecycleOwner
+import androidx.core.view.isVisible
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.work.found.core.base.R
 import com.work.found.core.base.extensions.contentView
 import com.work.found.core.base.presentation.BaseFragment
-import com.work.found.core.base.R
 import com.work.found.core.base.utils.ViewInsetsController
 import com.work.found.root.home.presenter.HomePresenter
 import com.work.found.root.home.providers.HomeDataProvider
@@ -18,6 +18,7 @@ class HomeFragment : BaseFragment<HomeViewOutput, HomeDataProvider>() {
     }
 
     private val navigationView = contentView<BottomNavigationView>(R.id.home_navigation_bv)
+    private val connectionState = contentView<View>(R.id.home_connection_state)
 
     override val layoutId: Int = R.layout.home_container
 
@@ -47,7 +48,13 @@ class HomeFragment : BaseFragment<HomeViewOutput, HomeDataProvider>() {
         viewOutput.onNavigationToWorkList(parentFragmentManager)
     }
 
-    override fun subscribeOnData() = Unit
+    override fun subscribeOnData() {
+        dataProvider.isNetworkConnected.launchWhenStartedWithScope { isConnected ->
+            connectionState {
+                isVisible = !isConnected
+            }
+        }
+    }
 
     override fun setInsetListener(rootView: View) {
         ViewInsetsController.bindPadding(rootView, forBottom = true, forTop = true)
