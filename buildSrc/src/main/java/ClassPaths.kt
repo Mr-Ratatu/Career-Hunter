@@ -1,7 +1,3 @@
-@file:Suppress("PackageDirectoryMismatch")
-
-package configs
-
 object ClassPaths {
 
     const val gradle = "com.android.tools.build:gradle:${Versions.gradleVersion}"

@@ -1,6 +1,3 @@
-import configs.Dependencies
-import configs.Modules
-
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
@@ -50,6 +47,7 @@ dependencies {
 
     // Other
     implementation(Dependencies.timber)
+    implementation(Dependencies.fragmentKtx)
 
     // UI
     implementation(Dependencies.coil)

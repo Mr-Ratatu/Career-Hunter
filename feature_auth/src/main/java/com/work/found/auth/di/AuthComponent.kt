@@ -1,7 +1,6 @@
 package com.work.found.auth.di
 
-import com.work.found.auth.presenter.AuthPresenter
-import com.work.found.auth.view.GoogleSignInDelegate
+import com.work.found.auth.view.AuthFragment
 import com.work.found.core.di.dependencies.AuthDependencies
 import dagger.Component
 import javax.inject.Scope
@@ -25,7 +24,5 @@ interface AuthComponent {
         fun build(): AuthComponent
     }
 
-    fun inject(target: AuthPresenter)
-
-    fun inject(target: GoogleSignInDelegate)
+    fun inject(target: AuthFragment)
 }

@@ -1,6 +1,7 @@
 package com.work.found
 
 import android.app.Application
+import com.google.firebase.FirebaseApp
 import com.work.found.core.base.utils.AppConfig
 import com.work.found.core.di.base.BaseComponent
 import com.work.found.core.di.base.ComponentCreator
@@ -20,6 +21,7 @@ class App : Application(), ComponentCreator {
         }
 
         AppConfig.init(this)
+        FirebaseApp.initializeApp(this)
     }
 
     override fun create(): BaseComponent {

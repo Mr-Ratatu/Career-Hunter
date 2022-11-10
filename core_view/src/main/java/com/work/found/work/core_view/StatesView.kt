@@ -10,9 +10,7 @@ import android.view.animation.LinearInterpolator
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 enum class States {
     LOADING, SUCCESS, ERROR
@@ -32,7 +30,7 @@ class StatesView @JvmOverloads constructor(
     private val stateName = ContentView<TextView>(R.id.state_tv_name, this)
     private val stateIcon = ContentView<ImageView>(R.id.state_iv_icon, this)
 
-    private lateinit var coroutineScope: CoroutineScope
+    private val coroutineScope = CoroutineScope(Job() + Dispatchers.Main.immediate)
 
     private val iconRotationAnimation = ValueAnimator.ofFloat(0f, 360f)
     private val hideViewAnimation = ValueAnimator.ofInt(measuredHeight, 0)
@@ -71,12 +69,9 @@ class StatesView @JvmOverloads constructor(
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
+        coroutineScope.cancel()
         iconRotationAnimation.removeAllUpdateListeners()
         hideViewAnimation.removeAllUpdateListeners()
-    }
-
-    fun setCoroutineScope(scope: CoroutineScope) {
-        coroutineScope = scope
     }
 
     fun updateState(state: States) {

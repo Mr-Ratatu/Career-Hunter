@@ -1,7 +1,3 @@
-@file:Suppress("PackageDirectoryMismatch")
-
-package configs
-
 object Versions {
 
     const val lifecycleVersion = "2.4.0-alpha03"
@@ -27,7 +23,7 @@ object Versions {
     const val androidArchCoreTest = "2.1.0"
     const val coroutinesVersion = "1.6.4"
     const val daggerVersion = "2.40.5"
-    const val fragmentVersion = "1.2.5"
+    const val fragmentVersion = "1.5.2"
     const val lottieVersion = "3.4.0"
     const val timberVersion = "5.0.1"
     const val recyclerview = "1.2.1"

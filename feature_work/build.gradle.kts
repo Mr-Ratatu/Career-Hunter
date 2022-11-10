@@ -33,13 +33,16 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
 
-    implementation(project(configs.Modules.core_base))
-    implementation(project(configs.Modules.core_view))
-    implementation(project(configs.Modules.core_api))
+    implementation(project(Modules.core_base))
+    implementation(project(Modules.core_view))
+    implementation(project(Modules.core_api))
 
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
@@ -49,15 +52,19 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
     // DI
-    implementation(configs.Dependencies.dagger)
-    kapt(configs.Dependencies.daggerKapt)
+    implementation(Dependencies.dagger)
+    kapt(Dependencies.daggerKapt)
 
     // Coroutines
-    implementation(configs.Dependencies.coroutinesAndroid)
-    implementation(configs.Dependencies.lifecycleRuntime)
-    implementation(configs.Dependencies.coroutinesCore)
+    implementation(Dependencies.coroutinesAndroid)
+    implementation(Dependencies.lifecycleRuntime)
+    implementation(Dependencies.coroutinesCore)
 
     // UI
-    implementation(configs.Dependencies.recyclerview)
-    implementation(configs.Dependencies.coil)
+    implementation(Dependencies.recyclerview)
+    implementation(Dependencies.coil)
+
+    implementation(Dependencies.viewModel)
+    implementation(Dependencies.lifecycleRuntime)
+    implementation(Dependencies.fragmentKtx)
 }

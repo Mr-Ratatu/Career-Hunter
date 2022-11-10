@@ -1,5 +1,3 @@
-package configs
-
 object Dependencies {
 
     // https://kotlinlang.org/docs/home.html

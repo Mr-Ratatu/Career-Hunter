@@ -1,10 +1,8 @@
-import configs.Dependencies
-import configs.Modules
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -78,4 +76,6 @@ dependencies {
     testImplementation(Dependencies.mockitoInline)
     androidTestImplementation 'org.mockito:mockito-android:3.8.0'
     testImplementation("com.squareup.okhttp3:mockwebserver:4.9.3")
+
+    implementation("com.google.firebase:firebase-auth-ktx:21.1.0")
 }

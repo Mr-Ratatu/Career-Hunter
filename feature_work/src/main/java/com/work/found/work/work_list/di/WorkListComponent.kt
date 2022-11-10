@@ -1,7 +1,10 @@
 package com.work.found.work.work_list.di
 
+import com.work.found.core.base.delegates.NetworkConnectionManager
 import com.work.found.core.di.dependencies.WorkListDependencies
-import com.work.found.work.work_list.presenter.WorkListPresenter
+import com.work.found.work.work_list.WorkListViewModel
+import com.work.found.work.work_list.interactor.WorkListInteractorInput
+import com.work.found.work.work_list.view.WorkListFragment
 import dagger.BindsInstance
 import dagger.Component
 import kotlinx.coroutines.CoroutineScope
@@ -29,5 +32,13 @@ interface WorkListComponent {
         fun build(): WorkListComponent
     }
 
-    fun inject(target: WorkListPresenter)
+    fun inject(target: WorkListFragment)
+
+    val interactor: WorkListInteractorInput
+    val connectionManager: NetworkConnectionManager
 }
+
+fun WorkListComponent.constructWorkListViewModel() = WorkListViewModel(
+    interactor = interactor,
+    connectionManager = connectionManager
+)

@@ -1,7 +1,3 @@
-@file:Suppress("PackageDirectoryMismatch")
-
-package configs
-
 object Configs {
 
     const val compileSdkVersion = 32
