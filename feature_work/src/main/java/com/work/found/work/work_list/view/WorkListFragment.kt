@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
+import com.work.found.core.api.model.articles.ArticlesItem
 import com.work.found.core.api.model.work.WorkResponse
 import com.work.found.core.api.router.ArticlesRouterInput
 import com.work.found.core.api.router.AuthRouterInput
@@ -26,6 +27,7 @@ import com.work.found.work.work_list.di.DaggerWorkListComponent
 import com.work.found.work.work_list.di.constructWorkListViewModel
 import com.work.found.work.work_list.view.adapter.ArticlesListAdapter
 import com.work.found.work.work_list.view.adapter.WorkListAdapter
+import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
 
 class WorkListFragment : Fragment() {
@@ -105,22 +107,19 @@ class WorkListFragment : Fragment() {
     }
 
     private fun subscribeOnData() {
-        with(viewModel) {
-            state.launchWhenStarted(lifecycleScope) { state ->
-                handleStates(state)
-            }
-
-            articles.launchWhenStarted(lifecycleScope) { articles ->
-                articleListAdapter.setArticles(articles)
-            }
-        }
+        combine(
+            flow = viewModel.state,
+            flow2 = viewModel.articles,
+            transform = ::handleStates,
+        ).launchWhenStarted(lifecycleScope)
     }
 
-    private fun handleStates(result: Result<WorkResponse>) {
+    private fun handleStates(result: Result<WorkResponse>, articlesItems: List<ArticlesItem>) {
         when (result) {
             is Result.Success -> {
                 binding.workListSvStates.updateState(States.SUCCESS)
                 workListAdapter.submitList(result.value.items)
+                articleListAdapter.setArticles(articlesItems)
                 binding.errorView.visibility = View.GONE
                 hideSkeleton()
             }
@@ -156,5 +155,14 @@ class WorkListFragment : Fragment() {
         fun newInstance(): WorkListFragment {
             return WorkListFragment()
         }
+
+        private fun getHandledState(result: Result<WorkResponse>): States = when (result) {
+            is Result.Success -> States.SUCCESS
+            is Result.Loading -> States.LOADING
+            is Result.Error,
+            is Result.NotFoundError,
+            is Result.ConnectionError -> States.ERROR
+        }
     }
+
 }

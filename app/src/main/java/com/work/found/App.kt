@@ -10,7 +10,7 @@ import com.work.found.di.ApplicationComponent
 
 class App : Application(), ComponentCreator {
 
-    private val dependencies by lazy { ApplicationComponent.create() }
+    private val dependencies by lazy { ApplicationComponent.create(this) }
 
     override fun onCreate() {
         super.onCreate()

@@ -2,14 +2,14 @@ package com.work.found.core.base.extensions
 
 import androidx.lifecycle.LifecycleCoroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 
-
-
-fun <T> Flow<T>.launchWhenStarted(coroutineScope: LifecycleCoroutineScope, block: (T) -> Unit) {
+fun <T> Flow<T>.launchWhenStarted(
+    coroutineScope: LifecycleCoroutineScope,
+    block: ((T) -> Unit?)? = null
+) {
     coroutineScope.launchWhenStarted {
-        collect { block.invoke(it) }
+        collect { block?.invoke(it) }
     }
 }
 

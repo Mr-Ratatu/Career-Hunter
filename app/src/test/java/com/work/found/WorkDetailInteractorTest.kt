@@ -13,7 +13,6 @@ import java.net.UnknownHostException
 
 internal class WorkDetailInteractorTest {
 
-    private val unknownHostException = UnknownHostException()
     private val inputValue = "67495966"
 
     private lateinit var service: WorkServiceInput
@@ -21,9 +20,9 @@ internal class WorkDetailInteractorTest {
     private lateinit var interactor: WorkDetailInteractorInput
 
     @Test
-    fun `should return success detail result`() = runBlockingTest {
+    fun `should return success detail result`() = runTest {
         // GIVEN
-        service = MockWorkService(returnSuccess = true, unknownHostException = unknownHostException)
+        service = MockWorkService(returnSuccess = true)
         interactor = WorkDetailInteractorImpl(service)
 
         // WHEN
@@ -37,12 +36,12 @@ internal class WorkDetailInteractorTest {
     @Test
     fun `should return error detail result`() = runTest {
         // GIVEN
-        service = MockWorkService(returnError = true, unknownHostException = unknownHostException)
+        service = MockWorkService(returnError = true)
         interactor = WorkDetailInteractorImpl(service)
 
         // WHEN
         val actual = interactor.fetchWorkDetail(id = inputValue)
-        val expected = Result.Error(unknownHostException)
+        val expected = Result.Error
 
         // THEN
         assertEquals(expected, actual)
@@ -51,7 +50,7 @@ internal class WorkDetailInteractorTest {
     @Test
     fun `should return loading detail result`() = runTest {
         // GIVEN
-        service = MockWorkService(unknownHostException = unknownHostException)
+        service = MockWorkService()
         interactor = WorkDetailInteractorImpl(service)
 
         // WHEN

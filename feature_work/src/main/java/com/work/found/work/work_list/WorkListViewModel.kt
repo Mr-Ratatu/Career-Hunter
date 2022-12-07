@@ -6,7 +6,6 @@ import com.work.found.core.api.model.articles.ArticlesItem
 import com.work.found.core.api.model.work.WorkResponse
 import com.work.found.core.api.state.Result
 import com.work.found.core.base.delegates.NetworkConnectionManager
-import com.work.found.core.base.utils.AppConfig
 import com.work.found.work.work_list.interactor.WorkListInteractorInput
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -39,7 +38,7 @@ class WorkListViewModel(
 
     private fun loadWorkList() = viewModelScope.launch(Dispatchers.IO) {
         val workList = interactor.fetchWorkList(vacanciesName = "Android")
-        val articlesList = interactor.loadArticles(AppConfig.application)
+        val articlesList = interactor.loadArticles()
         _state.value = workList
         _articles.value = articlesList
     }

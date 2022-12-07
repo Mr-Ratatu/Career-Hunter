@@ -5,15 +5,12 @@ import com.work.found.core.api.state.Result
 import com.work.found.mock.MockWorkService
 import com.work.found.search.interactor.SearchInteractorImpl
 import com.work.found.search.interactor.SearchInteractorInput
-import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
-import org.junit.jupiter.api.Assertions.*
-import java.net.UnknownHostException
+import org.junit.jupiter.api.Assertions.assertEquals
 
 internal class SearchInteractorTest {
 
-    private val unknownHostException = UnknownHostException()
     private val inputValue = ""
 
     private lateinit var service: WorkServiceInput
@@ -23,7 +20,7 @@ internal class SearchInteractorTest {
     @Test
     fun `should return success search result`() = runTest {
         // GIVEN
-        service = MockWorkService(returnSuccess = true, unknownHostException = unknownHostException)
+        service = MockWorkService(returnSuccess = true)
         interactor = SearchInteractorImpl(service)
 
         // WHEN
@@ -37,12 +34,12 @@ internal class SearchInteractorTest {
     @Test
     fun `should return error search result`() = runTest {
         // GIVEN
-        service = MockWorkService(returnError = true, unknownHostException = unknownHostException)
+        service = MockWorkService(returnError = true)
         interactor = SearchInteractorImpl(service)
 
         // WHEN
         val actual = interactor.fetchWorkList(inputValue)
-        val expected = Result.Error(unknownHostException)
+        val expected = Result.Error
 
         // THEN
         assertEquals(expected, actual)
@@ -51,7 +48,7 @@ internal class SearchInteractorTest {
     @Test
     fun `should return loading search result`() = runTest {
         // GIVEN
-        service = MockWorkService(unknownHostException = unknownHostException)
+        service = MockWorkService()
         interactor = SearchInteractorImpl(service)
 
         // WHEN

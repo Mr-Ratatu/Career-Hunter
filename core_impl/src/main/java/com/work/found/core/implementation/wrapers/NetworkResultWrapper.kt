@@ -24,10 +24,10 @@ class NetworkResultWrapper : ResultWrapper {
             if (httpException.code() == HttpURLConnection.HTTP_NOT_FOUND) {
                 Result.NotFoundError
             } else {
-                Result.Error(httpException)
+                Result.Error
             }
         } catch (throwable: Throwable) {
-            Result.Error(throwable)
+            Result.Error
         }
     }
 }
