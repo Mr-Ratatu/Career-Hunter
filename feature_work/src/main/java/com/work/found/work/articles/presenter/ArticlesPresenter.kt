@@ -29,7 +29,7 @@ class ArticlesPresenter : BasePresenter<ArticlesViewStateInput>(), ArticlesViewO
 
     override fun onLoadArticles(id: Int) {
         presenterScope.launch(Dispatchers.IO) {
-            val articles = interactor.loadArticles(AppConfig.application, id)
+            val articles = interactor.loadArticles(articleId = id)
             withContext(Dispatchers.Main) {
                 viewState.updateArticles(articles)
             }

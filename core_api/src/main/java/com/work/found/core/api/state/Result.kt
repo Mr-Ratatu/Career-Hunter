@@ -4,7 +4,7 @@ sealed class Result<out T> {
 
     data class Success<out T>(val value: T) : Result<T>()
 
-    data class Error(val error: Throwable? = null) : Result<Nothing>()
+    object Error : Result<Nothing>()
 
     object ConnectionError : Result<Nothing>()
 

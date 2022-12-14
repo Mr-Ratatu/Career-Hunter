@@ -10,8 +10,10 @@ import com.work.found.work.work_list.interactor.WorkListInteractorInput
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import org.junit.Before
 import org.junit.Test
 import java.net.HttpURLConnection
 import java.net.UnknownHostException
@@ -19,19 +21,22 @@ import java.util.concurrent.TimeUnit
 
 internal class WorkListInteractorTest {
 
-    private val unknownHostException = UnknownHostException()
     private val inputValue = "Android"
 
     private lateinit var interactor: WorkListInteractorInput
-    private val articlesService: ArticlesServiceInput = MockArticlesService()
-    private var service: WorkServiceInput = MockWorkService(unknownHostException = unknownHostException)
+    private lateinit var articlesService: ArticlesServiceInput
+    private lateinit var service: WorkServiceInput
 
-    private val mockWebServer = MockWebServer()
+    @Before
+    fun setup() {
+        articlesService = MockArticlesService()
+        service = MockWorkService()
+    }
 
     @Test
-    fun `should return success work list result`() = runBlockingTest {
+    fun `should return success work list result`() = runTest {
         // GIVEN
-        service = MockWorkService(returnSuccess = true, unknownHostException = unknownHostException)
+        service = MockWorkService(returnSuccess = true)
         interactor = WorkListInteractorImpl(service, articlesService)
 
         // WHEN
@@ -43,21 +48,21 @@ internal class WorkListInteractorTest {
     }
 
     @Test
-    fun `should return error work list result`() = runBlockingTest {
+    fun `should return error work list result`() = runTest {
         // GIVEN
-        service = MockWorkService(returnError = true, unknownHostException = unknownHostException)
+        service = MockWorkService(returnError = true)
         interactor = WorkListInteractorImpl(service, articlesService)
 
         // WHEN
         val actual = interactor.fetchWorkList(vacanciesName = inputValue)
-        val expected = Result.Error(unknownHostException)
+        val expected = Result.Error
 
         // THEN
         assertEquals(expected, actual)
     }
 
     @Test
-    fun `should return loading work list result`() = runBlockingTest {
+    fun `should return loading work list result`() = runTest {
         // GIVEN
         interactor = WorkListInteractorImpl(service, articlesService)
 

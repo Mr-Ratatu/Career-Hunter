@@ -45,11 +45,11 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
     // Coroutines
-    implementation(configs.Dependencies.coroutinesAndroid)
+    implementation(Dependencies.coroutinesAndroid)
 
     // Other
-    implementation(configs.Dependencies.timber)
+    implementation(Dependencies.timber)
 
     // UI
-    implementation(configs.Dependencies.lottie)
+    implementation(Dependencies.lottie)
 }

@@ -12,14 +12,13 @@ import java.net.UnknownHostException
 
 internal class MockWorkService(
     private val returnSuccess: Boolean = false,
-    private val returnError: Boolean = false,
-    private val unknownHostException: UnknownHostException
+    private val returnError: Boolean = false
 ) : WorkServiceInput {
 
     override suspend fun fetchWorkList(vacanciesName: String): Result<WorkResponse> {
         return when {
             returnSuccess -> Result.Success(ExpensesFactory.workResponse)
-            returnError -> Result.Error(unknownHostException)
+            returnError -> Result.Error
             else -> Result.Loading
         }
     }
@@ -27,7 +26,7 @@ internal class MockWorkService(
     override suspend fun fetchWorkDetail(id: String): Result<WorkDetailResponse> {
         return when {
             returnSuccess -> Result.Success(ExpensesFactory.workDetailResponse)
-            returnError -> Result.Error(unknownHostException)
+            returnError -> Result.Error
             else -> Result.Loading
         }
     }

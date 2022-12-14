@@ -1,131 +1,168 @@
 package com.work.found.work.work_list.view
 
+import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
-import androidx.recyclerview.widget.RecyclerView
+import com.work.found.core.api.model.articles.ArticlesItem
 import com.work.found.core.api.model.work.WorkResponse
+import com.work.found.core.api.router.ArticlesRouterInput
+import com.work.found.core.api.router.AuthRouterInput
+import com.work.found.core.api.router.SearchRouterInput
+import com.work.found.core.api.router.WorkDetailRouterInput
 import com.work.found.core.api.state.Result
-import com.work.found.core.base.extensions.contentView
-import com.work.found.core.base.presentation.BaseFragment
+import com.work.found.core.base.extensions.launchWhenStarted
+import com.work.found.core.base.extensions.viewModels
 import com.work.found.core.base.utils.ShadowDelegate
 import com.work.found.core.base.utils.ViewInsetsController
-import com.work.found.work.R
-import com.work.found.work.core_view.ErrorView
+import com.work.found.core.di.base.DaggerInjector
 import com.work.found.work.core_view.States
-import com.work.found.work.core_view.StatesView
-import com.work.found.work.work_list.presenter.WorkListPresenter
-import com.work.found.work.work_list.provider.WorkListDataProvider
+import com.work.found.work.databinding.FragmentWorkListBinding
+import com.work.found.work.work_list.WorkListViewModel
+import com.work.found.work.work_list.di.DaggerWorkListComponent
+import com.work.found.work.work_list.di.constructWorkListViewModel
 import com.work.found.work.work_list.view.adapter.ArticlesListAdapter
 import com.work.found.work.work_list.view.adapter.WorkListAdapter
+import kotlinx.coroutines.flow.combine
+import javax.inject.Inject
 
-class WorkListFragment : BaseFragment<WorkListViewOutput, WorkListDataProvider>() {
+class WorkListFragment : Fragment() {
 
-    companion object {
-        fun newInstance(): WorkListFragment {
-            return WorkListFragment()
-        }
+    @Inject
+    lateinit var detailRouter: WorkDetailRouterInput
+
+    @Inject
+    lateinit var articlesRouter: ArticlesRouterInput
+
+    @Inject
+    lateinit var authRouter: AuthRouterInput
+
+    @Inject
+    lateinit var searchRouter: SearchRouterInput
+
+    private val component by lazy {
+        DaggerWorkListComponent
+            .builder()
+            .coroutineScope(lifecycleScope)
+            .dependencies(DaggerInjector.appDependencies())
+            .build()
     }
 
-    private val stateView = contentView<StatesView>(R.id.work_list_sv_states)
-    private val skeleton = contentView<View>(R.id.work_list_vs_skeleton)
-    private val workList = contentView<RecyclerView>(R.id.work_list_rv)
-    private val searchField = contentView<LinearLayout>(R.id.work_list_ll_search_container)
-    private val filterBtn = contentView<ImageView>(R.id.work_list_iv_filter_btn)
-    private val errorView = contentView<ErrorView>(R.id.error_view)
-    private val shadow = contentView<View>(R.id.work_list_shadow)
+    private lateinit var binding: FragmentWorkListBinding
+
+    private val viewModel: WorkListViewModel by viewModels {
+        component.constructWorkListViewModel()
+    }
 
     // Adapters
     private val articleListAdapter = ArticlesListAdapter(
-        itemOnClick = { id -> viewOutput.showDetailInfoAboutArticles(id, parentFragmentManager) }
+        itemOnClick = { id -> articlesRouter.showArticlesScreen(parentFragmentManager, id) }
     )
     private val workListAdapter = WorkListAdapter(
-        onClickItem = { id -> viewOutput.showDetailInfoAboutVacancy(id, parentFragmentManager) },
-        onApplyWork = { viewOutput.showAuthScreen(parentFragmentManager) }
+        onClickItem = { id -> detailRouter.openWorkDetailScreen(id, parentFragmentManager) },
+        onApplyWork = { authRouter.showAuthScreen(parentFragmentManager) }
     )
     private val concatAdapter = ConcatAdapter(articleListAdapter, workListAdapter)
 
     private val shadowDelegate = ShadowDelegate()
 
-    override val layoutId: Int = R.layout.fragment_work_list
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        component.inject(this)
+    }
 
-    override fun initViewOutput(): WorkListViewOutput = WorkListPresenter()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentWorkListBinding.inflate(inflater, container, false)
 
-    override fun initView() {
-        stateView {
-            setCoroutineScope(lifecycleScope)
-        }
+        initView()
+        setInsetListener(binding.root)
 
-        workList {
-            adapter = concatAdapter
-        }
+        return binding.root
+    }
 
-        searchField {
-            setOnClickListener { viewOutput.showSearchScreen(parentFragmentManager) }
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        subscribeOnData()
+    }
 
-        filterBtn {
-            setOnClickListener { viewOutput.showFilterScreen() }
-        }
-
-        shadowDelegate.setShadowScrollListener(
-            scrollView = workList.view,
-            shadowView = shadow.view
-        )
-
-        errorView {
-            setOnReloadClickListener { viewOutput.onReloadData() }
+    private fun initView() {
+        binding.apply {
+            workListRv.adapter = concatAdapter
+            workListHeader.workListLlSearchContainer.setOnClickListener {
+                searchRouter.openSearchScreen(parentFragmentManager)
+            }
+            errorView.setOnReloadClickListener { viewModel.onReloadData() }
+            shadowDelegate.setShadowScrollListener(
+                scrollView = workListRv,
+                shadowView = workListShadow
+            )
         }
     }
 
-    override fun subscribeOnData() {
-        with(dataProvider) {
-            states.launchWhenStartedWithScope { state ->
-                handleStates(state)
-            }
-
-            articlesValue.launchWhenStartedWithScope { articles ->
-                articleListAdapter.setArticles(articles)
-            }
-        }
+    private fun subscribeOnData() {
+        combine(
+            flow = viewModel.state,
+            flow2 = viewModel.articles,
+            transform = ::handleStates,
+        ).launchWhenStarted(lifecycleScope)
     }
 
-    private fun handleStates(result: Result<WorkResponse>) {
+    private fun handleStates(result: Result<WorkResponse>, articlesItems: List<ArticlesItem>) {
         when (result) {
             is Result.Success -> {
-                stateView { updateState(States.SUCCESS) }
+                binding.workListSvStates.updateState(States.SUCCESS)
                 workListAdapter.submitList(result.value.items)
-                errorView { visibility = View.GONE }
+                articleListAdapter.setArticles(articlesItems)
+                binding.errorView.visibility = View.GONE
                 hideSkeleton()
             }
             is Result.Loading -> {
                 showSkeleton()
-                stateView { updateState(States.LOADING) }
+                binding.workListSvStates.updateState(States.LOADING)
             }
             is Result.Error,
             is Result.NotFoundError,
             is Result.ConnectionError -> {
-                stateView { updateState(States.ERROR) }
-                skeleton { visibility = View.GONE }
-                errorView { visibility = View.VISIBLE }
+                binding.workListSvStates.updateState(States.ERROR)
+                binding.workListVsSkeleton.root.visibility = View.GONE
+                binding.errorView.visibility = View.VISIBLE
             }
         }
     }
 
     private fun showSkeleton() {
-        skeleton { visibility = View.VISIBLE }
-        workList { visibility = View.GONE }
+        binding.workListVsSkeleton.root.visibility = View.VISIBLE
+        binding.workListRv.visibility = View.GONE
     }
 
     private fun hideSkeleton() {
-        skeleton { visibility = View.GONE }
-        workList { visibility = View.VISIBLE }
+        binding.workListVsSkeleton.root.visibility = View.GONE
+        binding.workListRv.visibility = View.VISIBLE
     }
 
-    override fun setInsetListener(rootView: View) {
+    private fun setInsetListener(rootView: View) {
         ViewInsetsController.bindMargin(rootView, forTop = true, forBottom = true)
+    }
+
+    companion object {
+        fun newInstance(): WorkListFragment {
+            return WorkListFragment()
+        }
+
+        private fun getHandledState(result: Result<WorkResponse>): States = when (result) {
+            is Result.Success -> States.SUCCESS
+            is Result.Loading -> States.LOADING
+            is Result.Error,
+            is Result.NotFoundError,
+            is Result.ConnectionError -> States.ERROR
+        }
     }
 
 }

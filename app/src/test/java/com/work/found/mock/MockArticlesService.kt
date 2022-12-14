@@ -1,12 +1,11 @@
 package com.work.found.mock
 
-import android.content.Context
 import com.work.found.core.api.model.articles.ArticlesItem
 import com.work.found.core.api.services.ArticlesServiceInput
 
 internal class MockArticlesService : ArticlesServiceInput {
 
-    override fun loadArticles(context: Context, articlesAssetName: String): List<ArticlesItem> {
+    override fun loadArticles(articlesAssetName: String): List<ArticlesItem> {
         return articlesList
     }
 

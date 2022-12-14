@@ -78,10 +78,6 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
             scrollView = scrollContainer.view,
             shadowView = shadow.view
         )
-
-        stateView {
-            setCoroutineScope(lifecycleScope)
-        }
     }
 
     override fun subscribeOnData() {
