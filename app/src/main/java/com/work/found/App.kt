@@ -7,6 +7,7 @@ import com.work.found.core.di.base.BaseComponent
 import com.work.found.core.di.base.ComponentCreator
 import com.work.found.core.di.base.DaggerInjector
 import com.work.found.di.ApplicationComponent
+import com.work.found.routing.base.AppModules
 
 class App : Application(), ComponentCreator {
 
@@ -20,6 +21,7 @@ class App : Application(), ComponentCreator {
             getAppComponent() as ApplicationComponent
         }
 
+        AppModules.initModuleProvider(ModuleProvider())
         AppConfig.init(this)
         FirebaseApp.initializeApp(this)
     }

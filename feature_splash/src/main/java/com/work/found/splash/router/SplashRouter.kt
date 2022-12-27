@@ -1,18 +1,15 @@
 package com.work.found.splash.router
 
 import androidx.fragment.app.FragmentManager
-import com.work.found.core.api.router.SplashRouterInput
-import com.work.found.core.base.router.Animation
-import com.work.found.core.base.router.FragmentRouter
-import com.work.found.core.base.router.FragmentRouterImpl
-import com.work.found.splash.view.SplashFragment
-import javax.inject.Inject
+import com.work.found.routing.router.FragmentRouter
+import com.work.found.routing.router.FragmentRouterImpl
+import com.work.found.routing.modules.HomeRoutingModule
 
 class SplashRouter : SplashRouterInput, FragmentRouter by FragmentRouterImpl() {
 
-    override fun showSplashScreen(manager: FragmentManager) {
-        addFragment(
-            fragment = SplashFragment.newInstance(),
+    override fun openHomeScreen(manager: FragmentManager) {
+        addFragmentToRoot(
+            clazz = HomeRoutingModule::class,
             fragmentManager = manager,
         )
     }

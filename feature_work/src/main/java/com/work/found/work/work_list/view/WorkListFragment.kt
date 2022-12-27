@@ -10,10 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import com.work.found.core.api.model.articles.ArticlesItem
 import com.work.found.core.api.model.work.WorkResponse
-import com.work.found.core.api.router.ArticlesRouterInput
-import com.work.found.core.api.router.AuthRouterInput
-import com.work.found.core.api.router.SearchRouterInput
-import com.work.found.core.api.router.WorkDetailRouterInput
 import com.work.found.core.api.state.Result
 import com.work.found.core.base.extensions.launchWhenStarted
 import com.work.found.core.base.extensions.viewModels
@@ -25,6 +21,7 @@ import com.work.found.work.databinding.FragmentWorkListBinding
 import com.work.found.work.work_list.WorkListViewModel
 import com.work.found.work.work_list.di.DaggerWorkListComponent
 import com.work.found.work.work_list.di.constructWorkListViewModel
+import com.work.found.work.work_list.router.WorkListRouterInput
 import com.work.found.work.work_list.view.adapter.ArticlesListAdapter
 import com.work.found.work.work_list.view.adapter.WorkListAdapter
 import kotlinx.coroutines.flow.combine
@@ -33,16 +30,7 @@ import javax.inject.Inject
 class WorkListFragment : Fragment() {
 
     @Inject
-    lateinit var detailRouter: WorkDetailRouterInput
-
-    @Inject
-    lateinit var articlesRouter: ArticlesRouterInput
-
-    @Inject
-    lateinit var authRouter: AuthRouterInput
-
-    @Inject
-    lateinit var searchRouter: SearchRouterInput
+    lateinit var router: WorkListRouterInput
 
     private val component by lazy {
         DaggerWorkListComponent
@@ -60,11 +48,11 @@ class WorkListFragment : Fragment() {
 
     // Adapters
     private val articleListAdapter = ArticlesListAdapter(
-        itemOnClick = { id -> articlesRouter.showArticlesScreen(parentFragmentManager, id) }
+        itemOnClick = { id -> router.openArticleScreen(parentFragmentManager, id) }
     )
     private val workListAdapter = WorkListAdapter(
-        onClickItem = { id -> detailRouter.openWorkDetailScreen(id, parentFragmentManager) },
-        onApplyWork = { authRouter.showAuthScreen(parentFragmentManager) }
+        onClickItem = { id -> router.openWorkDetailScreen(parentFragmentManager, id) },
+        onApplyWork = { router.openAuthScreen(parentFragmentManager) }
     )
     private val concatAdapter = ConcatAdapter(articleListAdapter, workListAdapter)
 
@@ -96,7 +84,7 @@ class WorkListFragment : Fragment() {
         binding.apply {
             workListRv.adapter = concatAdapter
             workListHeader.workListLlSearchContainer.setOnClickListener {
-                searchRouter.openSearchScreen(parentFragmentManager)
+                router.openSearchScreen(parentFragmentManager)
             }
             errorView.setOnReloadClickListener { viewModel.onReloadData() }
             shadowDelegate.setShadowScrollListener(
@@ -152,10 +140,6 @@ class WorkListFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): WorkListFragment {
-            return WorkListFragment()
-        }
-
         private fun getHandledState(result: Result<WorkResponse>): States = when (result) {
             is Result.Success -> States.SUCCESS
             is Result.Loading -> States.LOADING
@@ -164,5 +148,4 @@ class WorkListFragment : Fragment() {
             is Result.ConnectionError -> States.ERROR
         }
     }
-
 }

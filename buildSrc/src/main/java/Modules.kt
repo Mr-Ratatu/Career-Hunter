@@ -5,6 +5,7 @@ object Modules {
     const val core_view = ":core_view"
     const val core_base = ":core_base"
     const val store = ":store"
+    const val routing = ":routing"
 
     const val feature_work = ":feature_work"
     const val feature_root = ":feature_root"

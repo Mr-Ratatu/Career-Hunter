@@ -6,35 +6,19 @@ import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.lifecycleScope
-import com.work.found.core.api.model.articles.ArticlesItem
 import com.work.found.core.base.extensions.contentView
-import com.work.found.core.base.extensions.launchWhenStarted
 import com.work.found.core.base.extensions.popBackStack
 import com.work.found.core.base.extensions.setImageFromString
 import com.work.found.core.base.presentation.BaseFragment
 import com.work.found.core.base.utils.Constants
 import com.work.found.core.base.utils.ShadowDelegate
 import com.work.found.core.base.utils.ViewInsetsController
+import com.work.found.routing.modules.ArticlesRoutingModule
 import com.work.found.work.R
 import com.work.found.work.articles.presenter.ArticlesPresenter
 import com.work.found.work.articles.provider.ArticlesDataProviderInput
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 
 class ArticlesFragment : BaseFragment<ArticlesViewOutput, ArticlesDataProviderInput>() {
-
-    companion object {
-        private const val ARGUMENT_ID = "id"
-
-        fun newInstance(id: Int): ArticlesFragment {
-            val argument = Bundle().apply {
-                putInt(ARGUMENT_ID, id)
-            }
-
-            return ArticlesFragment().apply { arguments = argument }
-        }
-    }
 
     private val articlePoster = contentView<ImageView>(R.id.articles_iv_poster)
     private val toolbar = contentView<Toolbar>(R.id.articles_tb)
@@ -49,7 +33,7 @@ class ArticlesFragment : BaseFragment<ArticlesViewOutput, ArticlesDataProviderIn
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val argumentId = arguments?.getInt(ARGUMENT_ID) ?: Constants.UNDEFINED
+        val argumentId = arguments?.getInt(ArticlesRoutingModule.ARTICLE_ID_KEY) ?: Constants.UNDEFINED
         viewOutput.onLoadArticles(argumentId)
     }
 

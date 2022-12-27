@@ -4,11 +4,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.work.found.auth.BuildConfig
 import com.work.found.auth.interactor.AuthInteractorImpl
 import com.work.found.auth.interactor.AuthInteractorInput
+import com.work.found.auth.router.AuthRouterImpl
+import com.work.found.auth.router.AuthRouterInput
 import dagger.Module
 import dagger.Provides
 
 @Module
 class AuthModule {
+
+    @Provides
+    @AuthScope
+    fun providesAuthRouter(): AuthRouterInput = AuthRouterImpl()
 
     @Provides
     @AuthScope

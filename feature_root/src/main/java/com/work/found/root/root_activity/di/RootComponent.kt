@@ -2,7 +2,11 @@ package com.work.found.root.root_activity.di
 
 import com.work.found.core.di.dependencies.RootDependencies
 import com.work.found.root.root_activity.presenter.RootPresenter
+import com.work.found.root.root_activity.router.RootRouterImpl
+import com.work.found.root.root_activity.router.RootRouterInput
 import dagger.Component
+import dagger.Module
+import dagger.Provides
 import javax.inject.Scope
 
 @Scope
@@ -10,7 +14,10 @@ import javax.inject.Scope
 annotation class RootScope
 
 @RootScope
-@Component(dependencies = [RootDependencies::class])
+@Component(
+    dependencies = [RootDependencies::class],
+    modules = [RootModule::class]
+)
 interface RootComponent {
 
     @Component.Builder
@@ -22,4 +29,12 @@ interface RootComponent {
     }
 
     fun inject(target: RootPresenter)
+}
+
+@Module
+class RootModule {
+
+    @Provides
+    @RootScope
+    fun provideRouter(): RootRouterInput = RootRouterImpl()
 }

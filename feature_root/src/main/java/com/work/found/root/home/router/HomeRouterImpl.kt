@@ -1,20 +1,16 @@
 package com.work.found.root.home.router
 
 import androidx.fragment.app.FragmentManager
-import com.work.found.core.api.router.HomeRouterInput
-import com.work.found.core.base.router.Animation
-import com.work.found.core.base.router.Container
-import com.work.found.core.base.router.FragmentRouter
-import com.work.found.core.base.router.FragmentRouterImpl
-import com.work.found.root.home.view.HomeFragment
+import com.work.found.routing.router.FragmentRouter
+import com.work.found.routing.router.FragmentRouterImpl
+import com.work.found.routing.modules.WorkListRoutingModule
 
 class HomeRouterImpl : HomeRouterInput, FragmentRouter by FragmentRouterImpl() {
 
-    override fun openHomeScreen(manager: FragmentManager) {
-        addFragment(
+    override fun openWorkListScreen(manager: FragmentManager) {
+        addFragmentToHome(
+            clazz = WorkListRoutingModule::class,
             fragmentManager = manager,
-            fragment = HomeFragment.newInstance(),
-            animation = Animation.noAnimation(),
         )
     }
 }

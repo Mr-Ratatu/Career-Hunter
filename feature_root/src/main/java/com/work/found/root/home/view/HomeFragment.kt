@@ -13,10 +13,6 @@ import com.work.found.root.home.providers.HomeDataProvider
 
 class HomeFragment : BaseFragment<HomeViewOutput, HomeDataProvider>() {
 
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
-
     private val navigationView = contentView<BottomNavigationView>(R.id.home_navigation_bv)
     private val connectionState = contentView<View>(R.id.home_connection_state)
 

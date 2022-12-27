@@ -22,6 +22,7 @@
             <option value="$PROJECT_DIR$/feature_search" />
             <option value="$PROJECT_DIR$/feature_splash" />
             <option value="$PROJECT_DIR$/feature_work" />
+            <option value="$PROJECT_DIR$/routing" />
           </set>
         </option>
       </GradleProjectSettings>

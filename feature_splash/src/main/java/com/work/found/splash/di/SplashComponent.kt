@@ -2,7 +2,11 @@ package com.work.found.splash.di
 
 import com.work.found.core.di.dependencies.SplashDependencies
 import com.work.found.splash.presenter.SplashPresenter
+import com.work.found.splash.router.SplashRouter
+import com.work.found.splash.router.SplashRouterInput
 import dagger.Component
+import dagger.Module
+import dagger.Provides
 import javax.inject.Scope
 
 @Scope
@@ -11,7 +15,8 @@ annotation class SplashScope
 
 @SplashScope
 @Component(
-    dependencies = [SplashDependencies::class]
+    dependencies = [SplashDependencies::class],
+    modules = [SplashModule::class]
 )
 interface SplashComponent {
 
@@ -24,4 +29,12 @@ interface SplashComponent {
     }
 
     fun inject(target: SplashPresenter)
+}
+
+@Module
+class SplashModule {
+
+    @Provides
+    @SplashScope
+    fun providesSplashRouter(): SplashRouterInput = SplashRouter()
 }
