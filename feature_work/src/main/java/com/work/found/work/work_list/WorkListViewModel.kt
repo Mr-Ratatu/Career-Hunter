@@ -2,10 +2,10 @@ package com.work.found.work.work_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.work.found.core.api.interactors.NetworkConnectionInteractor
 import com.work.found.core.api.model.articles.ArticlesItem
 import com.work.found.core.api.model.work.WorkResponse
 import com.work.found.core.api.state.Result
-import com.work.found.core.base.delegates.NetworkConnectionManager
 import com.work.found.work.work_list.interactor.WorkListInteractorInput
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 class WorkListViewModel(
     private val interactor: WorkListInteractorInput,
-    private val connectionManager: NetworkConnectionManager
+    private val connectionInteractor: NetworkConnectionInteractor
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<Result<WorkResponse>>(Result.Loading)
@@ -26,9 +26,9 @@ class WorkListViewModel(
     val articles = _articles.asStateFlow()
 
     init {
-        connectionManager.startListenNetworkState()
+        connectionInteractor.startListenNetworkState()
 
-        connectionManager
+        connectionInteractor
             .isNetworkConnectedFlow
             .onEach { isConnected ->
                 if (isConnected) loadWorkList()
@@ -46,6 +46,6 @@ class WorkListViewModel(
     fun onReloadData() = loadWorkList()
 
     override fun onCleared() {
-        connectionManager.stopListenNetworkState()
+        connectionInteractor.stopListenNetworkState()
     }
 }

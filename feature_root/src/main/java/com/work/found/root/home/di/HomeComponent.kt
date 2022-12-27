@@ -1,8 +1,6 @@
 package com.work.found.root.home.di
 
 import com.work.found.core.di.dependencies.HomeDependencies
-import com.work.found.core.base.delegates.NetworkConnectionManager
-import com.work.found.core.base.delegates.NetworkConnectionManagerImpl
 import com.work.found.root.home.presenter.HomePresenter
 import com.work.found.root.home.router.HomeRouterImpl
 import com.work.found.root.home.router.HomeRouterInput
@@ -33,12 +31,6 @@ interface HomeComponent {
 
 @Module
 class HomeModule {
-
-    @Provides
-    @Singleton
-    fun provideNetworkConnectionManager(coroutineScope: CoroutineScope): NetworkConnectionManager {
-        return NetworkConnectionManagerImpl(coroutineScope)
-    }
 
     @Provides
     @Singleton

@@ -1,4 +1,4 @@
-package com.work.found.core.implementation
+package com.work.found.core.implementation.services
 
 import android.content.Context
 import com.google.gson.Gson

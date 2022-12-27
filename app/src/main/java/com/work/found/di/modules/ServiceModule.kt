@@ -3,9 +3,9 @@ package com.work.found.di.modules
 import com.work.found.core.api.services.ArticlesServiceInput
 import com.work.found.core.api.services.SearchServiceInput
 import com.work.found.core.api.services.WorkServiceInput
-import com.work.found.core.implementation.ArticlesServiceImpl
-import com.work.found.core.implementation.SearchServiceImpl
-import com.work.found.core.implementation.WorkServiceImpl
+import com.work.found.core.implementation.services.ArticlesServiceImpl
+import com.work.found.core.implementation.services.SearchServiceImpl
+import com.work.found.core.implementation.services.WorkServiceImpl
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton

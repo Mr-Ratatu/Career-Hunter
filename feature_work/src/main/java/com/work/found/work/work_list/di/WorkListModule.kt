@@ -2,15 +2,12 @@ package com.work.found.work.work_list.di
 
 import com.work.found.core.api.services.ArticlesServiceInput
 import com.work.found.core.api.services.WorkServiceInput
-import com.work.found.core.base.delegates.NetworkConnectionManager
-import com.work.found.core.base.delegates.NetworkConnectionManagerImpl
 import com.work.found.work.work_list.interactor.WorkListInteractorImpl
 import com.work.found.work.work_list.interactor.WorkListInteractorInput
 import com.work.found.work.work_list.router.WorkListRouter
 import com.work.found.work.work_list.router.WorkListRouterInput
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.CoroutineScope
 
 @Module
 class WorkListModule {
@@ -22,12 +19,6 @@ class WorkListModule {
         articlesService: ArticlesServiceInput
     ): WorkListInteractorInput {
         return WorkListInteractorImpl(workService, articlesService)
-    }
-
-    @Provides
-    @WorkListScope
-    fun provideNetworkConnectionManager(coroutineScope: CoroutineScope): NetworkConnectionManager {
-        return NetworkConnectionManagerImpl(coroutineScope)
     }
 
     @Provides

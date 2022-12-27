@@ -1,30 +1,18 @@
-package com.work.found.core.base.delegates
+package com.work.found.managers
 
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import androidx.core.content.getSystemService
+import com.work.found.core.api.managers.NetworkConnectionManager
 import com.work.found.core.base.utils.AppConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.SharingStarted
-
-interface NetworkConnectionManager {
-    /**
-     * Emits [Boolean] value when the current network becomes available or unavailable.
-     */
-    val isNetworkConnectedFlow: StateFlow<Boolean>
-
-    val isNetworkConnected: Boolean
-
-    fun startListenNetworkState()
-
-    fun stopListenNetworkState()
-}
+import kotlinx.coroutines.flow.update
 
 class NetworkConnectionManagerImpl(coroutineScope: CoroutineScope) : NetworkConnectionManager {
 
