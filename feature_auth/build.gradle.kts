@@ -47,6 +47,7 @@ dependencies {
     implementation(project(Modules.core_base))
     implementation(project(Modules.core_view))
     implementation(project(Modules.core_api))
+    implementation(project(Modules.routing))
 
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.4.2")

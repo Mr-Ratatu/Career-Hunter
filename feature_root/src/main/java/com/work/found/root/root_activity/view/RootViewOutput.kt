@@ -5,5 +5,4 @@ import com.work.found.core.base.presentation.ViewOutput
 
 interface RootViewOutput: ViewOutput {
     fun onShowSplashScreen(manager: FragmentManager)
-    fun onShowHomeScreen(manager: FragmentManager)
 }

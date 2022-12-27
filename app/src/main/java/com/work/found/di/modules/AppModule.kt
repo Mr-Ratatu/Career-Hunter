@@ -10,7 +10,6 @@ import javax.inject.Singleton
     includes = [
         NetworkModule::class,
         ServiceModule::class,
-        RouterModule::class,
         UtilsModule::class
     ]
 )

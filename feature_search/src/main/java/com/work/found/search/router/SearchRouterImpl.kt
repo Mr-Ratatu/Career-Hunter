@@ -1,20 +1,18 @@
 package com.work.found.search.router
 
 import androidx.fragment.app.FragmentManager
-import com.work.found.core.api.router.SearchRouterInput
-import com.work.found.core.base.router.Animation
-import com.work.found.core.base.router.FragmentRouter
-import com.work.found.core.base.router.FragmentRouterImpl
-import com.work.found.search.view.SearchFragment
+import com.work.found.routing.router.FragmentRouter
+import com.work.found.routing.router.FragmentRouterImpl
+import com.work.found.routing.modules.WorkDetailRoutingModule
 
 class SearchRouterImpl : SearchRouterInput, FragmentRouter by FragmentRouterImpl() {
 
-    override fun openSearchScreen(manager: FragmentManager) {
-        addFragment(
-            fragment = SearchFragment.newInstance(),
+    override fun openWorkDetailScreen(manager: FragmentManager, id: String) {
+        addFragmentToRoot(
+            clazz = WorkDetailRoutingModule::class,
             fragmentManager = manager,
+            bundle = WorkDetailRoutingModule.putIdArgument(id),
             needToBackStack = true,
-            animation = Animation.defaultAnimation()
         )
     }
 }

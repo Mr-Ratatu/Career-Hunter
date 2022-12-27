@@ -12,13 +12,6 @@ import kotlinx.coroutines.launch
 
 class SplashFragment : BaseFragment<SplashViewOutput, SplashDataProvider>() {
 
-    companion object {
-
-        fun newInstance(): SplashFragment {
-            return SplashFragment()
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

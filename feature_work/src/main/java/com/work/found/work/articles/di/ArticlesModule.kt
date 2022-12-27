@@ -1,14 +1,23 @@
 package com.work.found.work.articles.di
 
+import com.work.found.core.api.services.ArticlesServiceInput
 import com.work.found.work.articles.interactor.ArticlesInteractorImpl
 import com.work.found.work.articles.interactor.ArticlesInteractorInput
-import dagger.Binds
+import com.work.found.work.articles.router.ArticlesRouterImpl
+import com.work.found.work.articles.router.ArticlesRouterInput
 import dagger.Module
+import dagger.Provides
 
 @Module
-interface ArticlesModule {
+class ArticlesModule {
 
-    @Binds
+    @Provides
     @ArticlesScope
-    fun bindInteractor(interactor: ArticlesInteractorImpl): ArticlesInteractorInput
+    fun provideInteractor(service: ArticlesServiceInput): ArticlesInteractorInput {
+        return ArticlesInteractorImpl(service)
+    }
+
+    @Provides
+    @ArticlesScope
+    fun providesArticlesRouter(): ArticlesRouterInput = ArticlesRouterImpl()
 }

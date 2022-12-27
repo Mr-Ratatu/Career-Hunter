@@ -6,7 +6,6 @@ import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.work.found.core.api.model.detail.WorkDetailResponse
 import com.work.found.core.api.state.Result
@@ -15,6 +14,7 @@ import com.work.found.core.base.presentation.BaseFragment
 import com.work.found.core.base.utils.Constants.EMPTY_STRING
 import com.work.found.core.base.utils.ShadowDelegate
 import com.work.found.core.base.utils.ViewInsetsController
+import com.work.found.routing.modules.WorkDetailRoutingModule
 import com.work.found.work.R
 import com.work.found.work.core_view.States
 import com.work.found.work.core_view.StatesView
@@ -22,19 +22,6 @@ import com.work.found.work.detail.presetner.WorkDetailPresenter
 import com.work.found.work.detail.provider.WorkDetailDataProviderInput
 
 class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProviderInput>() {
-
-    companion object {
-        private const val ARGUMENT_ID = "id"
-
-        fun newInstance(
-            id: String
-        ): WorkDetailFragment {
-            val arguments = Bundle().apply {
-                putString(ARGUMENT_ID, id)
-            }
-            return WorkDetailFragment().apply { setArguments(arguments) }
-        }
-    }
 
     private val toolbar = contentView<Toolbar>(R.id.work_detail_tb)
     private val workName = contentView<TextView>(R.id.work_detail_tv_name)
@@ -57,7 +44,10 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val id = requireArguments().getString(ARGUMENT_ID).orElse { EMPTY_STRING }
+        val id = requireArguments()
+            .getString(WorkDetailRoutingModule.DETAIL_ID_KEY)
+            .orElse { EMPTY_STRING }
+
         viewOutput.onUpdateDetailInfo(id)
 
         showSkeleton()

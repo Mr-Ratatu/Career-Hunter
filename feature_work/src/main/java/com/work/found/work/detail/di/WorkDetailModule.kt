@@ -1,14 +1,23 @@
 package com.work.found.work.detail.di
 
+import com.work.found.core.api.services.WorkServiceInput
 import com.work.found.work.detail.interactor.WorkDetailInteractorImpl
 import com.work.found.work.detail.interactor.WorkDetailInteractorInput
-import dagger.Binds
+import com.work.found.work.detail.router.WorkDetailRouterImpl
+import com.work.found.work.detail.router.WorkDetailRouterInput
 import dagger.Module
+import dagger.Provides
 
 @Module
-interface WorkDetailModule {
+class WorkDetailModule {
 
-    @Binds
+    @Provides
     @WorkDetailScope
-    fun bindInteractor(interactor: WorkDetailInteractorImpl): WorkDetailInteractorInput
+    fun provideInteractor(workService: WorkServiceInput): WorkDetailInteractorInput {
+        return WorkDetailInteractorImpl(workService)
+    }
+
+    @Provides
+    @WorkDetailScope
+    fun providesWorkDetailRouter(): WorkDetailRouterInput = WorkDetailRouterImpl()
 }
