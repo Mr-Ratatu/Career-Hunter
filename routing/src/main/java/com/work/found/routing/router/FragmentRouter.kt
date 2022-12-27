@@ -3,6 +3,7 @@ package com.work.found.routing.router
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.commit
 import com.work.found.routing.R
 import com.work.found.routing.base.Animation
 import com.work.found.routing.base.AppModules
@@ -18,6 +19,8 @@ interface FragmentRouter {
         bundle: Bundle? = null,
         needToBackStack: Boolean = false,
         animation: Animation = Animation.defaultAnimation(),
+        needHideLastScreen: Boolean = false,
+        isReplace: Boolean = false,
     )
 
     fun <T : RoutingModule> addFragmentToRoot(
@@ -26,6 +29,8 @@ interface FragmentRouter {
         bundle: Bundle? = null,
         needToBackStack: Boolean = false,
         animation: Animation = Animation.defaultAnimation(),
+        needHideLastScreen: Boolean = false,
+        isReplace: Boolean = false,
     )
 }
 
@@ -36,13 +41,17 @@ open class FragmentRouterImpl : FragmentRouter {
         fragmentManager: FragmentManager,
         bundle: Bundle?,
         needToBackStack: Boolean,
-        animation: Animation
+        animation: Animation,
+        needHideLastScreen: Boolean,
+        isReplace: Boolean,
     ) = addFragment(
-        AppModules.moduleInstance(clazz, bundle),
-        fragmentManager,
-        needToBackStack,
-        animation,
-        R.id.home_container_fl
+        fragment = AppModules.moduleInstance(clazz, bundle),
+        fragmentManager = fragmentManager,
+        needToBackStack = needToBackStack,
+        animation = animation,
+        containerId = R.id.home_container_fl,
+        needHideLastScreen = needHideLastScreen,
+        isReplace = isReplace,
     )
 
     override fun <T : RoutingModule> addFragmentToRoot(
@@ -50,13 +59,17 @@ open class FragmentRouterImpl : FragmentRouter {
         fragmentManager: FragmentManager,
         bundle: Bundle?,
         needToBackStack: Boolean,
-        animation: Animation
+        animation: Animation,
+        needHideLastScreen: Boolean,
+        isReplace: Boolean,
     ) = addFragment(
-        AppModules.moduleInstance(clazz, bundle),
-        fragmentManager,
-        needToBackStack,
-        animation,
-        R.id.main_container_fl
+        fragment = AppModules.moduleInstance(clazz, bundle),
+        fragmentManager = fragmentManager,
+        needToBackStack = needToBackStack,
+        animation = animation,
+        containerId = R.id.main_container_fl,
+        needHideLastScreen = needHideLastScreen,
+        isReplace = isReplace,
     )
 
     private fun addFragment(
@@ -65,15 +78,25 @@ open class FragmentRouterImpl : FragmentRouter {
         needToBackStack: Boolean,
         animation: Animation,
         containerId: Int,
+        needHideLastScreen: Boolean,
+        isReplace: Boolean,
     ) {
-        fragmentManager.beginTransaction().apply {
+        fragmentManager.commit {
             setCustomAnimations(animation)
             setReorderingAllowed(true)
-            replace(containerId, fragment)
+
+            if (needHideLastScreen) {
+                fragmentManager.fragments.lastOrNull { !it.isHidden }?.let(::hide)
+            }
+
+            when (isReplace) {
+                true -> replace(containerId, fragment)
+                false -> add(containerId, fragment)
+            }
 
             if (needToBackStack) {
                 addToBackStack(fragment::class.toString())
             }
-        }.commit()
+        }
     }
 }
