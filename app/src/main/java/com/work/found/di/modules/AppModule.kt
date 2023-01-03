@@ -10,7 +10,9 @@ import javax.inject.Singleton
     includes = [
         NetworkModule::class,
         ServiceModule::class,
-        UtilsModule::class
+        InteractorModule::class,
+        UtilsModule::class,
+        CoroutineScopeModule::class,
     ]
 )
 class AppModule(private val application: Application) {

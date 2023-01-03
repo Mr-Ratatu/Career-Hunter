@@ -2,7 +2,7 @@ package com.work.found.root.home.presenter
 
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LifecycleOwner
-import com.work.found.core.base.delegates.NetworkConnectionManager
+import com.work.found.core.api.interactors.NetworkConnectionInteractor
 import com.work.found.core.base.presenter.BasePresenter
 import com.work.found.core.base.state.ViewState
 import com.work.found.core.di.base.DaggerInjector
@@ -21,7 +21,7 @@ class HomePresenter : BasePresenter<HomeViewStateInput>(), HomeViewOutput {
     lateinit var router: HomeRouterInput
 
     @Inject
-    lateinit var connectionManager: NetworkConnectionManager
+    lateinit var connectionInteractor: NetworkConnectionInteractor
 
     init {
         DaggerHomeComponent
@@ -31,9 +31,9 @@ class HomePresenter : BasePresenter<HomeViewStateInput>(), HomeViewOutput {
             .build()
             .inject(this)
 
-        connectionManager.startListenNetworkState()
+        connectionInteractor.startListenNetworkState()
 
-        connectionManager.isNetworkConnectedFlow.onEach {
+        connectionInteractor.isNetworkConnectedFlow.onEach {
             viewState.isNetworkConnected.value = it
         }.launchIn(presenterScope)
     }
@@ -48,6 +48,6 @@ class HomePresenter : BasePresenter<HomeViewStateInput>(), HomeViewOutput {
 
     override fun <T : LifecycleOwner> onDetachView(view: T) {
         super.onDetachView(view)
-        connectionManager.stopListenNetworkState()
+        connectionInteractor.stopListenNetworkState()
     }
 }

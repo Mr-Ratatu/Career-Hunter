@@ -1,4 +1,4 @@
-package com.work.found.core.implementation
+package com.work.found.core.implementation.services
 
 import com.work.found.core.api.model.detail.WorkDetailResponse
 import com.work.found.core.api.model.work.WorkResponse

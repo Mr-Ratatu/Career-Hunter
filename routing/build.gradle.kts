@@ -42,6 +42,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.4")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
 
+    implementation(Dependencies.fragmentKtx)
     implementation(Dependencies.kotlin)
     implementation(Dependencies.kotlinReflect)
 }
