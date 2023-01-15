@@ -6,22 +6,39 @@ import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.work.found.core.api.model.detail.WorkDetailResponse
 import com.work.found.core.api.state.Result
 import com.work.found.core.base.extensions.*
-import com.work.found.core.base.presentation.BaseFragment
 import com.work.found.core.base.utils.Constants.EMPTY_STRING
 import com.work.found.core.base.utils.ShadowDelegate
 import com.work.found.core.base.utils.ViewInsetsController
+import com.work.found.core.di.base.DaggerInjector
 import com.work.found.routing.modules.WorkDetailRoutingModule
 import com.work.found.work.R
 import com.work.found.work.core_view.States
 import com.work.found.work.core_view.StatesView
-import com.work.found.work.detail.presetner.WorkDetailPresenter
-import com.work.found.work.detail.provider.WorkDetailDataProviderInput
+import com.work.found.work.detail.di.DaggerWorkDetailComponent
+import com.work.found.work.detail.di.constructWorkDetailViewModel
 
-class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProviderInput>() {
+class WorkDetailFragment : Fragment(R.layout.fragment_work_detail) {
+
+    private val component by lazy {
+        DaggerWorkDetailComponent
+            .builder()
+            .dependencies(DaggerInjector.appDependencies())
+            .build()
+    }
+
+    private val viewModel by viewModels {
+        component.constructWorkDetailViewModel(
+            workId = requireArguments()
+                .getString(WorkDetailRoutingModule.DETAIL_ID_KEY)
+                .orElse { EMPTY_STRING }
+        )
+    }
 
     private val toolbar = contentView<Toolbar>(R.id.work_detail_tb)
     private val workName = contentView<TextView>(R.id.work_detail_tv_name)
@@ -39,25 +56,16 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
 
     private val shadowDelegate = ShadowDelegate()
 
-    override val layoutId: Int = R.layout.fragment_work_detail
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val id = requireArguments()
-            .getString(WorkDetailRoutingModule.DETAIL_ID_KEY)
-            .orElse { EMPTY_STRING }
-
-        viewOutput.onUpdateDetailInfo(id)
-
+        setInsetListener(view)
+        initView()
+        subscribeOnData()
         showSkeleton()
     }
 
-    override fun initViewOutput(): WorkDetailViewOutput {
-        return WorkDetailPresenter()
-    }
-
-    override fun initView() {
+    private fun initView() {
         toolbar {
             setNavigationOnClickListener {
                 popBackStack()
@@ -70,15 +78,13 @@ class WorkDetailFragment : BaseFragment<WorkDetailViewOutput, WorkDetailDataProv
         )
     }
 
-    override fun subscribeOnData() {
-        dataProvider.apply {
-            states.observeWithViewScopeIgnoreNull { state ->
-                handleStates(state)
-            }
+    private fun subscribeOnData() {
+        viewModel.state.launchWhenStarted(lifecycleScope) { state ->
+            handleStates(state)
         }
     }
 
-    override fun setInsetListener(rootView: View) {
+    private fun setInsetListener(rootView: View) {
         ViewInsetsController.bindMargin(rootView, forTop = true, forBottom = true)
     }
 
