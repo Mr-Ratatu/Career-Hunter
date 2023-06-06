@@ -4,7 +4,6 @@
 The idea of this application is to find a job. You can consider it as a mini-analogue of the well-known hh.ru
 
 ##
-
 # Architecture
 <img src="https://github.com/Mr-Ratatu/Work-Found-App/blob/AN-02_work_list_screen/images/architecture.png" alt="Your image title" width="750"/>
 

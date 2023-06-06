@@ -26,10 +26,8 @@ class WorkListViewModel(
     val articles = _articles.asStateFlow()
 
     init {
-        connectionInteractor.startListenNetworkState()
-
         connectionInteractor
-            .isNetworkConnectedFlow
+            .isNetworkConnectedCallback
             .onEach { isConnected ->
                 if (isConnected) loadWorkList()
             }
@@ -44,8 +42,4 @@ class WorkListViewModel(
     }
 
     fun onReloadData() = loadWorkList()
-
-    override fun onCleared() {
-        connectionInteractor.stopListenNetworkState()
-    }
 }

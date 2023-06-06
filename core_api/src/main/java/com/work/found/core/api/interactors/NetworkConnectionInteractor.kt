@@ -1,9 +1,7 @@
 package com.work.found.core.api.interactors
 
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.Flow
 
 interface NetworkConnectionInteractor {
-    val isNetworkConnectedFlow: StateFlow<Boolean>
-    fun startListenNetworkState()
-    fun stopListenNetworkState()
+    val isNetworkConnectedCallback: Flow<Boolean>
 }

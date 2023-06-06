@@ -31,9 +31,7 @@ class HomePresenter : BasePresenter<HomeViewStateInput>(), HomeViewOutput {
             .build()
             .inject(this)
 
-        connectionInteractor.startListenNetworkState()
-
-        connectionInteractor.isNetworkConnectedFlow.onEach {
+        connectionInteractor.isNetworkConnectedCallback.onEach {
             viewState.isNetworkConnected.value = it
         }.launchIn(presenterScope)
     }
@@ -44,10 +42,5 @@ class HomePresenter : BasePresenter<HomeViewStateInput>(), HomeViewOutput {
 
     override fun onNavigationToWorkList(manager: FragmentManager) {
         router.openWorkListScreen(manager)
-    }
-
-    override fun <T : LifecycleOwner> onDetachView(view: T) {
-        super.onDetachView(view)
-        connectionInteractor.stopListenNetworkState()
     }
 }

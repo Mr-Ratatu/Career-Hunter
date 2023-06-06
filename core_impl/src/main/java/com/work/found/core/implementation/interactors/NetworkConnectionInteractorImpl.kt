@@ -7,9 +7,5 @@ class NetworkConnectionInteractorImpl(
     private val networkConnectionManager: NetworkConnectionManager
 ) : NetworkConnectionInteractor {
 
-    override val isNetworkConnectedFlow = networkConnectionManager.isNetworkConnectedFlow
-
-    override fun startListenNetworkState() = networkConnectionManager.startListenNetworkState()
-
-    override fun stopListenNetworkState() = networkConnectionManager.stopListenNetworkState()
+    override val isNetworkConnectedCallback = networkConnectionManager.isNetworkConnectedCallback
 }
