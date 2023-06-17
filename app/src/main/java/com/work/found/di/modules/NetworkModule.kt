@@ -1,7 +1,9 @@
 package com.work.found.di.modules
 
+import com.google.gson.Gson
 import com.work.found.BuildConfig
-import com.work.found.core.api.network_service.WorkServiceApi
+import com.work.found.core.api.network_service.ApiProvider
+import com.work.found.core.implementation.network.ApiProviderImpl
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -31,17 +33,11 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .build()
+    fun provideApiProvider(client: OkHttpClient, gson: Gson): ApiProvider {
+        return ApiProviderImpl(client, gson)
     }
 
     @Provides
     @Singleton
-    fun provideWorkServiceApi(retrofit: Retrofit): WorkServiceApi {
-        return retrofit.create(WorkServiceApi::class.java)
-    }
+    fun provideGson() = Gson()
 }

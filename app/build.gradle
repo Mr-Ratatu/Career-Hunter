@@ -55,7 +55,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 
     // Network
-    implementation(Dependencies.retrofit)
     implementation(Dependencies.gson)
     implementation(Dependencies.okHttp)
     implementation(Dependencies.okHttpLoggingInterceptor)

@@ -40,6 +40,8 @@ dependencies {
 
     // Network
     implementation(Dependencies.retrofit)
+    implementation(Dependencies.okHttpLoggingInterceptor)
+    implementation(Dependencies.loggingInterceptor)
     implementation(Dependencies.gson)
 
     // Coroutines
