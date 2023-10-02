@@ -14,4 +14,6 @@ object Modules {
     const val feature_settings = ":feature_settings"
     const val feature_search = ":feature_search"
     const val feature_auth = ":feature_auth"
+    const val articles_impl = ":feature_articles:impl"
+    const val articles_api = ":feature_articles:api"
 }

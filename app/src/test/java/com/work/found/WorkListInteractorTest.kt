@@ -1,12 +1,10 @@
 package com.work.found
 
-import com.work.found.core.api.services.ArticlesServiceInput
+import com.work.found.work.articles.api.data.ArticlesService
 import com.work.found.core.api.services.WorkServiceInput
 import com.work.found.core.api.state.Result
 import com.work.found.mock.MockArticlesService
 import com.work.found.mock.MockWorkService
-import com.work.found.work.work_list.domain.WorkListInteractorImpl
-import com.work.found.work.work_list.domain.WorkListInteractorInput
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
@@ -17,7 +15,7 @@ internal class WorkListInteractorTest {
     private val inputValue = "Android"
 
     private lateinit var interactor: WorkListInteractorInput
-    private lateinit var articlesService: ArticlesServiceInput
+    private lateinit var articlesService: ArticlesService
     private lateinit var service: WorkServiceInput
 
     @Before

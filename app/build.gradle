@@ -45,6 +45,8 @@ dependencies {
     implementation(project(Modules.feature_splash))
     implementation(project(Modules.feature_search))
     implementation(project(Modules.feature_auth))
+    implementation(project(Modules.articles_api))
+    implementation(project(Modules.articles_impl))
     implementation(project(Modules.routing))
 
     implementation("androidx.core:core-ktx:1.8.0")

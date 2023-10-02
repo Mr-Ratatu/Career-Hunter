@@ -7,7 +7,7 @@ import com.work.found.routing.base.RoutingModule
 import com.work.found.routing.modules.*
 import com.work.found.search.view.SearchRoutingModuleImpl
 import com.work.found.splash.view.SplashRoutingModuleImpl
-import com.work.found.work.articles.view.ArticlesRoutingModuleImpl
+import com.work.found.work.articles.impl.view.ArticlesRoutingModuleImpl
 import com.work.found.work.detail.view.WorkDetailModuleImpl
 import com.work.found.work.work_list.view.WorkListRoutingModuleImpl
 import kotlin.reflect.KClass

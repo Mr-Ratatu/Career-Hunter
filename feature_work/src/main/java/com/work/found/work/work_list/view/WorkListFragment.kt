@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.ConcatAdapter
-import com.work.found.core.api.model.articles.ArticlesItem
 import com.work.found.core.api.model.work.WorkResponse
 import com.work.found.core.api.state.Result
 import com.work.found.core.base.extensions.launchWhenStarted
@@ -24,7 +24,8 @@ import com.work.found.work.work_list.di.constructWorkListViewModel
 import com.work.found.work.work_list.router.WorkListRouterInput
 import com.work.found.work.work_list.view.adapter.ArticlesListAdapter
 import com.work.found.work.work_list.view.adapter.WorkListAdapter
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class WorkListFragment : Fragment() {
@@ -86,7 +87,7 @@ class WorkListFragment : Fragment() {
             workListHeader.workListLlSearchContainer.setOnClickListener {
                 router.openSearchScreen(parentFragmentManager)
             }
-            errorView.setOnReloadClickListener { viewModel.onReloadData() }
+            errorView.setOnReloadClickListener { workListAdapter.refresh() }
             shadowDelegate.setShadowScrollListener(
                 scrollView = workListRv,
                 shadowView = workListShadow
@@ -95,31 +96,29 @@ class WorkListFragment : Fragment() {
     }
 
     private fun subscribeOnData() {
-//        combine(
-//            flow = viewModel.state,
-//            flow2 = viewModel.articles,
-//            transform = ::handleStates,
-//        ).launchWhenStarted(lifecycleScope)
+        viewModel.pagingData.filterNotNull().launchWhenStarted(lifecycleScope) { item ->
+            articleListAdapter.setArticles(item.articlesItem)
+            workListAdapter.submitData(item.works)
+        }
 
-        viewModel.pagingData.launchWhenStarted(lifecycleScope, workListAdapter::submitData)
+        workListAdapter
+            .loadStateFlow
+            .map { it.refresh }
+            .launchWhenStarted(lifecycleScope, ::handleStates)
     }
 
-    private fun handleStates(result: Result<WorkResponse>, articlesItems: List<ArticlesItem>) {
-        when (result) {
-            is Result.Success -> {
-                binding.workListSvStates.updateState(States.SUCCESS)
-//                workListAdapter.submitList(result.value.items)
-                articleListAdapter.setArticles(articlesItems)
-                binding.errorView.visibility = View.GONE
-                hideSkeleton()
-            }
-            is Result.Loading -> {
+    private fun handleStates(state: LoadState) {
+        when (state) {
+            is LoadState.Loading -> {
                 showSkeleton()
                 binding.workListSvStates.updateState(States.LOADING)
             }
-            is Result.Error,
-            is Result.NotFoundError,
-            is Result.ConnectionError -> {
+            is LoadState.NotLoading -> {
+                binding.workListSvStates.updateState(States.SUCCESS)
+                binding.errorView.visibility = View.GONE
+                hideSkeleton()
+            }
+            is LoadState.Error -> {
                 binding.workListSvStates.updateState(States.ERROR)
                 binding.workListVsSkeleton.root.visibility = View.GONE
                 binding.errorView.visibility = View.VISIBLE

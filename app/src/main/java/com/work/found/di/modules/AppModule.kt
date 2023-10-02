@@ -14,6 +14,7 @@ import javax.inject.Singleton
         UtilsModule::class,
         CoroutineScopeModule::class,
         DataSourceModule::class,
+        UseCasesModule::class,
     ]
 )
 class AppModule(private val application: Application) {

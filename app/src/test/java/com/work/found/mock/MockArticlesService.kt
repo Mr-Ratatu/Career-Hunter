@@ -1,9 +1,9 @@
 package com.work.found.mock
 
-import com.work.found.core.api.model.articles.ArticlesItem
-import com.work.found.core.api.services.ArticlesServiceInput
+import com.work.found.work.articles.api.data.ArticlesService
+import com.work.found.work.articles.api.model.ArticlesItem
 
-internal class MockArticlesService : ArticlesServiceInput {
+internal class MockArticlesService : ArticlesService {
 
     override fun loadArticles(articlesAssetName: String): List<ArticlesItem> {
         return articlesList
