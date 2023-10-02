@@ -1,7 +1,6 @@
 package com.work.found.auth.di
 
 import com.work.found.auth.view.AuthFragment
-import com.work.found.core.di.dependencies.AuthDependencies
 import dagger.Component
 import javax.inject.Scope
 
@@ -26,3 +25,5 @@ interface AuthComponent {
 
     fun inject(target: AuthFragment)
 }
+
+interface AuthDependencies

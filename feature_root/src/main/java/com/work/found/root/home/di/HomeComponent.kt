@@ -1,6 +1,6 @@
 package com.work.found.root.home.di
 
-import com.work.found.core.di.dependencies.HomeDependencies
+import com.work.found.core.api.interactors.NetworkConnectionInteractor
 import com.work.found.root.home.presenter.HomePresenter
 import com.work.found.root.home.router.HomeRouterImpl
 import com.work.found.root.home.router.HomeRouterInput
@@ -27,6 +27,10 @@ interface HomeComponent {
     }
 
     fun inject(target: HomePresenter)
+}
+
+interface HomeDependencies {
+    fun connectionInteractor(): NetworkConnectionInteractor
 }
 
 @Module
