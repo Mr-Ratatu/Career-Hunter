@@ -47,7 +47,6 @@
         android:overScrollMode="never"
         android:paddingHorizontal="@dimen/indent_8dp"
         android:scrollbars="vertical"
-        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

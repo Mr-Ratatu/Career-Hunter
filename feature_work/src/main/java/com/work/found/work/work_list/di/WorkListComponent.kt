@@ -3,7 +3,8 @@ package com.work.found.work.work_list.di
 import com.work.found.core.api.interactors.NetworkConnectionInteractor
 import com.work.found.core.di.dependencies.WorkListDependencies
 import com.work.found.work.work_list.WorkListViewModel
-import com.work.found.work.work_list.interactor.WorkListInteractorInput
+import com.work.found.work.work_list.domain.WorkListInteractorInput
+import com.work.found.work.work_list.domain.WorkListUseCase
 import com.work.found.work.work_list.view.WorkListFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -36,9 +37,11 @@ interface WorkListComponent {
 
     val interactor: WorkListInteractorInput
     val connectionInteractor: NetworkConnectionInteractor
+    val useCase: WorkListUseCase
 }
 
 fun WorkListComponent.constructWorkListViewModel() = WorkListViewModel(
     interactor = interactor,
-    connectionInteractor = connectionInteractor
+    connectionInteractor = connectionInteractor,
+    useCase = useCase
 )

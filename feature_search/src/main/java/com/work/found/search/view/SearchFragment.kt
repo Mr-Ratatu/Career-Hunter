@@ -78,7 +78,7 @@ class SearchFragment : BaseFragment<SearchViewOutput, SearchDataProvider>() {
     private fun handleStates(result: Result<WorkResponse>) {
         when (result) {
             is Result.Success -> {
-                searchAdapter.submitList(result.value.items)
+//                searchAdapter.submitList(result.value.items)
             }
             is Result.Loading -> Unit
             is Result.Error -> Unit

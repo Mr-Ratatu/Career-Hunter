@@ -22,10 +22,11 @@ object Versions {
     const val coilVersion = "1.2.1"
     const val androidArchCoreTest = "2.1.0"
     const val coroutinesVersion = "1.6.4"
-    const val daggerVersion = "2.40.5"
+    const val daggerVersion = "2.48"
     const val fragmentVersion = "1.5.2"
     const val lottieVersion = "3.4.0"
     const val timberVersion = "5.0.1"
     const val recyclerview = "1.2.1"
     const val mockito_version = "3.8.0"
+    const val paging_version = "3.2.1"
 }

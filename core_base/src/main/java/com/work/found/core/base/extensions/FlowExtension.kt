@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.flow
 
 fun <T> Flow<T>.launchWhenStarted(
     coroutineScope: LifecycleCoroutineScope,
-    block: ((T) -> Unit?)? = null
+    block: (suspend (T) -> Unit?)? = null
 ) {
     coroutineScope.launchWhenStarted {
         collect { block?.invoke(it) }

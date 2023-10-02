@@ -1,4 +1,4 @@
-package com.work.found.work.work_list.interactor
+package com.work.found.work.work_list.domain
 
 import com.work.found.core.api.model.articles.ArticlesItem
 import com.work.found.core.api.model.work.WorkResponse

@@ -5,19 +5,12 @@ import com.work.found.core.api.services.WorkServiceInput
 import com.work.found.core.api.state.Result
 import com.work.found.mock.MockArticlesService
 import com.work.found.mock.MockWorkService
-import com.work.found.work.work_list.interactor.WorkListInteractorImpl
-import com.work.found.work.work_list.interactor.WorkListInteractorInput
+import com.work.found.work.work_list.domain.WorkListInteractorImpl
+import com.work.found.work.work_list.domain.WorkListInteractorInput
 import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertTrue
-import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.runTest
-import okhttp3.mockwebserver.MockResponse
-import okhttp3.mockwebserver.MockWebServer
 import org.junit.Before
 import org.junit.Test
-import java.net.HttpURLConnection
-import java.net.UnknownHostException
-import java.util.concurrent.TimeUnit
 
 internal class WorkListInteractorTest {
 

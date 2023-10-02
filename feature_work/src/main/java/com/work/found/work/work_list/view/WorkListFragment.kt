@@ -95,18 +95,20 @@ class WorkListFragment : Fragment() {
     }
 
     private fun subscribeOnData() {
-        combine(
-            flow = viewModel.state,
-            flow2 = viewModel.articles,
-            transform = ::handleStates,
-        ).launchWhenStarted(lifecycleScope)
+//        combine(
+//            flow = viewModel.state,
+//            flow2 = viewModel.articles,
+//            transform = ::handleStates,
+//        ).launchWhenStarted(lifecycleScope)
+
+        viewModel.pagingData.launchWhenStarted(lifecycleScope, workListAdapter::submitData)
     }
 
     private fun handleStates(result: Result<WorkResponse>, articlesItems: List<ArticlesItem>) {
         when (result) {
             is Result.Success -> {
                 binding.workListSvStates.updateState(States.SUCCESS)
-                workListAdapter.submitList(result.value.items)
+//                workListAdapter.submitList(result.value.items)
                 articleListAdapter.setArticles(articlesItems)
                 binding.errorView.visibility = View.GONE
                 hideSkeleton()

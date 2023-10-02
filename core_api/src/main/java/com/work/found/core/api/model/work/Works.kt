@@ -1,6 +1,6 @@
 package com.work.found.core.api.model.work
 
-data class WorkDto(
+data class Works(
     val accept_temporary: Boolean,
     val address: Address,
     val alternate_url: String,

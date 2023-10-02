@@ -13,6 +13,7 @@ import javax.inject.Singleton
         InteractorModule::class,
         UtilsModule::class,
         CoroutineScopeModule::class,
+        DataSourceModule::class,
     ]
 )
 class AppModule(private val application: Application) {
