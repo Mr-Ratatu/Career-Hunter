@@ -28,7 +28,7 @@ class WorkListRepositoryImpl(
     }
 
     companion object {
-        private const val DEFAULT_PAGE_SIZE = 20
+        private const val DEFAULT_PAGE_SIZE = 15
         private const val DEFAULT_PREFETCH_DISTANCE = 5
     }
 }

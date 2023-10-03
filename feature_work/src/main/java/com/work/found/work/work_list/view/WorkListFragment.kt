@@ -23,6 +23,7 @@ import com.work.found.work.work_list.di.DaggerWorkListComponent
 import com.work.found.work.work_list.di.constructWorkListViewModel
 import com.work.found.work.work_list.router.WorkListRouterInput
 import com.work.found.work.work_list.view.adapter.ArticlesListAdapter
+import com.work.found.work.work_list.view.adapter.LoaderAdapter
 import com.work.found.work.work_list.view.adapter.WorkListAdapter
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
@@ -48,6 +49,7 @@ class WorkListFragment : Fragment() {
     }
 
     // Adapters
+    private val loaderAdapter = LoaderAdapter()
     private val articleListAdapter = ArticlesListAdapter(
         itemOnClick = { id -> router.openArticleScreen(parentFragmentManager, id) }
     )
@@ -55,7 +57,10 @@ class WorkListFragment : Fragment() {
         onClickItem = { id -> router.openWorkDetailScreen(parentFragmentManager, id) },
         onApplyWork = { router.openAuthScreen(parentFragmentManager) }
     )
-    private val concatAdapter = ConcatAdapter(articleListAdapter, workListAdapter)
+    private val concatAdapter = ConcatAdapter(
+        articleListAdapter,
+        workListAdapter.withLoadStateFooter(loaderAdapter)
+    )
 
     private val shadowDelegate = ShadowDelegate()
 
@@ -138,15 +143,5 @@ class WorkListFragment : Fragment() {
 
     private fun setInsetListener(rootView: View) {
         ViewInsetsController.bindMargin(rootView, forTop = true, forBottom = true)
-    }
-
-    companion object {
-        private fun getHandledState(result: Result<WorkResponse>): States = when (result) {
-            is Result.Success -> States.SUCCESS
-            is Result.Loading -> States.LOADING
-            is Result.Error,
-            is Result.NotFoundError,
-            is Result.ConnectionError -> States.ERROR
-        }
     }
 }
