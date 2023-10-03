@@ -19,17 +19,18 @@ class LoaderAdapter : LoadStateAdapter<LoaderAdapter.LoaderViewHolder>() {
         return LoaderViewHolder.create(parent)
     }
 
-    class LoaderViewHolder(private val binding: ItemLoaderBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    class LoaderViewHolder(
+        private val binding: ItemLoaderBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(state: LoadState) {
             binding.workListLoader.isVisible = state is LoadState.Loading
+            binding.workListErrorRetry.isVisible = state is LoadState.Error
         }
 
         companion object {
             fun create(viewGroup: ViewGroup): LoaderViewHolder {
-                val inflater = LayoutInflater
-                    .from(viewGroup.context)
+                val inflater = LayoutInflater.from(viewGroup.context)
                     .inflate(R.layout.item_loader, viewGroup, false)
                 val binding = ItemLoaderBinding.bind(inflater)
                 return LoaderViewHolder(binding)
