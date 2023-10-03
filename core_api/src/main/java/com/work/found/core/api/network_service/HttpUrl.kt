@@ -28,7 +28,7 @@ class HttpUrl private constructor(
 
         fun setPath(key: String, value: String) = apply { path.add(PathData(key, value)) }
 
-        fun setQuery(key: String, value: String) = apply { query.add(PathData(key, value)) }
+        fun setQuery(key: String, value: Any?) = apply { query.add(PathData(key, value.toString())) }
 
         fun build() = HttpUrl(scheme, host, segment, path, query)
     }

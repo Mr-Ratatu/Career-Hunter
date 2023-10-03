@@ -5,13 +5,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
-import com.work.found.core.api.model.articles.ArticlesItem
 import com.work.found.core.base.extensions.contentView
 import com.work.found.core.base.extensions.diffUtilCallback
 import com.work.found.core.base.extensions.layoutInflater
 import com.work.found.core.base.extensions.setImageFromString
 import com.work.found.core.base.presentation.BaseViewHolder
 import com.work.found.work.R
+import com.work.found.work.articles.api.model.ArticlesItem
 
 class ArticleAdapter(
     private val onClickItem: (id: Int) -> Unit

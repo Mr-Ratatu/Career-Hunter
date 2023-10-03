@@ -1,10 +1,17 @@
 package com.work.found.core.api.model.work
 
+import com.google.gson.annotations.SerializedName
+
 data class WorkResponse(
-    val alternate_url: String,
-    val found: Int,
-    val items: List<WorkDto>,
-    val page: Int,
-    val pages: Int,
-    val per_page: Int
+    @SerializedName("alternate_url")
+    val alternativeUrl: String,
+
+    @SerializedName("items")
+    val works: List<Works>,
+
+    @SerializedName("page")
+    val currentPage: Int,
+
+    @SerializedName("per_page")
+    val perPage: Int
 )

@@ -9,10 +9,10 @@ import com.work.found.core.api.model.work.WorkResponse
 object ExpensesFactory {
 
     val workResponse = WorkResponse(
-        alternate_url = "",
+        alternativeUrl = "",
         found = 10,
         items = emptyList(),
-        pages = 5,
+        pagesCount = 5,
         page = 2,
         per_page = 3
     )

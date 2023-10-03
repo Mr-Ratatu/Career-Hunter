@@ -14,10 +14,11 @@ class WorkServiceImpl @Inject constructor(
     private val apiProvider: ApiProvider,
 ) : WorkServiceInput {
 
-    override suspend fun fetchWorkList(vacanciesName: String): Result<WorkResponse> {
+    override suspend fun fetchWorkList(vacanciesName: String, page: Int): Result<WorkResponse> {
         val url = HttpUrl.Builder()
-            .setSegment("vacancies")
-            .setQuery("text", vacanciesName)
+            .setSegment(VACANCIES_SEGMENT_KEY)
+            .setQuery(WORK_NAME_QUERY_KEY, vacanciesName)
+            .setQuery(PAGE_QUERY_KEY, page)
             .build()
 
         return wrapper.wrapWithResult { apiProvider.execute(WorkResponse::class.java, url) }
@@ -25,12 +26,18 @@ class WorkServiceImpl @Inject constructor(
 
     override suspend fun fetchWorkDetail(id: String): Result<WorkDetailResponse> {
         val url = HttpUrl.Builder()
-            .setSegment("vacancies")
+            .setSegment(VACANCIES_SEGMENT_KEY)
             .setSegment(id)
             .build()
 
         return wrapper.wrapWithResult {
             apiProvider.execute(WorkDetailResponse::class.java, url)
         }
+    }
+
+    companion object {
+        private const val VACANCIES_SEGMENT_KEY = "vacancies"
+        private const val WORK_NAME_QUERY_KEY = "text"
+        private const val PAGE_QUERY_KEY = "page"
     }
 }

@@ -1,7 +1,6 @@
 package com.work.found.di
 
 import android.app.Application
-import com.work.found.core.di.Dependencies
 import com.work.found.core.di.base.BaseComponent
 import com.work.found.di.modules.AppModule
 import dagger.Component

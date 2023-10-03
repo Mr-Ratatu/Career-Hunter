@@ -1,6 +1,5 @@
 package com.work.found.splash.di
 
-import com.work.found.core.di.dependencies.SplashDependencies
 import com.work.found.splash.presenter.SplashPresenter
 import com.work.found.splash.router.SplashRouter
 import com.work.found.splash.router.SplashRouterInput
@@ -30,6 +29,8 @@ interface SplashComponent {
 
     fun inject(target: SplashPresenter)
 }
+
+interface SplashDependencies
 
 @Module
 class SplashModule {

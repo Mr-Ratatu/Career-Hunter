@@ -2,11 +2,10 @@ package com.work.found.search.view
 
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ListAdapter
-import com.work.found.core.api.model.work.WorkDto
+import com.work.found.core.api.model.work.Works
 import com.work.found.core.base.extensions.contentView
 import com.work.found.core.base.extensions.diffUtilCallback
 import com.work.found.core.base.extensions.layoutInflater
@@ -18,7 +17,7 @@ import com.work.found.search.R
 
 class SearchAdapter(
     private val onClickItem: (id: String) -> Unit,
-) : ListAdapter<WorkDto, SearchAdapter.SearchViewHolder>(
+) : ListAdapter<Works, SearchAdapter.SearchViewHolder>(
     diffUtilCallback(
         areItemsTheSame = { oldItem, newItem ->
             oldItem.id == newItem.id
@@ -51,7 +50,7 @@ class SearchAdapter(
         holder.itemView.setOnClickListener(null)
     }
 
-    class SearchViewHolder(itemView: View): BaseViewHolder<WorkDto>(itemView) {
+    class SearchViewHolder(itemView: View): BaseViewHolder<Works>(itemView) {
 
         private val name = itemView.contentView<TextView>(R.id.work_tv_name)
         private val salary = itemView.contentView<TextView>(R.id.work_tv_salary)
@@ -59,7 +58,7 @@ class SearchAdapter(
         private val location = itemView.contentView<TextView>(R.id.work_tv_location)
         private val description = itemView.contentView<TextView>(R.id.work_tv_description)
 
-        override fun bind(item: WorkDto) {
+        override fun bind(item: Works) {
             name { text = item.name }
             companyName { text = item.employer.name }
             location { text = item.area.name }

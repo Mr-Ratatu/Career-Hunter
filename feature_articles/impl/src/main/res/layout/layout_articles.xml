@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:overScrollMode="never"
+    android:scrollbars="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/indent_16dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/articles_tv_title"
+            style="@style/StyleTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="How to migration?" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/articles_tv_description"
+            style="@style/StyleDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/indent_16dp"
+            tools:text="@tools:sample/lorem/random" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

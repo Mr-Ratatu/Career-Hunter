@@ -1,6 +1,5 @@
 package com.work.found.root.root_activity.di
 
-import com.work.found.core.di.dependencies.RootDependencies
 import com.work.found.root.root_activity.presenter.RootPresenter
 import com.work.found.root.root_activity.router.RootRouterImpl
 import com.work.found.root.root_activity.router.RootRouterInput
@@ -30,6 +29,8 @@ interface RootComponent {
 
     fun inject(target: RootPresenter)
 }
+
+interface RootDependencies
 
 @Module
 class RootModule {

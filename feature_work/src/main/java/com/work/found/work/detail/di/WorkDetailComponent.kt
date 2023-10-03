@@ -1,6 +1,6 @@
 package com.work.found.work.detail.di
 
-import com.work.found.core.di.dependencies.WorkDerailDependencies
+import com.work.found.core.api.services.WorkServiceInput
 import com.work.found.work.detail.WorkDetailViewModel
 import com.work.found.work.detail.interactor.WorkDetailInteractorInput
 import dagger.Component
@@ -13,14 +13,14 @@ internal annotation class WorkDetailScope
 @WorkDetailScope
 @Component(
     modules = [WorkDetailModule::class],
-    dependencies = [WorkDerailDependencies::class],
+    dependencies = [WorkDetailDependencies::class],
 )
 interface WorkDetailComponent {
 
     @Component.Builder
     interface Build {
 
-        fun dependencies(dependencies: WorkDerailDependencies): Build
+        fun dependencies(dependencies: WorkDetailDependencies): Build
 
         fun build(): WorkDetailComponent
     }
@@ -28,6 +28,11 @@ interface WorkDetailComponent {
     fun inject(target: WorkDetailViewModel)
 
     val workDetailInteractor: WorkDetailInteractorInput
+}
+
+interface WorkDetailDependencies {
+
+    fun workService(): WorkServiceInput
 }
 
 fun WorkDetailComponent.constructWorkDetailViewModel(

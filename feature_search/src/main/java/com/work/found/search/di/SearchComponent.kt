@@ -1,6 +1,6 @@
 package com.work.found.search.di
 
-import com.work.found.core.di.dependencies.SearchDependencies
+import com.work.found.core.api.services.WorkServiceInput
 import com.work.found.search.presenter.SearchPresenter
 import dagger.Component
 import javax.inject.Scope
@@ -24,4 +24,8 @@ interface SearchComponent {
     }
 
     fun inject(target: SearchPresenter)
+}
+
+interface SearchDependencies {
+    fun workService(): WorkServiceInput
 }

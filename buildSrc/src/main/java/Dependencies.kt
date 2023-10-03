@@ -84,4 +84,7 @@ object Dependencies {
     const val firebaseBom = "com.google.firebase:firebase-bom:30.2.0"
     const val firebaseAuth = "om.google.firebase:firebase-auth-ktx"
     const val firebaseAuthService = "com.google.android.gms:play-services-auth:20.2.0"
+
+    // https://developer.android.com/topic/libraries/architecture/paging/v3-overview
+    const val paginagion = "androidx.paging:paging-runtime:${Versions.paging_version}"
 }

@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.work.found"
         minSdk 24
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -45,6 +45,8 @@ dependencies {
     implementation(project(Modules.feature_splash))
     implementation(project(Modules.feature_search))
     implementation(project(Modules.feature_auth))
+    implementation(project(Modules.articles_api))
+    implementation(project(Modules.articles_impl))
     implementation(project(Modules.routing))
 
     implementation("androidx.core:core-ktx:1.8.0")

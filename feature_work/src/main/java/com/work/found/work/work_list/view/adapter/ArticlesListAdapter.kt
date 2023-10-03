@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.work.found.core.api.model.articles.ArticlesItem
 import com.work.found.core.base.extensions.contentView
 import com.work.found.core.base.extensions.layoutInflater
 import com.work.found.work.R
+import com.work.found.work.articles.api.model.ArticlesItem
 
 class ArticlesListAdapter(
     private val itemOnClick: (id: Int) -> Unit
