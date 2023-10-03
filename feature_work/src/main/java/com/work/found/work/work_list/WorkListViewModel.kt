@@ -3,15 +3,19 @@ package com.work.found.work.work_list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.work.found.core.api.interactors.NetworkConnectionInteractor
 import com.work.found.core.api.model.work.Works
 import com.work.found.work.articles.api.domain.ArticlesListUseCase
 import com.work.found.work.articles.api.model.ArticlesItem
 import com.work.found.work.work_list.domain.WorkListUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 
 class WorkListViewModel(
@@ -27,10 +31,15 @@ class WorkListViewModel(
     val pagingData = _pagingData.asStateFlow()
 
     init {
+        val source = workListUseCase.invoke("Android")
+            .distinctUntilChanged()
+            .flowOn(Dispatchers.IO)
+            .cachedIn(viewModelScope)
+
         combine(
             flow = connectionInteractor.isNetworkConnectedCallback,
             flow2 = flow { emit(articlesListUseCase()) },
-            flow3 = workListUseCase.invoke("Android"),
+            flow3 = source,
             transform = { isConnected, articles, works ->
                 if (isConnected)
                     _pagingData.value = WorksItem(

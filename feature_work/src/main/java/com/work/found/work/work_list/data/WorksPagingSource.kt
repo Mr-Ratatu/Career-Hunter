@@ -5,8 +5,11 @@ import androidx.paging.PagingState
 import com.work.found.core.api.model.work.Works
 import com.work.found.core.api.network_service.WorksNetworkDataSource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
 import java.lang.Integer.max
+import kotlin.coroutines.suspendCoroutine
 
 private const val STARTING_KEY = 1
 
@@ -22,13 +25,12 @@ class WorksPagingSource(
         }
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Works> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Works> = coroutineScope {
         val pageNumber = params.key ?: STARTING_KEY
+        val response = async(Dispatchers.IO) { apiProvider.fetchWorkList(query, pageNumber) }
 
-        return runCatching {
-            withContext(Dispatchers.IO) {
-                apiProvider.fetchWorkList(query, pageNumber)
-            }
+        return@coroutineScope runCatching {
+            response.await()
         }.fold(
             onSuccess = { symbolPage ->
                 LoadResult.Page(
